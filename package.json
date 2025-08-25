@@ -15,9 +15,9 @@
     "eject": "react-scripts eject",
     "deploy": "yarn build"
   },
+  "packageManager": "yarn@4.9.3",
   "engines": {
-    "node": ">=20.0.0",
-    "yarn": ">=4.0.0"
+    "node": ">=20.0.0"
   },
   "eslintConfig": {
     "extends": [
