@@ -85,9 +85,33 @@ DevGenius is optimized for search engines with:
 - **Mobile Responsive**: Perfect mobile experience across all devices
 - **Schema Markup**: Enhanced search result appearance
 
-## Ad Placement
+## Ad Monetization
 
-The application includes MREC (300x250) ad placement on each page for monetization purposes.
+### Google AdSense Integration
+DevGenius is ready for Google AdSense monetization with:
+- **MREC (300x250)** ad placement on each page
+- **Responsive design** that works on all devices
+- **Non-intrusive placement** that doesn't affect user experience
+- **Environment-based configuration** for easy setup
+
+### Setup Instructions
+1. **Apply for Google AdSense** at [google.com/adsense](https://www.google.com/adsense/)
+2. **Get approved** (see `ADSENSE_SETUP.md` for detailed guide)
+3. **Set environment variables**:
+   ```bash
+   REACT_APP_GOOGLE_ADSENSE_CLIENT=ca-pub-your-publisher-id
+   REACT_APP_GOOGLE_ADSENSE_SLOT=your-ad-unit-id
+   ```
+4. **Update the AdSense script** in `public/index.html` with your Publisher ID
+5. **Deploy to production** and start earning revenue!
+
+### Revenue Potential
+With the high-value developer audience and SEO-optimized content:
+- **10K monthly views**: $20-100
+- **50K monthly views**: $100-500  
+- **100K+ monthly views**: $300-1500+
+
+*See `ADSENSE_SETUP.md` for complete setup guide and approval tips.*
 
 ## License
 

@@ -19,16 +19,7 @@ import EncodersDecoders from './components/EncodersDecoders';
 import Formatters from './components/Formatters';
 import Generators from './components/Generators';
 import TextTools from './components/TextTools';
-
-// MREC Ad Component
-const MRECAd = () => (
-  <div className="ad-container">
-    <div className="ad-placeholder">
-      <span>Advertisement</span>
-      <div className="ad-size">300 × 250</div>
-    </div>
-  </div>
-);
+import GoogleAd from './components/GoogleAd';
 
 // Navigation Component
 const Navigation = () => {
@@ -111,7 +102,12 @@ const Layout = ({ children }) => (
     <main className="main-content">
       <div className="content-container">
         {children}
-        <MRECAd />
+        <GoogleAd 
+          width={300}
+          height={250}
+          adFormat="rectangle"
+          className="mrec-ad"
+        />
       </div>
     </main>
   </div>
