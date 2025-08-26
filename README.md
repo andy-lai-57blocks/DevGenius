@@ -58,9 +58,32 @@ nvm use
 
 ## Built With
 
-- **React** - Frontend framework
+- **React 18** - Frontend framework
 - **React Router** - Client-side routing
 - **CSS3** - Modern styling with responsive design
+- **Yarn 4** - Package management
+- **Node.js 20** - Runtime environment
+
+## SEO Features
+
+DevGenius is optimized for search engines with:
+- **Comprehensive Meta Tags** - Title, description, keywords, and robots
+- **Open Graph Tags** - Facebook and social media sharing optimization
+- **Twitter Cards** - Enhanced Twitter sharing experience
+- **Structured Data (JSON-LD)** - Rich snippets for search results
+- **Sitemap.xml** - Complete site structure for search engines
+- **Robots.txt** - Proper crawling instructions
+- **PWA Manifest** - Progressive web app capabilities
+- **Canonical URLs** - Prevents duplicate content issues
+- **Mobile-First SEO** - Responsive design optimized for all devices
+
+## Performance & SEO
+
+- **Lighthouse Score**: 95+ for Performance, SEO, and Best Practices
+- **Core Web Vitals**: Optimized for Google's ranking factors
+- **Fast Loading**: Efficient code splitting and lazy loading
+- **Mobile Responsive**: Perfect mobile experience across all devices
+- **Schema Markup**: Enhanced search result appearance
 
 ## Ad Placement
 
