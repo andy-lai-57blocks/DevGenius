@@ -21,87 +21,110 @@ import Generators from './components/Generators';
 import TextTools from './components/TextTools';
 import GoogleAd from './components/GoogleAd';
 
-// Navigation Component
-const Navigation = () => {
+// Sidebar Navigation Component
+const Sidebar = () => {
   const location = useLocation();
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
+  const [isCollapsed, setIsCollapsed] = React.useState(false);
+  const [isMobileOpen, setIsMobileOpen] = React.useState(false);
   
   const menuItems = [
-    { path: '/', label: 'Home', exact: true },
-    { path: '/encoders', label: 'Encoders / Decoders' },
-    { path: '/formatters', label: 'Formatters' },
-    { path: '/generators', label: 'Generators' },
-    { path: '/text', label: 'Text' }
+    { path: '/', label: 'Home', icon: '🏠', exact: true },
+    { path: '/encoders', label: 'Encoders / Decoders', icon: '🔐' },
+    { path: '/formatters', label: 'Formatters', icon: '📋' },
+    { path: '/generators', label: 'Generators', icon: '🆔' },
+    { path: '/text', label: 'Text Tools', icon: '🔤' }
   ];
 
+  const toggleCollapse = () => {
+    setIsCollapsed(!isCollapsed);
+  };
+
   const toggleMobileMenu = () => {
-    setIsMobileMenuOpen(!isMobileMenuOpen);
+    setIsMobileOpen(!isMobileOpen);
   };
 
   const closeMobileMenu = () => {
-    setIsMobileMenuOpen(false);
+    setIsMobileOpen(false);
   };
 
   return (
-    <nav className="navigation">
-      <div className="nav-container">
-        <Link to="/" className="logo" onClick={closeMobileMenu}>
+    <>
+      {/* Mobile Header */}
+      <div className="mobile-header">
+        <Link to="/" className="mobile-logo" onClick={closeMobileMenu}>
           <h1>DevGenius</h1>
         </Link>
-        
-        {/* Desktop Navigation */}
-        <ul className="nav-links desktop-nav">
-          {menuItems.map((item) => (
-            <li key={item.path}>
-              <Link 
-                to={item.path} 
-                className={location.pathname === item.path || location.pathname.startsWith(item.path + '/') ? 'active' : ''}
-              >
-                {item.label}
-              </Link>
-            </li>
-          ))}
-        </ul>
-
-        {/* Mobile Menu Button */}
         <button 
-          className="mobile-menu-button"
+          className="mobile-menu-toggle"
           onClick={toggleMobileMenu}
           aria-label="Toggle mobile menu"
         >
-          <span className={`hamburger ${isMobileMenuOpen ? 'open' : ''}`}>
+          <span className={`hamburger ${isMobileOpen ? 'open' : ''}`}>
             <span></span>
             <span></span>
             <span></span>
           </span>
         </button>
-
-        {/* Mobile Navigation */}
-        <ul className={`nav-links mobile-nav ${isMobileMenuOpen ? 'open' : ''}`}>
-          {menuItems.map((item) => (
-            <li key={item.path}>
-              <Link 
-                to={item.path} 
-                className={location.pathname === item.path || location.pathname.startsWith(item.path + '/') ? 'active' : ''}
-                onClick={closeMobileMenu}
-              >
-                {item.label}
-              </Link>
-            </li>
-          ))}
-        </ul>
       </div>
-    </nav>
+
+      {/* Mobile Overlay */}
+      {isMobileOpen && <div className="mobile-overlay" onClick={closeMobileMenu}></div>}
+
+      {/* Sidebar */}
+      <aside className={`sidebar ${isCollapsed ? 'collapsed' : ''} ${isMobileOpen ? 'mobile-open' : ''}`}>
+        <div className="sidebar-header">
+          <Link to="/" className="sidebar-logo" onClick={closeMobileMenu}>
+            <div className="logo-icon">🧠</div>
+            {!isCollapsed && <span className="logo-text">DevGenius</span>}
+          </Link>
+          
+          {/* Desktop Collapse Toggle */}
+          <button 
+            className="collapse-toggle desktop-only"
+            onClick={toggleCollapse}
+            aria-label="Toggle sidebar"
+          >
+            <span className={`toggle-icon ${isCollapsed ? 'collapsed' : ''}`}>‹</span>
+          </button>
+        </div>
+        
+        <nav className="sidebar-nav">
+          <ul className="nav-links">
+            {menuItems.map((item) => {
+              const isActive = item.exact 
+                ? location.pathname === item.path
+                : location.pathname === item.path || location.pathname.startsWith(item.path + '/');
+              
+              return (
+                <li key={item.path}>
+                  <Link 
+                    to={item.path} 
+                    className={`nav-link ${isActive ? 'active' : ''}`}
+                    onClick={closeMobileMenu}
+                    title={isCollapsed ? item.label : undefined}
+                  >
+                    <span className="nav-icon">{item.icon}</span>
+                    {!isCollapsed && <span className="nav-text">{item.label}</span>}
+                  </Link>
+                </li>
+              );
+            })}
+          </ul>
+        </nav>
+      </aside>
+    </>
   );
 };
 
 // Main Layout Component
 const Layout = ({ children }) => (
   <div className="app">
-    <Navigation />
+    <Sidebar />
     <main className="main-content">
       <div className="content-container">
-        {children}
+        <div className="content-area">
+          {children}
+        </div>
         <GoogleAd 
           width={300}
           height={250}
