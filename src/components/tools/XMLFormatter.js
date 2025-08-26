@@ -1,9 +1,57 @@
 import React, { useState } from 'react';
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { oneDark, oneLight } from 'react-syntax-highlighter/dist/esm/styles/prism';
+
+// Fallback themes in case imports fail
+const fallbackDarkTheme = {
+  'code[class*="language-"]': {
+    color: '#abb2bf',
+    background: '#282c34',
+    fontFamily: "'Source Code Pro', 'Courier New', monospace",
+    fontSize: '14px',
+    lineHeight: '1.5'
+  },
+  'pre[class*="language-"]': {
+    color: '#abb2bf',
+    background: '#282c34',
+    fontFamily: "'Source Code Pro', 'Courier New', monospace",
+    fontSize: '14px',
+    lineHeight: '1.5'
+  },
+  '.token.tag': { color: '#e06c75' },
+  '.token.attr-name': { color: '#d19a66' },
+  '.token.attr-value': { color: '#98c379' },
+  '.token.string': { color: '#98c379' },
+  '.token.punctuation': { color: '#abb2bf' }
+};
+
+const fallbackLightTheme = {
+  'code[class*="language-"]': {
+    color: '#1f2937',
+    background: '#fafafa',
+    fontFamily: "'Source Code Pro', 'Courier New', monospace",
+    fontSize: '14px',
+    lineHeight: '1.5'
+  },
+  'pre[class*="language-"]': {
+    color: '#1f2937',
+    background: '#fafafa',
+    fontFamily: "'Source Code Pro', 'Courier New', monospace",
+    fontSize: '14px',
+    lineHeight: '1.5'
+  },
+  '.token.tag': { color: '#e74c3c' },
+  '.token.attr-name': { color: '#e67e22' },
+  '.token.attr-value': { color: '#16a085' },
+  '.token.string': { color: '#16a085' },
+  '.token.punctuation': { color: '#1f2937' }
+};
 
 const XMLFormatter = () => {
   const [input, setInput] = useState('');
   const [output, setOutput] = useState('');
   const [isValid, setIsValid] = useState(null);
+  const [isDarkTheme, setIsDarkTheme] = useState(false);
 
   const formatXML = (xml) => {
     let formatted = '';
@@ -139,7 +187,7 @@ const XMLFormatter = () => {
       <div className="input-group">
         <label className="input-label">XML Input</label>
         <textarea
-          className="text-area"
+          className="text-area code-input"
           value={input}
           onChange={(e) => setInput(e.target.value)}
           placeholder="Paste your XML here..."
@@ -160,6 +208,9 @@ const XMLFormatter = () => {
         <button className="btn btn-outline" onClick={loadSampleXML}>
           Load Sample
         </button>
+        <button className="btn btn-outline" onClick={() => setIsDarkTheme(!isDarkTheme)}>
+          {isDarkTheme ? '☀️ Light' : '🌙 Dark'}
+        </button>
         <button className="btn btn-secondary" onClick={handleClear}>
           Clear
         </button>
@@ -171,16 +222,46 @@ const XMLFormatter = () => {
           {isValid === true && <span style={{ color: '#10b981', marginLeft: '0.5rem' }}>✅ Valid</span>}
           {isValid === false && <span style={{ color: '#ef4444', marginLeft: '0.5rem' }}>❌ Invalid</span>}
         </label>
-        <textarea
-          className="text-area"
-          value={output}
-          readOnly
-          placeholder="Formatted XML will appear here..."
-          style={{ 
-            minHeight: '200px',
-            borderColor: isValid === false ? '#ef4444' : isValid === true ? '#10b981' : '#d1d5db'
-          }}
-        />
+        {output && isValid !== false ? (
+          <div className={`code-output ${isDarkTheme ? 'dark-theme' : 'light-theme'}`}>
+            <SyntaxHighlighter
+              language="xml"
+              style={isDarkTheme ? (oneDark || fallbackDarkTheme) : (oneLight || fallbackLightTheme)}
+              customStyle={{
+                margin: 0,
+                borderRadius: '8px',
+                fontSize: '14px',
+                fontFamily: "'Source Code Pro', 'Courier New', monospace",
+                minHeight: '200px',
+                border: `2px solid ${isValid === true ? '#10b981' : (isDarkTheme ? '#4a5568' : '#d1d5db')}`,
+                backgroundColor: isDarkTheme ? '#282c34' : '#fafafa'
+              }}
+              wrapLongLines={true}
+              showLineNumbers={false}
+            >
+              {output}
+            </SyntaxHighlighter>
+          </div>
+        ) : (
+          <div 
+            className={`code-placeholder ${isDarkTheme ? 'dark' : 'light'}`}
+            style={{
+              minHeight: '200px',
+              border: `2px solid ${isValid === false ? '#ef4444' : (isDarkTheme ? '#4a5568' : '#d1d5db')}`,
+              borderRadius: '8px',
+              padding: '1rem',
+              backgroundColor: isDarkTheme ? '#282c34' : '#f8fafc',
+              fontFamily: "'Source Code Pro', 'Courier New', monospace",
+              fontSize: '14px',
+              color: isValid === false ? '#ef4444' : (isDarkTheme ? '#abb2bf' : '#64748b'),
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center'
+            }}
+          >
+            {output || 'Formatted XML will appear here...'}
+          </div>
+        )}
       </div>
 
       {output && (

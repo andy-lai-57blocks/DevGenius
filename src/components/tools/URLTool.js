@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 
-const Base64Tool = () => {
+const URLTool = () => {
   const [input, setInput] = useState('');
   const [output, setOutput] = useState('');
   const [mode, setMode] = useState('encode'); // 'encode' or 'decode'
 
   const handleEncode = () => {
     try {
-      const encoded = btoa(unescape(encodeURIComponent(input)));
+      const encoded = encodeURIComponent(input);
       setOutput(encoded);
     } catch (error) {
       setOutput('Error: Unable to encode the input text');
@@ -16,10 +16,10 @@ const Base64Tool = () => {
 
   const handleDecode = () => {
     try {
-      const decoded = decodeURIComponent(escape(atob(input)));
+      const decoded = decodeURIComponent(input);
       setOutput(decoded);
     } catch (error) {
-      setOutput('Error: Invalid Base64 input');
+      setOutput('Error: Invalid URL encoded input');
     }
   };
 
@@ -39,9 +39,7 @@ const Base64Tool = () => {
   const handleCopy = async () => {
     try {
       await navigator.clipboard.writeText(output);
-      // You could add a toast notification here
     } catch (error) {
-      // Fallback for older browsers
       const textArea = document.createElement('textarea');
       textArea.value = output;
       document.body.appendChild(textArea);
@@ -54,8 +52,8 @@ const Base64Tool = () => {
   return (
     <div className="tool-container">
       <div className="tool-header">
-        <h2>Base64 Encoder/Decoder</h2>
-        <p>Encode and decode text using Base64 encoding scheme</p>
+        <h2>URL Encoder/Decoder</h2>
+        <p>Encode and decode URLs for safe transmission over the internet</p>
       </div>
 
       <div className="input-group">
@@ -77,13 +75,13 @@ const Base64Tool = () => {
 
       <div className="input-group">
         <label className="input-label">
-          {mode === 'encode' ? 'Text to Encode' : 'Base64 to Decode'}
+          {mode === 'encode' ? 'Text/URL to Encode' : 'URL Encoded Text to Decode'}
         </label>
         <textarea
-          className="text-area"
+          className="text-area code-editor"
           value={input}
           onChange={(e) => setInput(e.target.value)}
-          placeholder={mode === 'encode' ? 'Enter text to encode...' : 'Enter Base64 to decode...'}
+          placeholder={mode === 'encode' ? 'Enter text or URL to encode...' : 'Enter URL encoded text to decode...'}
         />
       </div>
 
@@ -101,7 +99,7 @@ const Base64Tool = () => {
           {mode === 'encode' ? 'Encoded Result' : 'Decoded Result'}
         </label>
         <textarea
-          className="text-area"
+          className="text-area code-editor"
           value={output}
           readOnly
           placeholder="Result will appear here..."
@@ -119,4 +117,4 @@ const Base64Tool = () => {
   );
 };
 
-export default Base64Tool;
+export default URLTool;

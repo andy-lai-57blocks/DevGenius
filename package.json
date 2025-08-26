@@ -1,12 +1,14 @@
 {
   "name": "one-toys",
   "version": "1.0.0",
+  "description": "One Toys Tools is a comprehensive platform that integrates hundreds of practical functions, designed to help users process various types of data more efficiently and enhance work productivity.",
   "private": true,
   "dependencies": {
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.8.1",
-    "react-scripts": "5.0.1"
+    "react-scripts": "5.0.1",
+    "react-syntax-highlighter": "^15.6.6"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -36,5 +38,12 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@types/react": "^19.1.11",
+    "@types/react-dom": "^19.1.8",
+    "eslint": "^8.1.0",
+    "eslint-config-react-app": "^7.0.1",
+    "typescript": "^5.9.2"
   }
 }

@@ -1,36 +1,13 @@
 import React, { useState } from 'react';
 
-const HTMLTool = () => {
+const Base64Tool = () => {
   const [input, setInput] = useState('');
   const [output, setOutput] = useState('');
   const [mode, setMode] = useState('encode'); // 'encode' or 'decode'
 
-  const htmlEntities = {
-    '&': '&amp;',
-    '<': '&lt;',
-    '>': '&gt;',
-    '"': '&quot;',
-    "'": '&#x27;',
-    '/': '&#x2F;'
-  };
-
-  const reverseHtmlEntities = {
-    '&amp;': '&',
-    '&lt;': '<',
-    '&gt;': '>',
-    '&quot;': '"',
-    '&#x27;': "'",
-    '&#39;': "'",
-    '&#x2F;': '/',
-    '&#47;': '/'
-  };
-
   const handleEncode = () => {
     try {
-      let encoded = input;
-      Object.keys(htmlEntities).forEach(char => {
-        encoded = encoded.replace(new RegExp(char.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'g'), htmlEntities[char]);
-      });
+      const encoded = btoa(unescape(encodeURIComponent(input)));
       setOutput(encoded);
     } catch (error) {
       setOutput('Error: Unable to encode the input text');
@@ -39,13 +16,10 @@ const HTMLTool = () => {
 
   const handleDecode = () => {
     try {
-      let decoded = input;
-      Object.keys(reverseHtmlEntities).forEach(entity => {
-        decoded = decoded.replace(new RegExp(entity, 'g'), reverseHtmlEntities[entity]);
-      });
+      const decoded = decodeURIComponent(escape(atob(input)));
       setOutput(decoded);
     } catch (error) {
-      setOutput('Error: Unable to decode the input text');
+      setOutput('Error: Invalid Base64 input');
     }
   };
 
@@ -65,7 +39,9 @@ const HTMLTool = () => {
   const handleCopy = async () => {
     try {
       await navigator.clipboard.writeText(output);
+      // You could add a toast notification here
     } catch (error) {
+      // Fallback for older browsers
       const textArea = document.createElement('textarea');
       textArea.value = output;
       document.body.appendChild(textArea);
@@ -78,8 +54,8 @@ const HTMLTool = () => {
   return (
     <div className="tool-container">
       <div className="tool-header">
-        <h2>HTML Encoder/Decoder</h2>
-        <p>Encode and decode HTML entities and special characters</p>
+        <h2>Base64 Encoder/Decoder</h2>
+        <p>Encode and decode text using Base64 encoding scheme</p>
       </div>
 
       <div className="input-group">
@@ -101,13 +77,13 @@ const HTMLTool = () => {
 
       <div className="input-group">
         <label className="input-label">
-          {mode === 'encode' ? 'HTML/Text to Encode' : 'HTML Entities to Decode'}
+          {mode === 'encode' ? 'Text to Encode' : 'Base64 to Decode'}
         </label>
         <textarea
-          className="text-area"
+          className="text-area code-editor"
           value={input}
           onChange={(e) => setInput(e.target.value)}
-          placeholder={mode === 'encode' ? 'Enter HTML or text to encode...' : 'Enter HTML entities to decode...'}
+          placeholder={mode === 'encode' ? 'Enter text to encode...' : 'Enter Base64 to decode...'}
         />
       </div>
 
@@ -125,7 +101,7 @@ const HTMLTool = () => {
           {mode === 'encode' ? 'Encoded Result' : 'Decoded Result'}
         </label>
         <textarea
-          className="text-area"
+          className="text-area code-editor"
           value={output}
           readOnly
           placeholder="Result will appear here..."
@@ -143,4 +119,4 @@ const HTMLTool = () => {
   );
 };
 
-export default HTMLTool;
+export default Base64Tool;

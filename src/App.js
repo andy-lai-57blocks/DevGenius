@@ -1,25 +1,56 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Link, useLocation } from 'react-router-dom';
-import './App.css';
+
+// Import styles
+import './styles/common.css';
+import './styles/sidebar.css';
+import './styles/forms.css';
+import './styles/pages.css';
+import './styles/tools.css';
+import './styles/responsive.css';
 
 // Import components
-import Base64Tool from './components/Base64Tool';
-import URLTool from './components/URLTool';
-import HTMLTool from './components/HTMLTool';
-import JSONFormatter from './components/JSONFormatter';
-import XMLFormatter from './components/XMLFormatter';
-import CaseConverter from './components/CaseConverter';
-import UUIDGenerator from './components/UUIDGenerator';
-import PasswordGenerator from './components/PasswordGenerator';
-import LoremGenerator from './components/LoremGenerator';
-import Home from './components/Home';
+import { 
+  Base64Tool, 
+  URLTool, 
+  HTMLTool, 
+  JSONFormatter, 
+  XMLFormatter, 
+  CaseConverter, 
+  CharacterCount,
+  UUIDGenerator, 
+  PasswordGenerator, 
+  LoremGenerator,
+  SystemInfo,
+  NetworkInfo,
+  BrowserInfo,
+  CallingCodesLookup,
+  PublicServiceNumbers,
+  PostcodeLookup,
+  TimestampConverter,
+  DateFormatter,
+  DateCalculator,
+  TimezoneConverter,
+  CountdownTool
+} from './components/tools';
 
-// Import category pages
-import EncodersDecoders from './components/EncodersDecoders';
-import Formatters from './components/Formatters';
-import Generators from './components/Generators';
-import TextTools from './components/TextTools';
-import GoogleAd from './components/GoogleAd';
+import { 
+  Home, 
+  Code, 
+  Office, 
+  TextTools, 
+  Info, 
+  DateTime 
+} from './components/pages';
+
+import { GoogleAd } from './components/shared';
+
+// Legacy category imports for backward compatibility
+import { 
+  EncodersDecoders, 
+  Formatters, 
+  Generators 
+} from './components/legacy';
 
 // Sidebar Navigation Component
 const Sidebar = () => {
@@ -29,10 +60,10 @@ const Sidebar = () => {
   
   const menuItems = [
     { path: '/', label: 'Home', icon: '🏠', exact: true },
-    { path: '/encoders', label: 'Encoders / Decoders', icon: '🔐' },
-    { path: '/formatters', label: 'Formatters', icon: '📋' },
-    { path: '/generators', label: 'Generators', icon: '🆔' },
-    { path: '/text', label: 'Text Tools', icon: '🔤' }
+    { path: '/code', label: 'Code', icon: '🖥️' },
+    { path: '/text', label: 'Text', icon: '🔤' },
+    { path: '/info', label: 'Info', icon: 'ℹ️' },
+    { path: '/datetime', label: 'DateTime', icon: '🕐' }
   ];
 
   const toggleCollapse = () => {
@@ -74,7 +105,6 @@ const Sidebar = () => {
       <aside className={`sidebar ${isCollapsed ? 'collapsed' : ''} ${isMobileOpen ? 'mobile-open' : ''}`}>
         <div className="sidebar-header">
           <Link to="/" className="sidebar-logo" onClick={closeMobileMenu}>
-            <div className="logo-icon">🧠</div>
             {!isCollapsed && <span className="logo-text">One Toys</span>}
           </Link>
           
@@ -144,30 +174,64 @@ function App() {
           {/* Home */}
           <Route path="/" element={<Home />} />
           
-          {/* Category Pages */}
-          <Route path="/encoders" element={<EncodersDecoders />} />
-          <Route path="/formatters" element={<Formatters />} />
-          <Route path="/generators" element={<Generators />} />
+          {/* New Category Pages */}
+          <Route path="/code" element={<Code />} />
           <Route path="/text" element={<TextTools />} />
+          <Route path="/info" element={<Info />} />
+          <Route path="/datetime" element={<DateTime />} />
           
-          {/* Encoder/Decoder Tools */}
-          <Route path="/encoders/base64" element={<Base64Tool />} />
-          <Route path="/encoders/url" element={<URLTool />} />
-          <Route path="/encoders/html" element={<HTMLTool />} />
+          {/* Office redirect page for backward compatibility */}
+          <Route path="/office" element={<Office />} />
           
-          {/* Formatter Tools */}
-          <Route path="/formatters/json" element={<JSONFormatter />} />
-          <Route path="/formatters/xml" element={<XMLFormatter />} />
+          {/* Code Tools (Encoders/Decoders & Formatters) */}
+          <Route path="/code/base64" element={<Base64Tool />} />
+          <Route path="/code/url" element={<URLTool />} />
+          <Route path="/code/html" element={<HTMLTool />} />
+          <Route path="/code/json" element={<JSONFormatter />} />
+          <Route path="/code/xml" element={<XMLFormatter />} />
           
-          {/* Generator Tools */}
-          <Route path="/generators/uuid" element={<UUIDGenerator />} />
-          <Route path="/generators/password" element={<PasswordGenerator />} />
-          <Route path="/generators/lorem" element={<LoremGenerator />} />
+          {/* Code Tools (Generators) */}
+          <Route path="/code/uuid" element={<UUIDGenerator />} />
+          <Route path="/code/password" element={<PasswordGenerator />} />
           
           {/* Text Tools */}
           <Route path="/text/case-converter" element={<CaseConverter />} />
+          <Route path="/text/character-count" element={<CharacterCount />} />
+          <Route path="/text/lorem" element={<LoremGenerator />} />
+                
+                {/* Info Tools */}
+                <Route path="/info/system" element={<SystemInfo />} />
+                <Route path="/info/network" element={<NetworkInfo />} />
+                <Route path="/info/browser" element={<BrowserInfo />} />
+                <Route path="/info/calling-codes" element={<CallingCodesLookup />} />
+                <Route path="/info/public-services" element={<PublicServiceNumbers />} />
+                <Route path="/info/postcodes" element={<PostcodeLookup />} />
+                
+                {/* DateTime Tools */}
+                <Route path="/datetime/timestamp" element={<TimestampConverter />} />
+                <Route path="/datetime/format" element={<DateFormatter />} />
+                <Route path="/datetime/calculator" element={<DateCalculator />} />
+                <Route path="/datetime/timezone" element={<TimezoneConverter />} />
+                <Route path="/datetime/countdown" element={<CountdownTool />} />
           
-          {/* Legacy redirects for backward compatibility */}
+          {/* Legacy Category Pages for backward compatibility */}
+          <Route path="/encoders" element={<EncodersDecoders />} />
+          <Route path="/formatters" element={<Formatters />} />
+          <Route path="/generators" element={<Generators />} />
+          
+          {/* Legacy Tool Routes for backward compatibility */}
+          <Route path="/encoders/base64" element={<Base64Tool />} />
+          <Route path="/encoders/url" element={<URLTool />} />
+          <Route path="/encoders/html" element={<HTMLTool />} />
+          <Route path="/formatters/json" element={<JSONFormatter />} />
+          <Route path="/formatters/xml" element={<XMLFormatter />} />
+          <Route path="/generators/uuid" element={<UUIDGenerator />} />
+          <Route path="/generators/password" element={<PasswordGenerator />} />
+          <Route path="/generators/lorem" element={<LoremGenerator />} />
+          {/* Office backward compatibility routes */}
+          <Route path="/office/uuid" element={<UUIDGenerator />} />
+          <Route path="/office/password" element={<PasswordGenerator />} />
+          <Route path="/office/lorem" element={<LoremGenerator />} />
           <Route path="/base64" element={<Base64Tool />} />
           <Route path="/url" element={<URLTool />} />
           <Route path="/html" element={<HTMLTool />} />

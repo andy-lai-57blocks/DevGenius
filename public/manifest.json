@@ -1,7 +1,7 @@
 {
   "short_name": "OneToys",
-  "name": "One Toys - Free Developer Tools",
-  "description": "Free online developer tools for encoding, decoding, formatting, and text conversion",
+  "name": "One Toys - Comprehensive Platform",
+  "description": "Comprehensive platform with hundreds of practical functions for efficient data processing and productivity",
   "icons": [
     {
       "src": "favicon.ico",
@@ -26,7 +26,7 @@
   "orientation": "portrait-primary",
   "scope": "/",
   "lang": "en-US",
-  "categories": ["developer", "productivity", "utilities"],
+  "categories": ["productivity", "utilities", "tools"],
   "screenshots": [
     {
       "src": "screenshot-wide.png",
