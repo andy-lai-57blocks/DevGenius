@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 
 const GoogleAd = ({ 
-  adClient = process.env.REACT_APP_GOOGLE_ADSENSE_CLIENT,
+  adClient = process.env.REACT_APP_GOOGLE_ADSENSE_CLIENT || "ca-pub-8806399994474387",
   adSlot = process.env.REACT_APP_GOOGLE_ADSENSE_SLOT,
   adFormat = "rectangle",
   width = 300,
@@ -20,9 +20,9 @@ const GoogleAd = ({
     }
   }, [adClient]);
 
-  // Show placeholder in development or when credentials are not set
+  // Show placeholder in development or when ad slot is not set
   const isProduction = process.env.NODE_ENV === 'production';
-  const hasValidCredentials = adClient && adClient !== "ca-pub-xxxxxxxxxx" && 
+  const hasValidCredentials = adClient && adClient.startsWith("ca-pub-") && 
                                adSlot && adSlot !== "xxxxxxxxxx";
 
   if (!isProduction || !hasValidCredentials) {
@@ -33,7 +33,10 @@ const GoogleAd = ({
           <div className="ad-size">{width} × {height}</div>
           {!hasValidCredentials && (
             <div className="ad-setup-note">
-              Set REACT_APP_GOOGLE_ADSENSE_CLIENT and REACT_APP_GOOGLE_ADSENSE_SLOT
+              {adSlot === "xxxxxxxxxx" ? 
+                "Create ad units in AdSense and set REACT_APP_GOOGLE_ADSENSE_SLOT" : 
+                "Set REACT_APP_GOOGLE_ADSENSE_CLIENT and REACT_APP_GOOGLE_ADSENSE_SLOT"
+              }
             </div>
           )}
         </div>
