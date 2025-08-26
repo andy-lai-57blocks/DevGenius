@@ -52,7 +52,7 @@ const Sidebar = () => {
       {/* Mobile Header */}
       <div className="mobile-header">
         <Link to="/" className="mobile-logo" onClick={closeMobileMenu}>
-          <h1>DevGenius</h1>
+          <h1>One Toys</h1>
         </Link>
         <button 
           className="mobile-menu-toggle"
@@ -75,7 +75,7 @@ const Sidebar = () => {
         <div className="sidebar-header">
           <Link to="/" className="sidebar-logo" onClick={closeMobileMenu}>
             <div className="logo-icon">🧠</div>
-            {!isCollapsed && <span className="logo-text">DevGenius</span>}
+            {!isCollapsed && <span className="logo-text">One Toys</span>}
           </Link>
           
           {/* Desktop Collapse Toggle */}

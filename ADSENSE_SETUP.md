@@ -1,6 +1,6 @@
 # Google AdSense Setup Guide
 
-This guide will help you set up Google AdSense for monetizing your DevGenius developer tools website.
+This guide will help you set up Google AdSense for monetizing your One Toys developer tools website.
 
 ## 🚀 Quick Setup
 
@@ -126,7 +126,7 @@ If AdSense rejects initially:
 3. **Set environment variables** once approved
 4. **Deploy and monitor** ad performance
 
-Your DevGenius website is perfectly positioned for AdSense approval with:
+Your One Toys website is perfectly positioned for AdSense approval with:
 - ✅ Professional design
 - ✅ Mobile-responsive
 - ✅ Fast loading

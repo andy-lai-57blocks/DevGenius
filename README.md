@@ -1,4 +1,4 @@
-# DevGenius - Developer Tools
+# One Toys - Developer Tools
 
 A simple and elegant web application providing essential developer tools for encoding, formatting, and text conversion.
 
@@ -66,7 +66,7 @@ nvm use
 
 ## SEO Features
 
-DevGenius is optimized for search engines with:
+One Toys is optimized for search engines with:
 - **Comprehensive Meta Tags** - Title, description, keywords, and robots
 - **Open Graph Tags** - Facebook and social media sharing optimization
 - **Twitter Cards** - Enhanced Twitter sharing experience
@@ -88,7 +88,7 @@ DevGenius is optimized for search engines with:
 ## Ad Monetization
 
 ### Google AdSense Integration
-DevGenius is ready for Google AdSense monetization with:
+One Toys is ready for Google AdSense monetization with:
 - **MREC (300x250)** ad placement on each page
 - **Responsive design** that works on all devices
 - **Non-intrusive placement** that doesn't affect user experience

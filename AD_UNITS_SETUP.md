@@ -12,7 +12,7 @@ Congratulations! Your Google AdSense has been approved. Now you need to create a
 ### Create MREC Ad Unit (300x250)
 1. **Click**: "Create new ad unit"
 2. **Choose**: "Display ads"
-3. **Ad unit name**: `DevGenius MREC`
+3. **Ad unit name**: `OneToys MREC`
 4. **Ad size**: 
    - Select **"Fixed size"**
    - Choose **"Medium Rectangle (300 × 250)"**
@@ -35,7 +35,7 @@ After creating the ad unit, you'll see code like this:
 
 **Copy the `data-ad-slot` value** (e.g., "1234567890") - this is what you need!
 
-## ⚙️ Step 2: Configure Your DevGenius Website
+## ⚙️ Step 2: Configure Your One Toys Website
 
 ### Option A: Environment Variables (Recommended)
 **Create `.env.local` file in your project root:**
@@ -139,7 +139,7 @@ If you encounter issues:
 
 ## 🎉 Congratulations!
 
-Your DevGenius website is now monetized! With your high-quality developer tools and excellent SEO, you should see steady revenue growth as your traffic increases.
+Your One Toys website is now monetized! With your high-quality developer tools and excellent SEO, you should see steady revenue growth as your traffic increases.
 
 **Expected first month**: $20-100 (depending on traffic)
 **Growth potential**: $200-1000+ as traffic scales

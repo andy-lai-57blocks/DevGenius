@@ -35,7 +35,7 @@ const Home = () => {
 
   return (
     <div className="home-container">
-      <h1 className="home-title">DevGenius</h1>
+      <h1 className="home-title">One Toys</h1>
       <p className="home-subtitle">
         Essential developer tools for encoding, formatting, and text conversion
       </p>
