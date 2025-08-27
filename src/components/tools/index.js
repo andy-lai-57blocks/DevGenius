@@ -9,7 +9,8 @@ export {
   XMLFormatter,
   UUIDGenerator,
   PasswordGenerator,
-  GzipTool
+  GzipTool,
+  HLSTool
 } from './code';
 
 // Text Tools

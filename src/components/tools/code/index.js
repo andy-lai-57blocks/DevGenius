@@ -8,3 +8,4 @@ export { default as XMLFormatter } from './XMLFormatter';
 export { default as UUIDGenerator } from './UUIDGenerator';
 export { default as PasswordGenerator } from './PasswordGenerator';
 export { default as GzipTool } from './GzipTool';
+export { default as HLSTool } from './HLSTool';

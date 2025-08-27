@@ -25,13 +25,20 @@ const Code = () => {
       icon: '🏷️',
       category: 'Encoding'
     },
-    {
-      path: '/code/gzip',
-      title: 'Gzip Compression',
-      description: 'Simple text compression and decompression with gzip',
-      icon: '🗜️',
-      category: 'Encoding'
-    },
+            {
+          path: '/code/gzip',
+          title: 'Gzip Compression',
+          description: 'Simple text compression and decompression with gzip',
+          icon: '🗜️',
+          category: 'Encoding'
+        },
+        {
+          path: '/code/hls',
+          title: 'HLS Stream Player',
+          description: 'Play and analyze HTTP Live Streaming (HLS) content',
+          icon: '📺',
+          category: 'Media'
+        },
     // Formatters
     {
       path: '/code/json',
@@ -74,7 +81,7 @@ const Code = () => {
   }, {});
 
   // Define category order with Formatting first
-  const categoryOrder = ['Formatting', 'Encoding', 'Generators'];
+  const categoryOrder = ['Formatting', 'Encoding', 'Media', 'Generators'];
   const orderedGroupedTools = categoryOrder
     .filter(category => groupedTools[category]) // Only include categories that exist
     .map(category => [category, groupedTools[category]]);

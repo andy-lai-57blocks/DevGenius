@@ -7052,6 +7052,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"hls.js@npm:^1.6.11":
+  version: 1.6.11
+  resolution: "hls.js@npm:1.6.11"
+  checksum: 10c0/bf98d5796750ddc33bf301133256950fe894332e5cde9733433b98e6738fe72a86746fb2f3cc901f6f8a67afa2fca55f4606adfdb5c631dca3780a9d7353ea00
+  languageName: node
+  linkType: hard
+
 "hoopy@npm:^0.1.4":
   version: 0.1.4
   resolution: "hoopy@npm:0.1.4"
@@ -9631,6 +9638,7 @@ __metadata:
     "@types/react-dom": "npm:^19.1.8"
     eslint: "npm:^8.1.0"
     eslint-config-react-app: "npm:^7.0.1"
+    hls.js: "npm:^1.6.11"
     pako: "npm:^2.1.0"
     react: "npm:^18.2.0"
     react-dom: "npm:^18.2.0"

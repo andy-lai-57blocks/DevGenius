@@ -6,13 +6,14 @@ import { HelmetProvider } from 'react-helmet-async';
 import './styles/main.scss';
 
 // Import components
-import { 
+import {
   Base64Tool, 
   URLTool, 
   HTMLTool, 
   JSONFormatter, 
   XMLFormatter, 
   GzipTool,
+  HLSTool,
   CaseConverter, 
   CharacterCount,
   UUIDGenerator, 
@@ -186,6 +187,7 @@ function App() {
           <Route path="/code/json" element={<JSONFormatter />} />
           <Route path="/code/xml" element={<XMLFormatter />} />
           <Route path="/code/gzip" element={<GzipTool />} />
+          <Route path="/code/hls" element={<HLSTool />} />
           
           {/* Code Tools (Generators) */}
           <Route path="/code/uuid" element={<UUIDGenerator />} />

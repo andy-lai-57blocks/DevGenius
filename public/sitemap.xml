@@ -82,6 +82,13 @@
 </url>
 
 <url>
+  <loc>https://devgenius.vercel.app/code/hls</loc>
+  <lastmod>2024-12-19</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.85</priority>
+</url>
+
+<url>
   <loc>https://devgenius.vercel.app/code/uuid</loc>
   <lastmod>2024-12-19</lastmod>
   <changefreq>monthly</changefreq>

@@ -80,6 +80,13 @@ export const seoData = {
     type: 'tool'
   },
 
+  '/code/hls': {
+    title: 'HLS Stream Player & Analyzer - HTTP Live Streaming | One Toys',
+    description: 'Professional HLS stream player and analyzer. Play HTTP Live Streaming content, analyze stream quality, view adaptive bitrate levels. Supports live and on-demand streams.',
+    keywords: 'hls player, http live streaming, hls stream analyzer, m3u8 player, adaptive streaming, live streaming, video streaming, hls tool, streaming media',
+    type: 'tool'
+  },
+
   '/code/uuid': {
     title: 'UUID Generator - Version 4 & Version 1 | One Toys',
     description: 'Generate unique UUIDs (Universally Unique Identifiers) online. Support for UUID v4 (random) and UUID v1 (timestamp). Bulk generation available.',
