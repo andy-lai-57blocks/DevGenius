@@ -1,0 +1,93 @@
+@import '../../../shared/variables';
+
+// Info Tools Base Styling
+.system-info-container,
+.browser-info-container,
+.network-info-container {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-xl;
+}
+
+.info-section {
+  background: $bg-card;
+  border: 2px solid #f1f5f9;
+  border-radius: $border-radius-xl;
+  padding: $spacing-lg;
+  transition: $transition-normal;
+
+  &:hover {
+    border-color: #e2e8f0;
+    box-shadow: $shadow-md;
+  }
+}
+
+.info-section-title {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: $font-size-xl;
+  font-weight: 700;
+  color: $text-primary;
+  margin-bottom: $spacing-md;
+  padding-bottom: $spacing-sm;
+  border-bottom: 2px solid #f1f5f9;
+}
+
+.info-icon {
+  font-size: $font-size-2xl;
+}
+
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: $spacing-md;
+}
+
+.info-item {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-xs;
+}
+
+.info-label {
+  font-weight: 600;
+  color: $text-secondary;
+  font-size: $font-size-sm;
+  text-transform: capitalize;
+}
+
+.info-value {
+  color: $text-primary;
+  font-size: 0.925rem;
+  word-break: break-all;
+  font-family: $font-family-mono;
+
+  &.supported {
+    color: $success-color;
+    font-weight: 600;
+  }
+
+  &.unsupported {
+    color: $error-color;
+    font-weight: 600;
+  }
+}
+
+// Permission states
+.permission-granted {
+  color: $success-color !important;
+}
+
+.permission-denied {
+  color: $error-color !important;
+}
+
+.permission-prompt {
+  color: $warning-color !important;
+}
+
+.permission-unknown,
+.permission-unsupported {
+  color: $text-secondary !important;
+}

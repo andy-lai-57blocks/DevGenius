@@ -1,13 +1,9 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Link, useLocation } from 'react-router-dom';
+import { HelmetProvider } from 'react-helmet-async';
 
 // Import styles
-import './styles/common.css';
-import './styles/sidebar.css';
-import './styles/forms.css';
-import './styles/pages.css';
-import './styles/tools.css';
-import './styles/responsive.css';
+import './styles/main.scss';
 
 // Import components
 import { 
@@ -16,6 +12,7 @@ import {
   HTMLTool, 
   JSONFormatter, 
   XMLFormatter, 
+  GzipTool,
   CaseConverter, 
   CharacterCount,
   UUIDGenerator, 
@@ -43,14 +40,10 @@ import {
   DateTime 
 } from './components/pages';
 
-import { GoogleAd } from './components/shared';
+import { GoogleAd, SEOHead, Breadcrumbs } from './components/shared';
 
 // Legacy category imports for backward compatibility
-import { 
-  EncodersDecoders, 
-  Formatters, 
-  Generators 
-} from './components/legacy';
+// Legacy components removed - using category-based organization
 
 // Sidebar Navigation Component
 const Sidebar = () => {
@@ -149,10 +142,12 @@ const Sidebar = () => {
 // Main Layout Component
 const Layout = ({ children }) => (
   <div className="app">
+    <SEOHead />
     <Sidebar />
     <main className="main-content">
       <div className="content-container">
         <div className="content-area">
+          <Breadcrumbs />
           {children}
         </div>
         <GoogleAd 
@@ -168,8 +163,9 @@ const Layout = ({ children }) => (
 
 function App() {
   return (
-    <Router>
-      <Layout>
+    <HelmetProvider>
+      <Router>
+        <Layout>
         <Routes>
           {/* Home */}
           <Route path="/" element={<Home />} />
@@ -189,6 +185,7 @@ function App() {
           <Route path="/code/html" element={<HTMLTool />} />
           <Route path="/code/json" element={<JSONFormatter />} />
           <Route path="/code/xml" element={<XMLFormatter />} />
+          <Route path="/code/gzip" element={<GzipTool />} />
           
           {/* Code Tools (Generators) */}
           <Route path="/code/uuid" element={<UUIDGenerator />} />
@@ -214,10 +211,10 @@ function App() {
                 <Route path="/datetime/timezone" element={<TimezoneConverter />} />
                 <Route path="/datetime/countdown" element={<CountdownTool />} />
           
-          {/* Legacy Category Pages for backward compatibility */}
-          <Route path="/encoders" element={<EncodersDecoders />} />
-          <Route path="/formatters" element={<Formatters />} />
-          <Route path="/generators" element={<Generators />} />
+          {/* Legacy Category Pages - redirected to main Code page */}
+          <Route path="/encoders" element={<Code />} />
+          <Route path="/formatters" element={<Code />} />
+          <Route path="/generators" element={<Code />} />
           
           {/* Legacy Tool Routes for backward compatibility */}
           <Route path="/encoders/base64" element={<Base64Tool />} />
@@ -241,6 +238,7 @@ function App() {
         </Routes>
       </Layout>
     </Router>
+    </HelmetProvider>
   );
 }
 

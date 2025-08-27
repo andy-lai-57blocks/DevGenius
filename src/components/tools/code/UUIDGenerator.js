@@ -72,15 +72,15 @@ const UUIDGenerator = () => {
 
       <div className="input-group">
         <label className="input-label">UUID Version</label>
-        <div className="button-group">
+        <div className="tab-group">
           <button
-            className={`btn ${version === 'v4' ? 'btn-primary' : 'btn-outline'}`}
+            className={`tab-btn ${version === 'v4' ? 'active' : ''}`}
             onClick={() => setVersion('v4')}
           >
             Version 4 (Random)
           </button>
           <button
-            className={`btn ${version === 'v1' ? 'btn-primary' : 'btn-outline'}`}
+            className={`tab-btn ${version === 'v1' ? 'active' : ''}`}
             onClick={() => setVersion('v1')}
           >
             Version 1 (Timestamp)

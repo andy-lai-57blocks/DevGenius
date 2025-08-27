@@ -1,0 +1,85 @@
+@import '../../../shared/variables';
+
+// Enhanced Case Converter Styles
+.case-results {
+  margin-top: $spacing-xl;
+}
+
+.case-result-item {
+  background: $bg-card;
+  border: 2px solid #f1f5f9;
+  border-radius: $border-radius-xl;
+  padding: $spacing-lg;
+  margin-bottom: $spacing-lg;
+  transition: $transition-normal;
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, $primary-color, #8b5cf6);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform $transition-normal;
+  }
+
+  &:hover {
+    border-color: #e2e8f0;
+    box-shadow: $shadow-md;
+    transform: translateY(-2px);
+
+    &::before {
+      transform: scaleX(1);
+    }
+  }
+}
+
+.case-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: $spacing-md;
+}
+
+.case-label {
+  font-weight: 700;
+  color: $text-primary;
+  font-size: $font-size-base;
+  background: linear-gradient(135deg, $text-primary, #475569);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.case-description {
+  display: block;
+  font-size: $font-size-xs;
+  color: $text-secondary;
+  margin-top: $spacing-sm;
+  font-style: italic;
+}
+
+.case-result {
+  background: linear-gradient(135deg, #fafafa 0%, $bg-card 100%);
+  border: 2px solid #e2e8f0;
+  border-radius: $border-radius-lg;
+  padding: $spacing-md 1.25rem;
+  font-family: $font-family-mono;
+  font-size: 0.925rem;
+  color: #374151;
+  word-break: break-all;
+  min-height: 3rem;
+  display: flex;
+  align-items: center;
+  transition: all $transition-fast;
+
+  &:hover {
+    border-color: #cbd5e1;
+    background: $bg-card;
+  }
+}

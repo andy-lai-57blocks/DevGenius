@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { oneDark, oneLight } from 'react-syntax-highlighter/dist/esm/styles/prism';
+import { downloadAsFile, getDownloadInfo } from '../../../utils/downloadUtils';
 
 // Fallback themes in case imports fail
 const fallbackDarkTheme = {
@@ -127,6 +128,13 @@ const HTMLTool = () => {
     }
   };
 
+  const handleDownload = () => {
+    const success = downloadAsFile(output);
+    if (!success) {
+      console.error('Failed to download file');
+    }
+  };
+
   const loadSampleHTML = () => {
     const sampleHTML = `<!DOCTYPE html>
 <html lang="en">
@@ -183,15 +191,15 @@ const HTMLTool = () => {
       </div>
 
       <div className="input-group">
-        <div className="button-group">
+        <div className="tab-group">
           <button
-            className={`btn ${mode === 'encode' ? 'btn-primary' : 'btn-outline'}`}
+            className={`tab-btn ${mode === 'encode' ? 'active' : ''}`}
             onClick={() => setMode('encode')}
           >
             Encode
           </button>
           <button
-            className={`btn ${mode === 'decode' ? 'btn-primary' : 'btn-outline'}`}
+            className={`tab-btn ${mode === 'decode' ? 'active' : ''}`}
             onClick={() => setMode('decode')}
           >
             Decode
@@ -279,6 +287,15 @@ const HTMLTool = () => {
           <button className="btn btn-outline" onClick={handleCopy}>
             Copy Result
           </button>
+          {mode === 'decode' && (
+            <button 
+              className="btn btn-outline" 
+              onClick={handleDownload}
+              title={getDownloadInfo(output).description}
+            >
+              📥 Download as {getDownloadInfo(output).type}
+            </button>
+          )}
         </div>
       )}
     </div>

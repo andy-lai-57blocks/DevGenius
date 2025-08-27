@@ -25,6 +25,13 @@ const Code = () => {
       icon: '🏷️',
       category: 'Encoding'
     },
+    {
+      path: '/code/gzip',
+      title: 'Gzip Compression',
+      description: 'Simple text compression and decompression with gzip',
+      icon: '🗜️',
+      category: 'Encoding'
+    },
     // Formatters
     {
       path: '/code/json',
@@ -66,19 +73,25 @@ const Code = () => {
     return groups;
   }, {});
 
+  // Define category order with Formatting first
+  const categoryOrder = ['Formatting', 'Encoding', 'Generators'];
+  const orderedGroupedTools = categoryOrder
+    .filter(category => groupedTools[category]) // Only include categories that exist
+    .map(category => [category, groupedTools[category]]);
+
   return (
     <div className="category-page">
       <div className="category-header">
         <h1>🖥️ Code Tools</h1>
-        <p>Essential functions for encoding, decoding, and formatting various data types</p>
+        <p>Essential functions for formatting, encoding, decoding, and generating various data types</p>
       </div>
       
-      {Object.entries(groupedTools).map(([category, categoryTools], groupIndex) => (
+      {orderedGroupedTools.map(([category, categoryTools], groupIndex) => (
         <div key={category} className="tool-group">
           <h2 className="group-title">{category}</h2>
           <div className="tools-grid">
             {categoryTools.map((tool, index) => {
-              const globalIndex = Object.entries(groupedTools).slice(0, groupIndex).reduce((acc, [, tools]) => acc + tools.length, 0) + index;
+              const globalIndex = orderedGroupedTools.slice(0, groupIndex).reduce((acc, [, tools]) => acc + tools.length, 0) + index;
               return (
                 <Link 
                   key={tool.path} 

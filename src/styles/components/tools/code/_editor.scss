@@ -1,0 +1,274 @@
+@import '../../../shared/variables';
+
+// Enhanced Code Editor Styles for All Code Tools
+
+// Source Code Pro font for all code-related text areas and code output
+.text-area.code-editor,
+.text-area.code-input,
+.code-input,
+.uuid-text,
+.password-result,
+.password-output {
+  font-family: $font-family-mono !important;
+  font-size: $font-size-sm !important;
+  line-height: 1.5 !important;
+  tab-size: 2;
+  letter-spacing: 0.025em;
+}
+
+// Light theme (default)
+.code-editor-container {
+  transition: $transition-normal;
+}
+
+.code-input {
+  border: 2px solid $code-border-light;
+  border-radius: $border-radius-lg;
+  background-color: $code-bg-light;
+  color: $code-text-light;
+  transition: all $transition-fast;
+
+  &:focus {
+    border-color: $primary-color;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+    background-color: $bg-card;
+    outline: none;
+  }
+
+  &::placeholder {
+    color: $text-secondary;
+  }
+}
+
+// Dark theme styles - only for code-output area
+.code-output {
+  position: relative;
+  border-radius: $border-radius-lg;
+  overflow: hidden;
+  transition: $transition-normal;
+
+  &.light-theme {
+    box-shadow: $shadow-sm;
+  }
+
+  &.dark-theme {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    background-color: $code-bg-dark !important;
+    border: 2px solid $code-border-dark !important;
+
+    pre {
+      background-color: $code-bg-dark !important;
+      color: $code-text-dark !important;
+    }
+
+    code {
+      background-color: $code-bg-dark !important;
+      color: $code-text-dark !important;
+    }
+  }
+
+  &:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  }
+}
+
+.code-placeholder {
+  font-family: $font-family-mono !important;
+  font-size: $font-size-sm !important;
+  line-height: 1.5 !important;
+  transition: all $transition-fast !important;
+  text-align: center;
+  font-style: italic;
+
+  &:hover {
+    background-color: #f1f5f9 !important;
+  }
+}
+
+// Theme toggle button styling
+.button-group .btn:has-text("Light"),
+.button-group .btn:has-text("Dark") {
+  min-width: 80px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: $spacing-xs;
+}
+
+// Enhanced syntax highlighting container
+.code-output pre {
+  margin: 0 !important;
+  padding: $spacing-md !important;
+  background: transparent !important;
+  font-family: $font-family-mono !important;
+  font-size: $font-size-sm !important;
+  line-height: 1.5 !important;
+  tab-size: 2 !important;
+  white-space: pre-wrap !important;
+  word-wrap: break-word !important;
+}
+
+// Custom scrollbar for code areas
+.code-output pre::-webkit-scrollbar,
+.code-input::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.code-output pre::-webkit-scrollbar-track,
+.code-input::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+}
+
+.code-output pre::-webkit-scrollbar-thumb,
+.code-input::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 4px;
+
+  &:hover {
+    background: rgba(0, 0, 0, 0.5);
+  }
+}
+
+// Responsive adjustments for code editors
+@media (max-width: $breakpoint-md) {
+  .code-input,
+  .code-placeholder {
+    font-size: 13px;
+  }
+  
+  .code-output pre {
+    font-size: 13px;
+    padding: 0.75rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .code-input,
+  .code-placeholder {
+    font-size: 12px;
+  }
+  
+  .code-output pre {
+    font-size: 12px;
+    padding: $spacing-sm;
+  }
+  
+  .button-group {
+    flex-wrap: wrap;
+    gap: $spacing-sm;
+
+    .btn {
+      min-width: auto;
+      flex: 1 1 calc(50% - 0.25rem);
+    }
+  }
+}
+
+// Tab-style toggle buttons for mode selection
+.tab-group {
+  display: inline-flex;
+  background: #f8fafc;
+  border: 2px solid #e2e8f0;
+  border-radius: $border-radius-lg;
+  padding: 0.25rem;
+  margin-bottom: $spacing-md;
+}
+
+.tab-btn {
+  background: none;
+  border: none;
+  padding: $spacing-sm $spacing-md;
+  border-radius: $border-radius-md;
+  font-weight: 500;
+  font-size: $font-size-sm;
+  color: $text-secondary;
+  cursor: pointer;
+  transition: all $transition-fast;
+  margin: 0 2px;
+
+  &:hover {
+    color: $text-primary;
+    background: rgba(59, 130, 246, 0.1);
+  }
+
+  &.active {
+    background: $primary-color;
+    color: $text-white;
+    box-shadow: 0 2px 4px rgba(59, 130, 246, 0.2);
+  }
+
+  &:first-child {
+    margin-left: 0;
+  }
+
+  &:last-child {
+    margin-right: 0;
+  }
+}
+
+// Gzip Tool Specific Styles
+.radio-group {
+  display: flex;
+  gap: $spacing-md;
+  margin-top: $spacing-sm;
+}
+
+.radio-option {
+  display: flex;
+  align-items: center;
+  gap: $spacing-xs;
+  cursor: pointer;
+
+  input[type="radio"] {
+    margin: 0;
+  }
+
+  .radio-label {
+    font-weight: 500;
+    color: $text-primary;
+  }
+}
+
+.error-message {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  background: #fef2f2;
+  border: 2px solid #fecaca;
+  border-radius: $border-radius-lg;
+  padding: $spacing-md;
+  color: $error-color;
+  font-weight: 500;
+  margin: $spacing-md 0;
+
+  .error-icon {
+    font-size: $font-size-lg;
+    flex-shrink: 0;
+  }
+}
+
+.output-container {
+  position: relative;
+
+  .copy-btn {
+    position: absolute;
+    top: $spacing-sm;
+    right: $spacing-sm;
+    background: $primary-color;
+    color: $text-white;
+    border: none;
+    border-radius: $border-radius-sm;
+    padding: $spacing-xs $spacing-sm;
+    cursor: pointer;
+    font-size: $font-size-sm;
+    transition: $transition-fast;
+
+    &:hover {
+      background: darken($primary-color, 10%);
+      transform: translateY(-1px);
+    }
+  }
+}
