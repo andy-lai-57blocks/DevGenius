@@ -32,31 +32,12 @@ const CountdownTool = () => {
           }
         }
         
-        // No valid saved data, set defaults
-        console.log('No saved data found, setting defaults...');
-        const defaultCountdowns = [
-          {
-            id: Date.now() + 1,
-            title: 'New Year 2025',
-            date: '2025-01-01T00:00:00',
-            category: 'holiday',
-            description: 'Welcome the new year!',
-            createdAt: Date.now()
-          },
-          {
-            id: Date.now() + 2,
-            title: 'Christmas 2024',
-            date: '2024-12-25T00:00:00',
-            category: 'holiday',
-            description: 'Merry Christmas!',
-            createdAt: Date.now()
-          }
-        ];
+        // No valid saved data, start with empty array
+        console.log('No saved data found, starting with empty countdowns...');
+        setCountdowns([]);
         
-        setCountdowns(defaultCountdowns);
-        
-        // Save defaults to localStorage immediately
-        const dataToSave = JSON.stringify(defaultCountdowns);
+        // Initialize empty array in localStorage
+        const dataToSave = JSON.stringify([]);
         localStorage.setItem('one-toys-countdowns', dataToSave);
         console.log('✅ Saved default countdowns to localStorage');
         
