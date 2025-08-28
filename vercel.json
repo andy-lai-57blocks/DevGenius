@@ -34,10 +34,7 @@
     {
       "src": "/(.*)",
       "dest": "/index.html",
-      "headers": {
-        
-        "Content-Security-Policy": "script-src * 'unsafe-inline' 'unsafe-eval'; img-src *; frame-src *; connect-src *; style-src * 'unsafe-inline'; font-src *; media-src *; object-src *; default-src *;"
-      }
+      "headers": {}
     }
   ]
 }
