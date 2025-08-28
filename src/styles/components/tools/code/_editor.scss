@@ -556,3 +556,39 @@
     }
   }
 }
+
+// MIME Type Info Styling
+.mime-type-info {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-xs;
+  
+  p {
+    margin: 0;
+    padding: $spacing-xs;
+    background: $bg-tertiary;
+    border-radius: $border-radius-sm;
+    font-size: $font-size-sm;
+    
+    strong {
+      font-family: 'Source Code Pro', 'Monaco', 'Menlo', monospace;
+      color: $primary-600;
+    }
+  }
+  
+  small {
+    color: $text-muted;
+    font-style: italic;
+    margin-top: $spacing-xs;
+  }
+}
+
+// Stream info code styling
+.stream-info-section code {
+  background: $bg-tertiary;
+  padding: $spacing-xs $spacing-sm;
+  border-radius: $border-radius-sm;
+  font-family: 'Source Code Pro', 'Monaco', 'Menlo', monospace;
+  font-size: $font-size-sm;
+  color: $primary-600;
+}

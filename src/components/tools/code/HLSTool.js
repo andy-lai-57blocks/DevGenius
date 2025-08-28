@@ -13,6 +13,7 @@ const HLSTool = () => {
     bufferLength: 0,
     droppedFrames: 0
   });
+  const [hlsMimeType, setHlsMimeType] = useState(null);
   
   const videoRef = useRef(null);
   const hlsRef = useRef(null);
@@ -54,7 +55,29 @@ const HLSTool = () => {
     return () => clearInterval(statsInterval);
   }, []);
 
-  const loadHLS = (url) => {
+  // Function to detect HLS MIME type
+  const detectHLSMimeType = async (url) => {
+    try {
+      const response = await fetch(url, { 
+        method: 'HEAD',
+        mode: 'cors'
+      });
+      
+      const contentType = response.headers.get('content-type');
+      setHlsMimeType(contentType);
+      
+      // Log for debugging
+      console.log('HLS MIME Type detected:', contentType);
+      
+      return contentType;
+    } catch (error) {
+      console.warn('Could not detect MIME type:', error);
+      setHlsMimeType('Detection failed');
+      return null;
+    }
+  };
+
+  const loadHLS = async (url) => {
     if (!url) {
       setError('Please enter a valid HLS URL');
       return;
@@ -64,6 +87,10 @@ const HLSTool = () => {
     setStreamInfo(null);
     setAvailableLevels([]);
     setCurrentLevel(-1);
+    setHlsMimeType(null);
+
+    // Detect MIME type first
+    await detectHLSMimeType(url);
 
     if (Hls.isSupported()) {
       // Destroy existing HLS instance
@@ -271,6 +298,9 @@ const HLSTool = () => {
                 <li><strong>Quality Levels:</strong> {streamInfo.levels}</li>
                 <li><strong>Duration:</strong> {streamInfo.duration}</li>
                 <li><strong>Current Level:</strong> {currentLevel >= 0 ? currentLevel : 'Auto'}</li>
+                {hlsMimeType && (
+                  <li><strong>MIME Type:</strong> <code>{hlsMimeType}</code></li>
+                )}
               </ul>
             </div>
             
@@ -383,6 +413,15 @@ const HLSTool = () => {
               <li>Mobile app streaming</li>
               <li>Broadcast television</li>
             </ul>
+          </div>
+          <div className="info-item">
+            <h4>🏷️ MIME Types</h4>
+            <div className="mime-type-info">
+              <p><strong>application/vnd.apple.mpegurl</strong> - Apple's official MIME type</p>
+              <p><strong>application/x-mpegURL</strong> - Alternative widely-supported MIME type</p>
+              <p><strong>text/plain</strong> - Sometimes used by servers for m3u8 files</p>
+              <small>💡 Both Apple and x-mpegURL types are valid for HLS streams</small>
+            </div>
           </div>
         </div>
       </div>
