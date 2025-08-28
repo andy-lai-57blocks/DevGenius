@@ -33,8 +33,7 @@
     },
     {
       "src": "/(.*)",
-      "dest": "/index.html",
-      "headers": {}
+      "dest": "/index.html"
     }
   ]
 }
