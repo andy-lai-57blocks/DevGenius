@@ -153,10 +153,10 @@ const Layout = ({ children }) => (
           {children}
         </div>
         <GoogleAd 
-          width={300}
-          height={250}
-          adFormat="rectangle"
-          className="mrec-ad"
+          adSlot="8870579772"
+          adFormat="auto"
+          responsive={true}
+          className="right-ad"
         />
       </div>
     </main>

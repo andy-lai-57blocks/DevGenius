@@ -48,7 +48,23 @@
   text-align: center;
 }
 
-.mrec-ad .ad-container {
+.mrec-ad .ad-container,
+.right-ad .ad-container {
   position: sticky;
   top: $spacing-xl;
+}
+
+// Responsive ad styling
+.right-ad {
+  .ad-container {
+    min-height: 250px; // Minimum height for responsive ads
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .adsbygoogle {
+    width: 100% !important;
+    max-width: 336px; // Standard sidebar width
+  }
 }
