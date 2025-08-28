@@ -14,6 +14,12 @@ const HLSTool = () => {
     droppedFrames: 0
   });
   const [hlsMimeType, setHlsMimeType] = useState(null);
+  const [streamFileInfo, setStreamFileInfo] = useState({
+    manifestSize: null,
+    realDuration: null,
+    totalSegments: null,
+    estimatedTotalSize: null
+  });
   
   const videoRef = useRef(null);
   const hlsRef = useRef(null);
@@ -49,6 +55,14 @@ const HLSTool = () => {
           bufferLength: video.buffered.length > 0 ? video.buffered.end(video.buffered.length - 1) - video.currentTime : 0,
           droppedFrames: video.getVideoPlaybackQuality ? video.getVideoPlaybackQuality().droppedVideoFrames : 0
         });
+
+        // Update real duration from video element if available and different from manifest
+        if (video.duration && !isNaN(video.duration) && video.duration !== Infinity) {
+          setStreamFileInfo(prev => ({
+            ...prev,
+            realDuration: prev.realDuration === 'Master Playlist' || typeof prev.realDuration !== 'number' ? video.duration : prev.realDuration
+          }));
+        }
       }
     }, 1000);
 
@@ -77,6 +91,89 @@ const HLSTool = () => {
     }
   };
 
+  // Function to get manifest file size and analyze content
+  const analyzeHLSManifest = async (url) => {
+    try {
+      const response = await fetch(url, { 
+        method: 'GET',
+        mode: 'cors'
+      });
+      
+      const manifestText = await response.text();
+      const manifestSize = new Blob([manifestText]).size;
+      
+      // Parse M3U8 manifest to extract information
+      let realDuration = null;
+      let totalSegments = 0;
+      let isLive = false;
+      
+      const lines = manifestText.split('\n');
+      let currentDuration = 0;
+      
+      for (const line of lines) {
+        const trimmedLine = line.trim();
+        
+        // Check if it's a live stream
+        if (trimmedLine.includes('#EXT-X-PLAYLIST-TYPE:VOD')) {
+          isLive = false;
+        } else if (trimmedLine.includes('#EXT-X-PLAYLIST-TYPE:EVENT') || trimmedLine.includes('#EXT-X-TARGETDURATION')) {
+          // Could be live or event
+        }
+        
+        // Get segment duration
+        if (trimmedLine.startsWith('#EXTINF:')) {
+          const durationMatch = trimmedLine.match(/#EXTINF:([\d.]+)/);
+          if (durationMatch) {
+            currentDuration += parseFloat(durationMatch[1]);
+            totalSegments++;
+          }
+        }
+        
+        // Check for total duration in master playlist
+        if (trimmedLine.startsWith('#EXT-X-STREAM-INF')) {
+          // This is a master playlist, we need to analyze individual streams
+          // For now, we'll get basic info
+        }
+      }
+      
+      // If no segments found, it might be a master playlist
+      if (totalSegments === 0) {
+        // Try to find variant streams
+        for (const line of lines) {
+          if (line.trim().endsWith('.m3u8') && !line.startsWith('#')) {
+            totalSegments++; // Count variant streams instead
+          }
+        }
+        realDuration = 'Master Playlist';
+      } else {
+        realDuration = currentDuration;
+      }
+      
+      setStreamFileInfo({
+        manifestSize,
+        realDuration: typeof realDuration === 'number' ? realDuration : realDuration,
+        totalSegments,
+        estimatedTotalSize: null // We'll calculate this later if needed
+      });
+      
+      console.log('HLS Manifest Analysis:', {
+        manifestSize,
+        realDuration,
+        totalSegments,
+        isLive
+      });
+      
+    } catch (error) {
+      console.warn('Could not analyze HLS manifest:', error);
+      setStreamFileInfo({
+        manifestSize: 'Analysis failed',
+        realDuration: 'Analysis failed',
+        totalSegments: null,
+        estimatedTotalSize: null
+      });
+    }
+  };
+
   const loadHLS = async (url) => {
     if (!url) {
       setError('Please enter a valid HLS URL');
@@ -88,9 +185,16 @@ const HLSTool = () => {
     setAvailableLevels([]);
     setCurrentLevel(-1);
     setHlsMimeType(null);
+    setStreamFileInfo({
+      manifestSize: null,
+      realDuration: null,
+      totalSegments: null,
+      estimatedTotalSize: null
+    });
 
-    // Detect MIME type first
+    // Detect MIME type and analyze manifest
     await detectHLSMimeType(url);
+    await analyzeHLSManifest(url);
 
     if (Hls.isSupported()) {
       // Destroy existing HLS instance
@@ -204,6 +308,14 @@ const HLSTool = () => {
     return `${mins}:${secs.toString().padStart(2, '0')}`;
   };
 
+  const formatFileSize = (bytes) => {
+    if (!bytes || isNaN(bytes)) return 'Unknown';
+    if (bytes < 1024) return bytes + ' B';
+    if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + ' KB';
+    if (bytes < 1024 * 1024 * 1024) return (bytes / (1024 * 1024)).toFixed(1) + ' MB';
+    return (bytes / (1024 * 1024 * 1024)).toFixed(1) + ' GB';
+  };
+
   return (
     <div className="tool-container">
       <div className="tool-header">
@@ -300,6 +412,19 @@ const HLSTool = () => {
                 <li><strong>Current Level:</strong> {currentLevel >= 0 ? currentLevel : 'Auto'}</li>
                 {hlsMimeType && (
                   <li><strong>MIME Type:</strong> <code>{hlsMimeType}</code></li>
+                )}
+                {streamFileInfo.manifestSize && (
+                  <li><strong>Manifest Size:</strong> {typeof streamFileInfo.manifestSize === 'number' ? formatFileSize(streamFileInfo.manifestSize) : streamFileInfo.manifestSize}</li>
+                )}
+                {streamFileInfo.realDuration && (
+                  <li><strong>Real Duration:</strong> {
+                    typeof streamFileInfo.realDuration === 'number' 
+                      ? formatDuration(streamFileInfo.realDuration) + ` (${streamFileInfo.realDuration}s)`
+                      : streamFileInfo.realDuration
+                  }</li>
+                )}
+                {streamFileInfo.totalSegments && (
+                  <li><strong>Total Segments:</strong> {streamFileInfo.totalSegments}</li>
                 )}
               </ul>
             </div>
