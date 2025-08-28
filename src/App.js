@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Link, useLocation } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
+import { Analytics } from '@vercel/analytics/react';
 
 // Import styles
 import './styles/main.scss';
@@ -165,6 +166,13 @@ const Layout = ({ children }) => (
 function App() {
   return (
     <HelmetProvider>
+      <Analytics 
+        debug={process.env.NODE_ENV === 'development'}
+        beforeSend={(event) => {
+          // Optional: Filter or modify events before sending
+          return event;
+        }}
+      />
       <Router>
         <Layout>
         <Routes>
