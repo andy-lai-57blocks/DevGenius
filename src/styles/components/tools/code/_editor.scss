@@ -566,13 +566,13 @@
   p {
     margin: 0;
     padding: $spacing-xs;
-    background: $bg-tertiary;
+    background: $bg-secondary;
     border-radius: $border-radius-sm;
     font-size: $font-size-sm;
     
     strong {
       font-family: 'Source Code Pro', 'Monaco', 'Menlo', monospace;
-      color: $primary-600;
+      color: $primary-color;
     }
   }
   
@@ -585,10 +585,10 @@
 
 // Stream info code styling
 .stream-info-section code {
-  background: $bg-tertiary;
+  background: $bg-secondary;
   padding: $spacing-xs $spacing-sm;
   border-radius: $border-radius-sm;
   font-family: 'Source Code Pro', 'Monaco', 'Menlo', monospace;
   font-size: $font-size-sm;
-  color: $primary-600;
+  color: $primary-color;
 }
