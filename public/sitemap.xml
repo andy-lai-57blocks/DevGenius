@@ -3,7 +3,7 @@
 
 <!-- Home Page -->
 <url>
-  <loc>https://devgenius.vercel.app/</loc>
+  <loc>https://one-toys.com/</loc>
   <lastmod>2024-12-19</lastmod>
   <changefreq>weekly</changefreq>
   <priority>1.0</priority>
@@ -11,28 +11,28 @@
 
 <!-- Main Category Pages -->
 <url>
-  <loc>https://devgenius.vercel.app/code</loc>
+  <loc>https://one-toys.com/code</loc>
   <lastmod>2024-12-19</lastmod>
   <changefreq>weekly</changefreq>
   <priority>0.9</priority>
 </url>
 
 <url>
-  <loc>https://devgenius.vercel.app/text</loc>
+  <loc>https://one-toys.com/text</loc>
   <lastmod>2024-12-19</lastmod>
   <changefreq>weekly</changefreq>
   <priority>0.9</priority>
 </url>
 
 <url>
-  <loc>https://devgenius.vercel.app/info</loc>
+  <loc>https://one-toys.com/info</loc>
   <lastmod>2024-12-19</lastmod>
   <changefreq>weekly</changefreq>
   <priority>0.9</priority>
 </url>
 
 <url>
-  <loc>https://devgenius.vercel.app/datetime</loc>
+  <loc>https://one-toys.com/datetime</loc>
   <lastmod>2024-12-19</lastmod>
   <changefreq>weekly</changefreq>
   <priority>0.9</priority>
@@ -40,63 +40,63 @@
 
 <!-- Code Tools - High Priority -->
 <url>
-  <loc>https://devgenius.vercel.app/code/base64</loc>
+  <loc>https://one-toys.com/code/base64</loc>
   <lastmod>2024-12-19</lastmod>
   <changefreq>monthly</changefreq>
   <priority>0.95</priority>
 </url>
 
 <url>
-  <loc>https://devgenius.vercel.app/code/json</loc>
+  <loc>https://one-toys.com/code/json</loc>
   <lastmod>2024-12-19</lastmod>
   <changefreq>monthly</changefreq>
   <priority>0.95</priority>
 </url>
 
 <url>
-  <loc>https://devgenius.vercel.app/code/url</loc>
+  <loc>https://one-toys.com/code/url</loc>
   <lastmod>2024-12-19</lastmod>
   <changefreq>monthly</changefreq>
   <priority>0.9</priority>
 </url>
 
 <url>
-  <loc>https://devgenius.vercel.app/code/html</loc>
+  <loc>https://one-toys.com/code/html</loc>
   <lastmod>2024-12-19</lastmod>
   <changefreq>monthly</changefreq>
   <priority>0.9</priority>
 </url>
 
 <url>
-  <loc>https://devgenius.vercel.app/code/xml</loc>
+  <loc>https://one-toys.com/code/xml</loc>
   <lastmod>2024-12-19</lastmod>
   <changefreq>monthly</changefreq>
   <priority>0.85</priority>
 </url>
 
 <url>
-  <loc>https://devgenius.vercel.app/code/gzip</loc>
+  <loc>https://one-toys.com/code/gzip</loc>
   <lastmod>2024-12-19</lastmod>
   <changefreq>monthly</changefreq>
   <priority>0.8</priority>
 </url>
 
 <url>
-  <loc>https://devgenius.vercel.app/code/hls</loc>
+  <loc>https://one-toys.com/code/hls</loc>
   <lastmod>2024-12-19</lastmod>
   <changefreq>monthly</changefreq>
   <priority>0.85</priority>
 </url>
 
 <url>
-  <loc>https://devgenius.vercel.app/code/uuid</loc>
+  <loc>https://one-toys.com/code/uuid</loc>
   <lastmod>2024-12-19</lastmod>
   <changefreq>monthly</changefreq>
   <priority>0.85</priority>
 </url>
 
 <url>
-  <loc>https://devgenius.vercel.app/code/password</loc>
+  <loc>https://one-toys.com/code/password</loc>
   <lastmod>2024-12-19</lastmod>
   <changefreq>monthly</changefreq>
   <priority>0.9</priority>
@@ -104,21 +104,21 @@
 
 <!-- Text Tools -->
 <url>
-  <loc>https://devgenius.vercel.app/text/case-converter</loc>
+  <loc>https://one-toys.com/text/case-converter</loc>
   <lastmod>2024-12-19</lastmod>
   <changefreq>monthly</changefreq>
   <priority>0.85</priority>
 </url>
 
 <url>
-  <loc>https://devgenius.vercel.app/text/character-count</loc>
+  <loc>https://one-toys.com/text/character-count</loc>
   <lastmod>2024-12-19</lastmod>
   <changefreq>monthly</changefreq>
   <priority>0.8</priority>
 </url>
 
 <url>
-  <loc>https://devgenius.vercel.app/text/lorem</loc>
+  <loc>https://one-toys.com/text/lorem</loc>
   <lastmod>2024-12-19</lastmod>
   <changefreq>monthly</changefreq>
   <priority>0.7</priority>
@@ -126,42 +126,42 @@
 
 <!-- Info Tools -->
 <url>
-  <loc>https://devgenius.vercel.app/info/calling-codes</loc>
+  <loc>https://one-toys.com/info/calling-codes</loc>
   <lastmod>2024-12-19</lastmod>
   <changefreq>monthly</changefreq>
   <priority>0.8</priority>
 </url>
 
 <url>
-  <loc>https://devgenius.vercel.app/info/public-services</loc>
+  <loc>https://one-toys.com/info/public-services</loc>
   <lastmod>2024-12-19</lastmod>
   <changefreq>monthly</changefreq>
   <priority>0.75</priority>
 </url>
 
 <url>
-  <loc>https://devgenius.vercel.app/info/postcodes</loc>
+  <loc>https://one-toys.com/info/postcodes</loc>
   <lastmod>2024-12-19</lastmod>
   <changefreq>monthly</changefreq>
   <priority>0.75</priority>
 </url>
 
 <url>
-  <loc>https://devgenius.vercel.app/info/system</loc>
+  <loc>https://one-toys.com/info/system</loc>
   <lastmod>2024-12-19</lastmod>
   <changefreq>monthly</changefreq>
   <priority>0.6</priority>
 </url>
 
 <url>
-  <loc>https://devgenius.vercel.app/info/network</loc>
+  <loc>https://one-toys.com/info/network</loc>
   <lastmod>2024-12-19</lastmod>
   <changefreq>monthly</changefreq>
   <priority>0.6</priority>
 </url>
 
 <url>
-  <loc>https://devgenius.vercel.app/info/browser</loc>
+  <loc>https://one-toys.com/info/browser</loc>
   <lastmod>2024-12-19</lastmod>
   <changefreq>monthly</changefreq>
   <priority>0.6</priority>
@@ -169,35 +169,35 @@
 
 <!-- DateTime Tools -->
 <url>
-  <loc>https://devgenius.vercel.app/datetime/timestamp</loc>
+  <loc>https://one-toys.com/datetime/timestamp</loc>
   <lastmod>2024-12-19</lastmod>
   <changefreq>monthly</changefreq>
   <priority>0.8</priority>
 </url>
 
 <url>
-  <loc>https://devgenius.vercel.app/datetime/format</loc>
+  <loc>https://one-toys.com/datetime/format</loc>
   <lastmod>2024-12-19</lastmod>
   <changefreq>monthly</changefreq>
   <priority>0.75</priority>
 </url>
 
 <url>
-  <loc>https://devgenius.vercel.app/datetime/calculator</loc>
+  <loc>https://one-toys.com/datetime/calculator</loc>
   <lastmod>2024-12-19</lastmod>
   <changefreq>monthly</changefreq>
   <priority>0.7</priority>
 </url>
 
 <url>
-  <loc>https://devgenius.vercel.app/datetime/timezone</loc>
+  <loc>https://one-toys.com/datetime/timezone</loc>
   <lastmod>2024-12-19</lastmod>
   <changefreq>monthly</changefreq>
   <priority>0.75</priority>
 </url>
 
 <url>
-  <loc>https://devgenius.vercel.app/datetime/countdown</loc>
+  <loc>https://one-toys.com/datetime/countdown</loc>
   <lastmod>2024-12-19</lastmod>
   <changefreq>monthly</changefreq>
   <priority>0.7</priority>
@@ -205,28 +205,28 @@
 
 <!-- Legacy Category Pages (redirects) -->
 <url>
-  <loc>https://devgenius.vercel.app/encoders</loc>
+  <loc>https://one-toys.com/encoders</loc>
   <lastmod>2024-12-19</lastmod>
   <changefreq>monthly</changefreq>
   <priority>0.6</priority>
 </url>
 
 <url>
-  <loc>https://devgenius.vercel.app/formatters</loc>
+  <loc>https://one-toys.com/formatters</loc>
   <lastmod>2024-12-19</lastmod>
   <changefreq>monthly</changefreq>
   <priority>0.6</priority>
 </url>
 
 <url>
-  <loc>https://devgenius.vercel.app/generators</loc>
+  <loc>https://one-toys.com/generators</loc>
   <lastmod>2024-12-19</lastmod>
   <changefreq>monthly</changefreq>
   <priority>0.6</priority>
 </url>
 
 <url>
-  <loc>https://devgenius.vercel.app/office</loc>
+  <loc>https://one-toys.com/office</loc>
   <lastmod>2024-12-19</lastmod>
   <changefreq>monthly</changefreq>
   <priority>0.5</priority>
@@ -234,42 +234,42 @@
 
 <!-- Legacy Tool URLs (redirects for SEO) -->
 <url>
-  <loc>https://devgenius.vercel.app/base64</loc>
+  <loc>https://one-toys.com/base64</loc>
   <lastmod>2024-12-19</lastmod>
   <changefreq>monthly</changefreq>
   <priority>0.7</priority>
 </url>
 
 <url>
-  <loc>https://devgenius.vercel.app/json</loc>
+  <loc>https://one-toys.com/json</loc>
   <lastmod>2024-12-19</lastmod>
   <changefreq>monthly</changefreq>
   <priority>0.7</priority>
 </url>
 
 <url>
-  <loc>https://devgenius.vercel.app/url</loc>
+  <loc>https://one-toys.com/url</loc>
   <lastmod>2024-12-19</lastmod>
   <changefreq>monthly</changefreq>
   <priority>0.65</priority>
 </url>
 
 <url>
-  <loc>https://devgenius.vercel.app/html</loc>
+  <loc>https://one-toys.com/html</loc>
   <lastmod>2024-12-19</lastmod>
   <changefreq>monthly</changefreq>
   <priority>0.65</priority>
 </url>
 
 <url>
-  <loc>https://devgenius.vercel.app/xml</loc>
+  <loc>https://one-toys.com/xml</loc>
   <lastmod>2024-12-19</lastmod>
   <changefreq>monthly</changefreq>
   <priority>0.6</priority>
 </url>
 
 <url>
-  <loc>https://devgenius.vercel.app/case</loc>
+  <loc>https://one-toys.com/case</loc>
   <lastmod>2024-12-19</lastmod>
   <changefreq>monthly</changefreq>
   <priority>0.6</priority>

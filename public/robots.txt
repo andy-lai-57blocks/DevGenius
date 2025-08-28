@@ -2,7 +2,7 @@ User-agent: *
 Allow: /
 
 # Sitemap location
-Sitemap: https://devgenius.vercel.app/sitemap.xml
+Sitemap: https://one-toys.com/sitemap.xml
 
 # Crawl delay (optional)
 Crawl-delay: 1

@@ -7,7 +7,7 @@ const SEOHead = () => {
   const location = useLocation();
   const seoData = getSEOData(location.pathname);
 
-  const baseUrl = 'https://devgenius.vercel.app';
+  const baseUrl = 'https://one-toys.com';
   const fullUrl = `${baseUrl}${location.pathname}`;
   const imageUrl = `${baseUrl}/og-image.png`;
 
