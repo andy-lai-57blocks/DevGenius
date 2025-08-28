@@ -592,3 +592,149 @@
   font-size: $font-size-sm;
   color: $primary-color;
 }
+
+// Enhanced HLS Info Section Styling
+.info-section {
+  margin-top: $spacing-xl;
+  padding: $spacing-lg;
+  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+  border-radius: $border-radius-xl;
+  border: 1px solid $border-light;
+  box-shadow: $shadow-sm;
+
+  h3 {
+    text-align: center;
+    color: $text-primary;
+    margin-bottom: $spacing-lg;
+    font-size: $font-size-2xl;
+    font-weight: 700;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  }
+
+  .info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: $spacing-lg;
+    margin-top: $spacing-lg;
+  }
+
+  .info-item {
+    background: white;
+    padding: $spacing-lg;
+    border-radius: $border-radius-lg;
+    border: 1px solid $border-light;
+    box-shadow: $shadow-md;
+    transition: all $transition-fast;
+    position: relative;
+    overflow: hidden;
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, $primary-color, #60a5fa);
+    }
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: $shadow-lg;
+      border-color: $primary-color;
+    }
+
+    h4 {
+      color: $text-primary;
+      margin-bottom: $spacing-md;
+      font-size: $font-size-lg;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: $spacing-sm;
+    }
+
+    p {
+      color: $text-secondary;
+      line-height: 1.6;
+      margin-bottom: $spacing-sm;
+      font-size: $font-size-base;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+
+      li {
+        color: $text-secondary;
+        margin-bottom: $spacing-xs;
+        padding-left: $spacing-md;
+        position: relative;
+        line-height: 1.5;
+        font-size: $font-size-sm;
+
+        &::before {
+          content: '▸';
+          position: absolute;
+          left: 0;
+          color: $primary-color;
+          font-weight: bold;
+        }
+
+        &:hover {
+          color: $text-primary;
+          transform: translateX(2px);
+          transition: all $transition-fast;
+        }
+      }
+    }
+  }
+
+  // Special styling for MIME types card
+  .info-item.mime-type-card {
+    background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+  }
+
+  .mime-type-info {
+    p {
+      background: rgba(255, 255, 255, 0.8);
+      border-left: 4px solid $primary-color;
+      margin-bottom: $spacing-sm;
+      
+      strong {
+        color: #2563eb;
+        font-weight: 600;
+      }
+    }
+
+    small {
+      display: block;
+      text-align: center;
+      background: rgba($primary-color, 0.1);
+      padding: $spacing-sm;
+      border-radius: $border-radius-md;
+      color: #1e40af;
+      font-weight: 500;
+    }
+  }
+
+  // Responsive adjustments
+  @media (max-width: 768px) {
+    padding: $spacing-md;
+    margin-top: $spacing-lg;
+
+    h3 {
+      font-size: $font-size-xl;
+    }
+
+    .info-grid {
+      grid-template-columns: 1fr;
+      gap: $spacing-md;
+    }
+
+    .info-item {
+      padding: $spacing-md;
+    }
+  }
+}

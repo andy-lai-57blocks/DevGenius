@@ -38,7 +38,7 @@ const HLSTool = () => {
     },
     {
       name: 'Sintel Trailer',
-      url: 'https://bitdash-a.akamaihd.net/content/sintel/hls/playlist.m3u8',
+      url: 'https://bitmovin-a.akamaihd.net/content/sintel/hls/playlist.m3u8',
       description: 'Short film trailer in HLS format'
     }
   ];
@@ -214,6 +214,15 @@ const HLSTool = () => {
       hls.loadSource(url);
       hls.attachMedia(videoRef.current);
 
+      // Auto-play when media is attached
+      hls.on(Hls.Events.MEDIA_ATTACHED, () => {
+        console.log('Media attached, attempting auto-play...');
+        videoRef.current.play().catch(e => {
+          console.warn('Auto-play blocked by browser:', e);
+          // Auto-play was blocked, user will need to manually play
+        });
+      });
+
       hls.on(Hls.Events.MANIFEST_PARSED, (event, data) => {
         console.log('Manifest loaded, found ' + data.levels.length + ' quality level(s)');
         
@@ -260,6 +269,14 @@ const HLSTool = () => {
     } else if (videoRef.current.canPlayType('application/vnd.apple.mpegurl')) {
       // Native HLS support (Safari)
       videoRef.current.src = url;
+      
+      // Auto-play for native HLS
+      videoRef.current.addEventListener('loadedmetadata', () => {
+        console.log('Native HLS loaded, attempting auto-play...');
+        videoRef.current.play().catch(e => {
+          console.warn('Auto-play blocked by browser:', e);
+        });
+      }, { once: true });
       setStreamInfo({
         levels: 1,
         duration: 'Unknown',
@@ -539,7 +556,7 @@ const HLSTool = () => {
               <li>Broadcast television</li>
             </ul>
           </div>
-          <div className="info-item">
+          <div className="info-item mime-type-card">
             <h4>🏷️ MIME Types</h4>
             <div className="mime-type-info">
               <p><strong>application/vnd.apple.mpegurl</strong> - Apple's official MIME type</p>
