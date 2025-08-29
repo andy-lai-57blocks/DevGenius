@@ -152,12 +152,7 @@ const Layout = ({ children }) => (
           <Breadcrumbs />
           {children}
         </div>
-        <GoogleAd 
-          adSlot="8870579772"
-          adFormat="auto"
-          responsive={true}
-          className="right-ad"
-        />
+
       </div>
     </main>
   </div>
