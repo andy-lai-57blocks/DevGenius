@@ -37,10 +37,6 @@ const TextTools = () => {
 
   return (
     <div className="category-page">
-      <div className="category-header">
-        <h1>🔤 Text Tools</h1>
-        <p>Powerful functions for text manipulation and transformation</p>
-      </div>
       
       {Object.entries(groupedTools).map(([category, categoryTools], groupIndex) => (
         <div key={category} className="tool-group">

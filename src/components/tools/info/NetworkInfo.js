@@ -143,11 +143,6 @@ const NetworkInfo = () => {
   return (
     <div className="content-area">
       <div className="tool-container">
-        <div className="tool-header">
-          <h2>🌐 Network Information</h2>
-          <p>View your network connection details, IP address, and location information</p>
-        </div>
-
         <div className="network-status">
           <div className={`status-indicator ${networkInfo.online ? 'online' : 'offline'}`}>
             <span className="status-dot"></span>

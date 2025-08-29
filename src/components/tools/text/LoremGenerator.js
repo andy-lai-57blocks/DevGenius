@@ -99,11 +99,6 @@ const LoremGenerator = () => {
 
   return (
     <div className="tool-container">
-      <div className="tool-header">
-        <h2>Lorem Ipsum Generator</h2>
-        <p>Generate placeholder text for your designs and mockups</p>
-      </div>
-
       <div className="input-group">
         <label className="input-label">Generate Type</label>
         <div className="button-group">
@@ -146,7 +141,7 @@ const LoremGenerator = () => {
         <button className="btn btn-primary" onClick={generateLorem}>
           Generate Lorem Ipsum
         </button>
-        <button className="btn btn-secondary" onClick={handleClear}>
+        <button className="btn btn-outline" onClick={handleClear}>
           Clear
         </button>
       </div>

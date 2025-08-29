@@ -7,12 +7,13 @@ import { Analytics } from '@vercel/analytics/react';
 import './styles/main.scss';
 
 // Import components
-import {
+import { 
   Base64Tool, 
   URLTool, 
   HTMLTool, 
   JSONFormatter, 
-  XMLFormatter, 
+  XMLFormatter,
+  VASTFormatter,
   GzipTool,
   HLSTool,
   CaseConverter, 
@@ -52,13 +53,66 @@ const Sidebar = () => {
   const location = useLocation();
   const [isCollapsed, setIsCollapsed] = React.useState(false);
   const [isMobileOpen, setIsMobileOpen] = React.useState(false);
-  
+  const [expandedSubmenus, setExpandedSubmenus] = React.useState({
+    '/code': true,
+    '/text': true,
+    '/info': true,
+    '/datetime': true
+  });
   const menuItems = [
     { path: '/', label: 'Home', icon: '🏠', exact: true },
-    { path: '/code', label: 'Code', icon: '🖥️' },
-    { path: '/text', label: 'Text', icon: '🔤' },
-    { path: '/info', label: 'Info', icon: 'ℹ️' },
-    { path: '/datetime', label: 'DateTime', icon: '🕐' }
+    { 
+      path: '/code', 
+      label: 'Code', 
+      icon: '🖥️',
+      submenu: [
+        { path: '/code/base64', title: 'Base64 Encoder/Decoder', icon: '🔐' },
+        { path: '/code/url', title: 'URL Encoder/Decoder', icon: '🌐' },
+        { path: '/code/html', title: 'HTML Encoder/Decoder', icon: '🏷️' },
+        { path: '/code/gzip', title: 'Gzip Compression', icon: '🗜️' },
+        { path: '/code/json', title: 'JSON Formatter', icon: '📋' },
+        { path: '/code/xml', title: 'XML Formatter', icon: '📄' },
+        { path: '/code/vast', title: 'VAST Formatter', icon: '📺' },
+        { path: '/code/uuid', title: 'UUID Generator', icon: '🆔' },
+        { path: '/code/password', title: 'Password Generator', icon: '🔑' },
+        { path: '/code/hls', title: 'HLS Stream Player', icon: '📺' }
+      ]
+    },
+    { 
+      path: '/text', 
+      label: 'Text', 
+      icon: '🔤',
+      submenu: [
+        { path: '/text/case-converter', title: 'Case Converter', icon: '🔤' },
+        { path: '/text/character-count', title: 'Character Count Tool', icon: '📊' },
+        { path: '/text/lorem', title: 'Lorem Ipsum Generator', icon: '📝' }
+      ]
+    },
+    { 
+      path: '/info', 
+      label: 'Info', 
+      icon: 'ℹ️',
+      submenu: [
+        { path: '/info/system', title: 'System Information', icon: '💻' },
+        { path: '/info/network', title: 'Network Information', icon: '🌐' },
+        { path: '/info/browser', title: 'Browser Information', icon: '🌍' },
+        { path: '/info/calling-codes', title: 'International Calling Codes', icon: '📞' },
+        { path: '/info/public-services', title: 'Public Service Numbers', icon: '🚨' },
+        { path: '/info/postcodes', title: 'Postcode Lookup', icon: '📮' }
+      ]
+    },
+    { 
+      path: '/datetime', 
+      label: 'DateTime', 
+      icon: '🕐',
+      submenu: [
+        { path: '/datetime/timestamp', title: 'Timestamp Converter', icon: '⏰' },
+        { path: '/datetime/format', title: 'Date Formatter', icon: '📅' },
+        { path: '/datetime/calculator', title: 'Date Calculator', icon: '🧮' },
+        { path: '/datetime/timezone', title: 'Timezone Converter', icon: '🌍' },
+        { path: '/datetime/countdown', title: 'Countdown Tool', icon: '⏱️' }
+      ]
+    }
   ];
 
   const toggleCollapse = () => {
@@ -72,6 +126,15 @@ const Sidebar = () => {
   const closeMobileMenu = () => {
     setIsMobileOpen(false);
   };
+
+  const toggleSubmenu = (menuPath) => {
+    setExpandedSubmenus(prev => ({
+      ...prev,
+      [menuPath]: !prev[menuPath]
+    }));
+  };
+
+
 
   return (
     <>
@@ -119,18 +182,75 @@ const Sidebar = () => {
               const isActive = item.exact 
                 ? location.pathname === item.path
                 : location.pathname === item.path || location.pathname.startsWith(item.path + '/');
+              const hasSubmenu = item.submenu && item.submenu.length > 0;
               
               return (
-                <li key={item.path}>
-                  <Link 
-                    to={item.path} 
-                    className={`nav-link ${isActive ? 'active' : ''}`}
-                    onClick={closeMobileMenu}
-                    title={isCollapsed ? item.label : undefined}
-                  >
-                    <span className="nav-icon">{item.icon}</span>
-                    {!isCollapsed && <span className="nav-text">{item.label}</span>}
-                  </Link>
+                <li key={item.path} className={`nav-item ${hasSubmenu ? 'has-submenu' : ''}`}>
+                  <div className="nav-link-container">
+                    <Link 
+                      to={item.path} 
+                      className={`nav-link ${isActive ? 'active' : ''} ${hasSubmenu ? 'has-toggle' : ''}`}
+                      onClick={closeMobileMenu}
+                      title={isCollapsed ? item.label : undefined}
+                    >
+                      <span className="nav-icon">{item.icon}</span>
+                      {!isCollapsed && (
+                        <>
+                          <span className="nav-text">{item.label}</span>
+                          {/* Integrated Submenu Toggle */}
+                          {hasSubmenu && (
+                            <span
+                              className={`submenu-toggle ${expandedSubmenus[item.path] ? 'expanded' : 'collapsed'}`}
+                              onClick={(e) => {
+                                e.preventDefault();
+                                e.stopPropagation();
+                                toggleSubmenu(item.path);
+                              }}
+                              aria-label={`Toggle ${item.label} submenu`}
+                            >
+                              <svg 
+                                width="16" 
+                                height="16" 
+                                viewBox="0 0 16 16" 
+                                fill="none" 
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <path 
+                                  d="M4 6L8 10L12 6" 
+                                  stroke="currentColor" 
+                                  strokeWidth="1.5" 
+                                  strokeLinecap="round" 
+                                  strokeLinejoin="round"
+                                />
+                              </svg>
+                            </span>
+                          )}
+                        </>
+                      )}
+                    </Link>
+                  </div>
+                  
+                  {/* Submenu items - show when expanded and not collapsed */}
+                  {hasSubmenu && !isCollapsed && expandedSubmenus[item.path] && (
+                    <ul className="submenu">
+                      {item.submenu.map((subitem) => {
+                        const isSubitemActive = location.pathname === subitem.path;
+                        return (
+                          <li key={subitem.path}>
+                            <Link
+                              to={subitem.path}
+                              className={`submenu-link ${isSubitemActive ? 'active' : ''}`}
+                              onClick={closeMobileMenu}
+                              title={subitem.title}
+                            >
+                              <span className="submenu-icon">{subitem.icon}</span>
+                              <span className="submenu-text">{subitem.title}</span>
+                            </Link>
+                          </li>
+                        );
+                      })}
+                    </ul>
+                  )}
                 </li>
               );
             })}
@@ -189,6 +309,7 @@ function App() {
           <Route path="/code/html" element={<HTMLTool />} />
           <Route path="/code/json" element={<JSONFormatter />} />
           <Route path="/code/xml" element={<XMLFormatter />} />
+          <Route path="/code/vast" element={<VASTFormatter />} />
           <Route path="/code/gzip" element={<GzipTool />} />
           <Route path="/code/hls" element={<HLSTool />} />
           
@@ -227,6 +348,7 @@ function App() {
           <Route path="/encoders/html" element={<HTMLTool />} />
           <Route path="/formatters/json" element={<JSONFormatter />} />
           <Route path="/formatters/xml" element={<XMLFormatter />} />
+          <Route path="/formatters/vast" element={<VASTFormatter />} />
           <Route path="/generators/uuid" element={<UUIDGenerator />} />
           <Route path="/generators/password" element={<PasswordGenerator />} />
           <Route path="/generators/lorem" element={<LoremGenerator />} />

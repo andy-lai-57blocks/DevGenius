@@ -593,6 +593,362 @@
   color: $primary-color;
 }
 
+// 3-Column Layout for Formatting and Encoding Tools
+.three-column-layout {
+  display: grid;
+  grid-template-columns: minmax(300px, 1fr) auto minmax(300px, 1fr);
+  gap: $spacing-xl;
+  align-items: start;
+  min-height: calc(100vh - 12rem); /* Fill most of viewport height */
+  height: 100%;
+  overflow: hidden; // Prevent layout breaking
+
+  .input-column {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    min-width: 0; // Allow column to shrink and enable text wrapping
+
+    .input-group {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      min-width: 0; // Allow content to wrap
+    }
+
+    .text-area,
+    .code-input {
+      flex: 1;
+      min-height: calc(100vh - 16rem); /* Larger textarea using viewport height */
+      resize: vertical;
+      overflow-x: auto; // Enable horizontal scroll for very long lines
+      word-wrap: break-word; // Break long words
+      overflow-wrap: break-word; // Modern syntax
+      white-space: pre-wrap; // Preserve formatting but wrap long lines
+    }
+
+    // Enhanced code input - professional code editor styling
+    .enhanced-code-input {
+      font-family: 'Source Code Pro', 'Monaco', 'Menlo', monospace !important;
+      font-size: 14px;
+      line-height: 1.5;
+      tab-size: 2;
+      -moz-tab-size: 2;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      overflow-wrap: break-word;
+      word-break: break-word;
+      overflow-x: hidden;
+      overflow-y: auto;
+      transition: all $transition-fast;
+
+      // Text selection styling
+      &::selection {
+        background: rgba(59, 130, 246, 0.2);
+        color: inherit;
+      }
+
+      &::-moz-selection {
+        background: rgba(59, 130, 246, 0.2);
+        color: inherit;
+      }
+
+      // Placeholder styling
+      &::placeholder {
+        color: rgba(107, 114, 128, 0.6);
+        font-style: italic;
+      }
+
+      // Focus state with proper box-shadow
+      &:focus {
+        outline: none;
+        box-shadow: 0 0 0 3px rgba($primary-color, 0.1);
+      }
+
+      // Custom scrollbar
+      &::-webkit-scrollbar {
+        width: 8px;
+        height: 0px;
+      }
+
+      &::-webkit-scrollbar-track {
+        background: rgba(0, 0, 0, 0.1);
+        border-radius: 4px;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        background: rgba(0, 0, 0, 0.3);
+        border-radius: 4px;
+        
+        &:hover {
+          background: rgba(0, 0, 0, 0.5);
+        }
+      }
+
+      // Firefox scrollbar
+      scrollbar-width: thin;
+      scrollbar-color: rgba(0, 0, 0, 0.3) transparent;
+
+      // Enhanced dark mode support when parent has dark-mode class
+      .tool-container.dark-mode & {
+        &::placeholder {
+          color: rgba(171, 178, 191, 0.6);
+        }
+
+        &::selection {
+          background: rgba(96, 165, 250, 0.3);
+        }
+
+        &::-moz-selection {
+          background: rgba(96, 165, 250, 0.3);
+        }
+
+        &::-webkit-scrollbar-track {
+          background: rgba(255, 255, 255, 0.1);
+        }
+
+        &::-webkit-scrollbar-thumb {
+          background: rgba(255, 255, 255, 0.3);
+          
+          &:hover {
+            background: rgba(255, 255, 255, 0.5);
+          }
+        }
+      }
+    }
+  }
+
+  .action-column {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: $spacing-sm;
+    padding: $spacing-md 0;
+    min-width: 140px;
+
+    .mode-toggle {
+      margin-bottom: $spacing-md;
+    }
+
+    .primary-actions {
+      display: flex;
+      flex-direction: column;
+      gap: $spacing-xs;
+      width: 100%;
+
+      .btn {
+        width: 100%;
+        font-size: $font-size-sm;
+        padding: $spacing-sm $spacing-md;
+        border-radius: $border-radius-md;
+        font-weight: 500;
+        text-transform: none;
+        letter-spacing: 0.025em;
+        transition: all $transition-fast;
+        min-height: auto;
+
+        &.btn-primary {
+          background: linear-gradient(135deg, $primary-color, #60a5fa);
+          border: none;
+          box-shadow: 0 2px 6px rgba($primary-color, 0.2);
+
+          &:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba($primary-color, 0.3);
+          }
+        }
+
+        &.btn-secondary {
+          background: $bg-secondary;
+          color: $text-secondary;
+          border: 1px solid $border-light;
+
+          &:hover {
+            background: #e2e8f0;
+            transform: translateY(-1px);
+          }
+        }
+      }
+    }
+
+    .secondary-actions {
+      display: flex;
+      flex-direction: column;
+      gap: $spacing-xs;
+      width: 100%;
+      margin-top: $spacing-sm;
+      padding-top: $spacing-sm;
+      border-top: 1px solid $border-light;
+
+      .btn {
+        font-size: $font-size-xs;
+        padding: $spacing-xs $spacing-sm;
+        border-radius: $border-radius-sm;
+        font-weight: 400;
+        
+        &.btn-outline {
+          background: transparent;
+          color: $text-secondary;
+          border: 1px solid $border-medium;
+          
+          &:hover {
+            background: $bg-secondary;
+            color: $text-primary;
+          }
+        }
+      }
+    }
+
+
+  }
+
+  .output-column {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    min-width: 0; // Allow column to shrink and enable text wrapping
+
+    .input-group {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      min-width: 0; // Allow content to wrap
+    }
+
+    .text-area,
+    .code-output,
+    .code-placeholder {
+      flex: 1;
+      min-height: calc(100vh - 16rem); /* Larger output area using viewport height */
+      overflow-x: auto; // Enable horizontal scroll for very long content
+      word-wrap: break-word; // Break long words
+      overflow-wrap: break-word; // Modern syntax
+    }
+
+    // Specific handling for SyntaxHighlighter in output
+    .code-output {
+      pre {
+        white-space: pre-wrap !important; // Wrap long lines
+        word-wrap: break-word !important;
+        overflow-wrap: break-word !important;
+        max-width: 100% !important;
+      }
+
+      code {
+        white-space: pre-wrap !important; // Wrap long lines
+        word-wrap: break-word !important;
+        overflow-wrap: break-word !important;
+        display: block !important;
+        max-width: 100% !important;
+      }
+    }
+
+    .result-actions {
+      margin-top: $spacing-md;
+      display: flex;
+      gap: $spacing-sm;
+      justify-content: flex-start;
+
+      .btn {
+        font-size: $font-size-sm;
+        padding: $spacing-sm $spacing-md;
+      }
+    }
+  }
+}
+
+// Status indicators for the 3-column layout
+.three-column-layout {
+  .status-indicator {
+    display: inline-flex;
+    align-items: center;
+    gap: $spacing-xs;
+    margin-left: $spacing-sm;
+    font-size: $font-size-sm;
+    font-weight: 600;
+
+    &.valid {
+      color: $success-color;
+    }
+
+    &.invalid {
+      color: $error-color;
+    }
+  }
+}
+
+// Height-based responsive design
+@media (max-height: 700px) {
+  .three-column-layout {
+    min-height: auto;
+    
+    .input-column,
+    .output-column {
+      .text-area,
+      .code-input,
+      .code-output,
+      .code-placeholder {
+        min-height: 250px; /* Smaller min-height for shorter screens */
+      }
+    }
+  }
+  
+  .content-area {
+    min-height: auto; /* Don't force viewport height on short screens */
+  }
+}
+
+// Responsive design for 3-column layout
+@media (max-width: 1200px) {
+  .three-column-layout {
+    grid-template-columns: 1fr auto 1fr;
+    gap: $spacing-lg;
+
+    .action-column {
+      min-width: 120px;
+    }
+  }
+}
+
+@media (max-width: 900px) {
+  .three-column-layout {
+    display: block;
+    min-height: auto; /* Reset viewport height for mobile */
+
+    .input-column,
+    .output-column {
+      margin-bottom: $spacing-lg;
+
+      .text-area,
+      .code-input,
+      .code-output,
+      .code-placeholder {
+        min-height: 300px; /* Smaller but still usable on mobile */
+      }
+    }
+
+    .action-column {
+      margin: $spacing-lg 0;
+      padding: $spacing-md;
+      background: $bg-secondary;
+      border-radius: $border-radius-lg;
+      border: 1px solid $border-light;
+
+      .primary-actions,
+      .secondary-actions {
+        flex-direction: row;
+        flex-wrap: wrap;
+
+        .btn {
+          flex: 1;
+          min-width: 120px;
+        }
+      }
+    }
+  }
+}
+
 // Enhanced HLS Info Section Styling
 .info-section {
   margin-top: $spacing-xl;

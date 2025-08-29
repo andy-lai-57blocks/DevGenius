@@ -5,7 +5,7 @@ import { downloadAsFile, getDownloadInfo } from '../../../utils/downloadUtils';
 const GzipTool = () => {
   const [input, setInput] = useState('');
   const [output, setOutput] = useState('');
-  const [mode, setMode] = useState('compress'); // 'compress' or 'decompress'
+  const [mode, setMode] = useState('decompress'); // 'compress' or 'decompress'
 
   const handleCompress = () => {
     try {
@@ -84,100 +84,137 @@ const GzipTool = () => {
 
   return (
     <div className="tool-container">
-      <div className="tool-header">
-        <h2>Gzip Compression Tool</h2>
-        <p>Compress and decompress text data using gzip algorithm</p>
-      </div>
-
-      <div className="input-group">
-        <div className="tab-group">
-          <button
-            className={`tab-btn ${mode === 'compress' ? 'active' : ''}`}
-            onClick={() => setMode('compress')}
-          >
-            Compress
-          </button>
-          <button
-            className={`tab-btn ${mode === 'decompress' ? 'active' : ''}`}
-            onClick={() => setMode('decompress')}
-          >
-            Decompress
-          </button>
-        </div>
-      </div>
-
-      <div className="input-group">
-        <label className="input-label">
-          {mode === 'compress' ? 'Text to Compress' : 'Base64 Data to Decompress'}
-        </label>
-        <textarea
-          className="text-area code-input"
-          value={input}
-          onChange={(e) => setInput(e.target.value)}
-          placeholder={mode === 'compress' ? 'Enter text to compress...' : 'Paste base64 compressed data here...'}
-          style={{ minHeight: '200px' }}
-        />
-      </div>
-
-      <div className="button-group">
-        <button className="btn btn-primary" onClick={handleConvert}>
-          {mode === 'compress' ? 'Compress' : 'Decompress'}
-        </button>
-        <button className="btn btn-outline" onClick={loadSample}>
-          Load Sample
-        </button>
-        <button className="btn btn-secondary" onClick={handleClear}>
-          Clear
-        </button>
-      </div>
-
-      <div className="input-group">
-        <label className="input-label">
-          {mode === 'compress' ? 'Compressed Result (Base64)' : 'Decompressed Result'}
-        </label>
-        {output ? (
-          <textarea
-            className="text-area code-input"
-            value={output}
-            readOnly
-            style={{ minHeight: '200px' }}
-          />
-        ) : (
-          <div 
-            className="code-placeholder"
-            style={{
-              minHeight: '200px',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              border: '2px solid #d1d5db',
-              borderRadius: '8px',
-              backgroundColor: '#fafafa',
-              color: '#6b7280',
-              fontStyle: 'italic'
-            }}
-          >
-            Result will appear here...
+      <div className="three-column-layout">
+        {/* Input Column */}
+        <div className="input-column">
+          <div className="input-group">
+            <label className="input-label">
+              {mode === 'compress' ? 'Text to Compress' : 'Base64 Data to Decompress'}
+            </label>
+            <textarea
+              className="text-area code-input enhanced-code-input"
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+              placeholder={mode === 'compress' ? 'Enter text to compress...' : 'Paste base64 compressed data here...'}
+              spellCheck={false}
+              style={{
+                minHeight: 'calc(100vh - 16rem)',
+                fontFamily: "'Source Code Pro', 'Courier New', monospace",
+                fontSize: '14px',
+                lineHeight: '1.5',
+                padding: '1rem',
+                resize: 'vertical',
+                outline: 'none',
+                whiteSpace: 'pre-wrap',
+                wordWrap: 'break-word',
+                overflowWrap: 'break-word',
+                tabSize: 2,
+                MozTabSize: 2,
+                overflowX: 'hidden',
+                overflowY: 'auto'
+              }}
+            />
           </div>
-        )}
-      </div>
-
-      {output && (
-        <div className="button-group">
-          <button className="btn btn-outline" onClick={handleCopy}>
-            Copy Result
-          </button>
-          {mode === 'decompress' && (
-            <button 
-              className="btn btn-outline" 
-              onClick={handleDownload}
-              title={getDownloadInfo(output).description}
-            >
-              📥 Download as {getDownloadInfo(output).type}
-            </button>
-          )}
         </div>
-      )}
+
+        {/* Action Column */}
+        <div className="action-column">
+          <div className="mode-toggle">
+            <div className="tab-group">
+              <button
+                className={`tab-btn ${mode === 'compress' ? 'active' : ''}`}
+                onClick={() => setMode('compress')}
+              >
+                Compress
+              </button>
+              <button
+                className={`tab-btn ${mode === 'decompress' ? 'active' : ''}`}
+                onClick={() => setMode('decompress')}
+              >
+                Decompress
+              </button>
+            </div>
+          </div>
+
+          <div className="primary-actions">
+            <button className="btn btn-primary" onClick={handleConvert}>
+              {mode === 'compress' ? '🗜️ Compress' : '📂 Decompress'}
+            </button>
+          </div>
+
+          <div className="secondary-actions">
+            <button className="btn btn-outline" onClick={loadSample}>
+              📄 Sample
+            </button>
+            <button className="btn btn-outline" onClick={handleClear}>
+              🗑️ Clear
+            </button>
+            {output && (
+              <>
+                <button className="btn btn-outline" onClick={handleCopy}>
+                  📋 Copy
+                </button>
+                {mode === 'decompress' && (
+                  <button 
+                    className="btn btn-outline" 
+                    onClick={handleDownload}
+                    title={getDownloadInfo(output).description}
+                  >
+                    📥 Download as {getDownloadInfo(output).type}
+                  </button>
+                )}
+              </>
+            )}
+          </div>
+        </div>
+
+        {/* Output Column */}
+        <div className="output-column">
+          <div className="input-group">
+            <label className="input-label">
+              {mode === 'compress' ? 'Compressed Result' : 'Decompressed Result'}
+            </label>
+            {output ? (
+              <textarea
+                className="text-area code-output enhanced-code-input"
+                value={output}
+                readOnly
+                style={{
+                  minHeight: 'calc(100vh - 16rem)',
+                  fontFamily: "'Source Code Pro', 'Courier New', monospace",
+                  fontSize: '14px',
+                  lineHeight: '1.5',
+                  padding: '1rem',
+                  whiteSpace: 'pre-wrap',
+                  wordWrap: 'break-word',
+                  overflowWrap: 'break-word',
+                  overflowX: 'hidden',
+                  overflowY: 'auto',
+                  backgroundColor: '#f8fafc',
+                  border: '2px solid #e2e8f0'
+                }}
+              />
+            ) : (
+              <div 
+                className="code-placeholder"
+                style={{
+                  minHeight: 'calc(100vh - 16rem)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  border: '2px solid #d1d5db',
+                  borderRadius: '8px',
+                  backgroundColor: '#fafafa',
+                  color: '#6b7280',
+                  fontStyle: 'italic'
+                }}
+              >
+                Result will appear here...
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

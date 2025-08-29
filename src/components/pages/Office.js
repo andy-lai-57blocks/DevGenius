@@ -23,10 +23,6 @@ const Office = () => {
 
   return (
     <div className="category-page">
-      <div className="category-header">
-        <h1>📦 Office Tools Moved</h1>
-        <p>Office tools have been reorganized! Find them in their new categories below:</p>
-      </div>
       
       <div className="tool-group">
         <h2 className="group-title">Tools Have Been Relocated</h2>

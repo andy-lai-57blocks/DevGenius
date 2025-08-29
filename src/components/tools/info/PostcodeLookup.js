@@ -437,11 +437,6 @@ const PostcodeLookup = () => {
   return (
     <div className="content-area">
       <div className="tool-container">
-        <div className="tool-header">
-          <h2>📮 Postal Code Lookup</h2>
-          <p>Search and lookup postal codes, ZIP codes, and postcodes worldwide</p>
-        </div>
-
         {/* Country Selection */}
         <div className="country-selection-section">
           <h3>🌍 Select Country</h3>

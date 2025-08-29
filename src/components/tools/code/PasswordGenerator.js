@@ -77,11 +77,6 @@ const PasswordGenerator = () => {
 
   return (
     <div className="tool-container">
-      <div className="tool-header">
-        <h2>Password Generator</h2>
-        <p>Generate secure passwords with customizable options</p>
-      </div>
-
       <div className="input-group">
         <label className="input-label">Password Length: {options.length}</label>
         <input
@@ -147,7 +142,7 @@ const PasswordGenerator = () => {
         <button className="btn btn-primary" onClick={generatePassword}>
           Generate Password
         </button>
-        <button className="btn btn-secondary" onClick={handleClear}>
+        <button className="btn btn-outline" onClick={handleClear}>
           Clear
         </button>
       </div>

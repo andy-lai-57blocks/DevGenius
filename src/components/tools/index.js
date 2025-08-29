@@ -7,6 +7,7 @@ export {
   HTMLTool,
   JSONFormatter,
   XMLFormatter,
+  VASTFormatter,
   UUIDGenerator,
   PasswordGenerator,
   GzipTool,

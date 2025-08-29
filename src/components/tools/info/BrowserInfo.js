@@ -193,11 +193,6 @@ const BrowserInfo = () => {
   return (
     <div className="content-area">
       <div className="tool-container">
-        <div className="tool-header">
-          <h2>🌍 Browser Information</h2>
-          <p>Detailed information about your browser capabilities, features, and permissions</p>
-        </div>
-
         <div className="button-group">
           <button className="btn btn-primary" onClick={copyToClipboard}>
             {copied ? '✓ Copied!' : '📋 Copy All Info'}

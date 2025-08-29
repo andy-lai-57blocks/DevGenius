@@ -147,11 +147,6 @@ const SystemInfo = () => {
   return (
     <div className="content-area">
       <div className="tool-container">
-        <div className="tool-header">
-          <h2>💻 System Information</h2>
-          <p>View detailed information about your browser, device, and system environment</p>
-        </div>
-
         <div className="button-group">
           <button className="btn btn-primary" onClick={copyToClipboard}>
             {copied ? '✓ Copied!' : '📋 Copy All Info'}

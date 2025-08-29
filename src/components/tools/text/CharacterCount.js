@@ -129,11 +129,6 @@ Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru
 
   return (
     <div className="tool-container">
-      <div className="tool-header">
-        <h2>Character Count Tool</h2>
-        <p>Analyze text with detailed character, word, and readability statistics</p>
-      </div>
-
       <div className="input-group">
         <label className="input-label">Text to Analyze</label>
         <textarea
@@ -149,7 +144,7 @@ Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru
         <button className="btn btn-outline" onClick={loadSampleText}>
           Load Sample
         </button>
-        <button className="btn btn-secondary" onClick={handleClear}>
+        <button className="btn btn-outline" onClick={handleClear}>
           Clear
         </button>
         <button className="btn btn-outline" onClick={copyAllStats} disabled={!input.trim()}>

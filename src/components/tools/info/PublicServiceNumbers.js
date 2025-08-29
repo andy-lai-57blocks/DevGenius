@@ -445,11 +445,6 @@ const PublicServiceNumbers = () => {
   return (
     <div className="content-area">
       <div className="tool-container">
-        <div className="tool-header">
-          <h2>📞 Public Service Numbers</h2>
-          <p>Find important government, emergency, and public service telephone numbers</p>
-        </div>
-
         {/* Country Selection */}
         <div className="country-selection-section">
           <h3>🌍 Select Country/Region</h3>

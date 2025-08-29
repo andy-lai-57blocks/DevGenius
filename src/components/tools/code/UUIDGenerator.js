@@ -65,11 +65,6 @@ const UUIDGenerator = () => {
 
   return (
     <div className="tool-container">
-      <div className="tool-header">
-        <h2>UUID Generator</h2>
-        <p>Generate universally unique identifiers (UUIDs) for your applications</p>
-      </div>
-
       <div className="input-group">
         <label className="input-label">UUID Version</label>
         <div className="tab-group">
@@ -105,7 +100,7 @@ const UUIDGenerator = () => {
         <button className="btn btn-primary" onClick={handleGenerate}>
           Generate UUID{count > 1 ? 's' : ''}
         </button>
-        <button className="btn btn-secondary" onClick={handleClear}>
+        <button className="btn btn-outline" onClick={handleClear}>
           Clear
         </button>
       </div>

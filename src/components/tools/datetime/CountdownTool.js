@@ -505,11 +505,6 @@ const CountdownTool = () => {
   return (
     <div className="content-area">
       <div className="tool-container">
-        <div className="tool-header">
-          <h2>⏰ Countdown Tool</h2>
-          <p>Track important dates and events with live countdowns</p>
-        </div>
-
         <div className="countdown-controls">
           <button 
             className="btn btn-primary"

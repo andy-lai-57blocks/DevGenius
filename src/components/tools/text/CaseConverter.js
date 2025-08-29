@@ -117,11 +117,6 @@ const CaseConverter = () => {
 
   return (
     <div className="tool-container">
-      <div className="tool-header">
-        <h2>Case Converter</h2>
-        <p>Convert text between different case formats</p>
-      </div>
-
       <div className="input-group">
         <label className="input-label">Input Text</label>
         <textarea
@@ -137,7 +132,7 @@ const CaseConverter = () => {
         <button className="btn btn-outline" onClick={loadSampleText}>
           Load Sample
         </button>
-        <button className="btn btn-secondary" onClick={handleClear}>
+        <button className="btn btn-outline" onClick={handleClear}>
           Clear
         </button>
       </div>

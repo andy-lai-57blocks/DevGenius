@@ -54,6 +54,13 @@ const Code = () => {
       icon: '📄',
       category: 'Formatting'
     },
+    {
+      path: '/code/vast',
+      title: 'VAST Formatter',
+      description: 'Format, validate and analyze VAST XML for video ads',
+      icon: '📺',
+      category: 'Formatting'
+    },
     // Generators
     {
       path: '/code/uuid',
@@ -88,10 +95,6 @@ const Code = () => {
 
   return (
     <div className="category-page">
-      <div className="category-header">
-        <h1>🖥️ Code Tools</h1>
-        <p>Essential functions for formatting, encoding, decoding, and generating various data types</p>
-      </div>
       
       {orderedGroupedTools.map(([category, categoryTools], groupIndex) => (
         <div key={category} className="tool-group">

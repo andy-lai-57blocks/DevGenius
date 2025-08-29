@@ -335,11 +335,6 @@ const HLSTool = () => {
 
   return (
     <div className="tool-container">
-      <div className="tool-header">
-        <h2>HLS Stream Player & Analyzer</h2>
-        <p>Play and analyze HTTP Live Streaming (HLS) content with detailed stream information</p>
-      </div>
-
       <div className="input-group">
         <label className="input-label">HLS Stream URL (.m3u8)</label>
         <div className="input-with-button">

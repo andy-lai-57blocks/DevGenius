@@ -64,10 +64,6 @@ const Info = () => {
 
   return (
     <div className="category-page">
-      <div className="category-header">
-        <h1>ℹ️ Info Tools</h1>
-        <p>Lookup tools, system information, and browser utilities</p>
-      </div>
       
       {orderedGroupedTools.map(([category, categoryTools], groupIndex) => (
         <div key={category} className="tool-group">

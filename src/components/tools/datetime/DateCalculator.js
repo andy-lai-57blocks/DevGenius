@@ -303,11 +303,6 @@ const DateCalculator = () => {
   return (
     <div className="content-area">
       <div className="tool-container">
-        <div className="tool-header">
-          <h2>🧮 Date Calculator</h2>
-          <p>Calculate date differences, add/subtract time periods, and determine age</p>
-        </div>
-
         <div className="operation-selector">
           <div className="button-group">
             <button 

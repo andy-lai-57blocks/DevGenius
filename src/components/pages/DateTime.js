@@ -51,10 +51,6 @@ const DateTime = () => {
 
   return (
     <div className="category-page">
-      <div className="category-header">
-        <h1>🕐 DateTime Tools</h1>
-        <p>Date and time conversion, formatting, and calculation tools</p>
-      </div>
       
       {Object.entries(groupedTools).map(([category, categoryTools], groupIndex) => (
         <div key={category} className="tool-group">

@@ -188,11 +188,6 @@ const CallingCodesLookup = () => {
   return (
     <div className="content-area">
       <div className="tool-container">
-        <div className="tool-header">
-          <h2>📞 International Calling Codes</h2>
-          <p>Search and lookup international dialing codes for countries worldwide</p>
-        </div>
-
         {/* Popular Calling Codes */}
         <div className="popular-codes-section">
           <h3>🌟 Most Popular Codes</h3>

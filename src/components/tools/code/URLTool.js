@@ -4,7 +4,7 @@ import { downloadAsFile, getDownloadInfo } from '../../../utils/downloadUtils';
 const URLTool = () => {
   const [input, setInput] = useState('');
   const [output, setOutput] = useState('');
-  const [mode, setMode] = useState('encode'); // 'encode' or 'decode'
+  const [mode, setMode] = useState('decode'); // 'encode' or 'decode'
 
   const handleEncode = () => {
     try {
@@ -59,77 +59,85 @@ const URLTool = () => {
 
   return (
     <div className="tool-container">
-      <div className="tool-header">
-        <h2>URL Encoder/Decoder</h2>
-        <p>Encode and decode URLs for safe transmission over the internet</p>
-      </div>
-
-      <div className="input-group">
-        <div className="tab-group">
-          <button
-            className={`tab-btn ${mode === 'encode' ? 'active' : ''}`}
-            onClick={() => setMode('encode')}
-          >
-            Encode
-          </button>
-          <button
-            className={`tab-btn ${mode === 'decode' ? 'active' : ''}`}
-            onClick={() => setMode('decode')}
-          >
-            Decode
-          </button>
+      <div className="three-column-layout">
+        {/* Input Column */}
+        <div className="input-column">
+          <div className="input-group">
+            <label className="input-label">
+              {mode === 'encode' ? 'Text/URL to Encode' : 'URL Encoded Text to Decode'}
+            </label>
+            <textarea
+              className="text-area code-editor"
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+              placeholder={mode === 'encode' ? 'Enter text or URL to encode...' : 'Enter URL encoded text to decode...'}
+            />
+          </div>
         </div>
-      </div>
 
-      <div className="input-group">
-        <label className="input-label">
-          {mode === 'encode' ? 'Text/URL to Encode' : 'URL Encoded Text to Decode'}
-        </label>
-        <textarea
-          className="text-area code-editor"
-          value={input}
-          onChange={(e) => setInput(e.target.value)}
-          placeholder={mode === 'encode' ? 'Enter text or URL to encode...' : 'Enter URL encoded text to decode...'}
-        />
-      </div>
+        {/* Action Column */}
+        <div className="action-column">
+          <div className="mode-toggle">
+            <div className="tab-group">
+              <button
+                className={`tab-btn ${mode === 'encode' ? 'active' : ''}`}
+                onClick={() => setMode('encode')}
+              >
+                Encode
+              </button>
+              <button
+                className={`tab-btn ${mode === 'decode' ? 'active' : ''}`}
+                onClick={() => setMode('decode')}
+              >
+                Decode
+              </button>
+            </div>
+          </div>
 
-      <div className="button-group">
-        <button className="btn btn-primary" onClick={handleConvert}>
-          {mode === 'encode' ? 'Encode' : 'Decode'}
-        </button>
-        <button className="btn btn-secondary" onClick={handleClear}>
-          Clear
-        </button>
-      </div>
-
-      <div className="input-group">
-        <label className="input-label">
-          {mode === 'encode' ? 'Encoded Result' : 'Decoded Result'}
-        </label>
-        <textarea
-          className="text-area code-editor"
-          value={output}
-          readOnly
-          placeholder="Result will appear here..."
-        />
-      </div>
-
-      {output && (
-        <div className="button-group">
-          <button className="btn btn-outline" onClick={handleCopy}>
-            Copy Result
-          </button>
-          {mode === 'decode' && (
-            <button 
-              className="btn btn-outline" 
-              onClick={handleDownload}
-              title={getDownloadInfo(output).description}
-            >
-              📥 Download as {getDownloadInfo(output).type}
+          <div className="primary-actions">
+            <button className="btn btn-primary" onClick={handleConvert}>
+              {mode === 'encode' ? '🔗 Encode' : '🔓 Decode'}
             </button>
-          )}
+          </div>
+
+          <div className="secondary-actions">
+            <button className="btn btn-outline" onClick={handleClear}>
+              🗑️ Clear
+            </button>
+            {output && (
+              <>
+                <button className="btn btn-outline" onClick={handleCopy}>
+                  📋 Copy
+                </button>
+                {mode === 'decode' && (
+                  <button 
+                    className="btn btn-outline" 
+                    onClick={handleDownload}
+                    title={getDownloadInfo(output).description}
+                  >
+                    📥 Download as {getDownloadInfo(output).type}
+                  </button>
+                )}
+              </>
+            )}
+          </div>
         </div>
-      )}
+
+        {/* Output Column */}
+        <div className="output-column">
+          <div className="input-group">
+            <label className="input-label">
+              {mode === 'encode' ? 'Encoded Result' : 'Decoded Result'}
+            </label>
+            <textarea
+              className="text-area code-editor"
+              value={output}
+              readOnly
+              placeholder="Result will appear here..."
+            />
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

@@ -227,11 +227,6 @@ const TimezoneConverter = () => {
   return (
     <div className="content-area">
       <div className="tool-container">
-        <div className="tool-header">
-          <h2>🌍 Timezone Converter</h2>
-          <p>Convert time between different timezones with live current time display</p>
-        </div>
-
         {/* Current World Clock */}
         <div className="world-clock-section">
           <h3>🕐 Current Time Around the World</h3>

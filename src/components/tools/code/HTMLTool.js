@@ -55,7 +55,7 @@ const fallbackLightTheme = {
 const HTMLTool = () => {
   const [input, setInput] = useState('');
   const [output, setOutput] = useState('');
-  const [mode, setMode] = useState('encode'); // 'encode' or 'decode'
+  const [mode, setMode] = useState('decode'); // 'encode' or 'decode'
   const [isDarkTheme, setIsDarkTheme] = useState(false);
 
   const htmlEntities = {
@@ -184,120 +184,159 @@ const HTMLTool = () => {
   };
 
   return (
-    <div className="tool-container">
-      <div className="tool-header">
-        <h2>HTML Encoder/Decoder</h2>
-        <p>Encode and decode HTML entities and special characters</p>
-      </div>
-
-      <div className="input-group">
-        <div className="tab-group">
-          <button
-            className={`tab-btn ${mode === 'encode' ? 'active' : ''}`}
-            onClick={() => setMode('encode')}
-          >
-            Encode
-          </button>
-          <button
-            className={`tab-btn ${mode === 'decode' ? 'active' : ''}`}
-            onClick={() => setMode('decode')}
-          >
-            Decode
-          </button>
-        </div>
-      </div>
-
-      <div className="input-group">
-        <label className="input-label">
-          {mode === 'encode' ? 'HTML/Text to Encode' : 'HTML Entities to Decode'}
-        </label>
-        <textarea
-          className="text-area code-input"
-          value={input}
-          onChange={(e) => setInput(e.target.value)}
-          placeholder={mode === 'encode' ? 'Enter HTML or text to encode...' : 'Enter HTML entities to decode...'}
-          style={{ minHeight: '200px' }}
-        />
-      </div>
-
-      <div className="button-group">
-        <button className="btn btn-primary" onClick={handleConvert}>
-          {mode === 'encode' ? 'Encode' : 'Decode'}
-        </button>
-        <button className="btn btn-outline" onClick={loadSampleHTML}>
-          Load Sample
-        </button>
-        <button 
-          className="btn btn-outline" 
-          onClick={() => setIsDarkTheme(!isDarkTheme)}
-        >
-          {isDarkTheme ? '☀️ Light' : '🌙 Dark'}
-        </button>
-        <button className="btn btn-secondary" onClick={handleClear}>
-          Clear
-        </button>
-      </div>
-
-      <div className="input-group">
-        <label className="input-label">
-          {mode === 'encode' ? 'Encoded Result' : 'Decoded Result'}
-        </label>
-        {output ? (
-          <div className={`code-output ${isDarkTheme ? 'dark-theme' : 'light-theme'}`}>
-            <SyntaxHighlighter
-              language={mode === 'decode' ? 'html' : 'text'}
-              style={isDarkTheme ? (oneDark || fallbackDarkTheme) : (oneLight || fallbackLightTheme)}
-              customStyle={{
-                margin: 0,
-                borderRadius: '8px',
-                fontSize: '14px',
-                fontFamily: "'Source Code Pro', 'Courier New', monospace",
-                minHeight: '200px',
+    <div className={`tool-container ${isDarkTheme ? 'dark-mode' : ''}`}>
+      <div className="three-column-layout">
+        {/* Input Column */}
+        <div className="input-column">
+          <div className="input-group">
+            <label className="input-label">
+              {mode === 'encode' ? 'HTML/Text to Encode' : 'HTML Entities to Decode'}
+            </label>
+            <textarea
+              className="text-area code-input enhanced-code-input"
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+              placeholder={mode === 'encode' ? 'Enter HTML or text to encode...' : 'Enter HTML entities to decode...'}
+              spellCheck={false}
+              style={{
+                minHeight: 'calc(100vh - 16rem)',
                 border: `2px solid ${isDarkTheme ? '#4a5568' : '#d1d5db'}`,
-                backgroundColor: isDarkTheme ? '#282c34' : '#fafafa'
+                backgroundColor: isDarkTheme ? '#282c34' : '#fafafa',
+                color: isDarkTheme ? '#abb2bf' : '#374151',
+                borderRadius: '8px',
+                fontFamily: "'Source Code Pro', 'Courier New', monospace",
+                fontSize: '14px',
+                lineHeight: '1.5',
+                padding: '1rem',
+                resize: 'vertical',
+                outline: 'none',
+                whiteSpace: 'pre-wrap',
+                wordWrap: 'break-word',
+                overflowWrap: 'break-word',
+                tabSize: 2,
+                MozTabSize: 2,
+                overflowX: 'hidden',
+                overflowY: 'auto'
               }}
-              wrapLongLines={true}
-              showLineNumbers={false}
-            >
-              {output}
-            </SyntaxHighlighter>
+              onFocus={(e) => {
+                e.target.style.borderColor = isDarkTheme ? '#60a5fa' : '#3b82f6';
+              }}
+              onBlur={(e) => {
+                e.target.style.borderColor = isDarkTheme ? '#4a5568' : '#d1d5db';
+              }}
+            />
           </div>
-        ) : (
-          <div 
-            className={`code-placeholder ${isDarkTheme ? 'dark' : 'light'}`}
-            style={{
-              minHeight: '200px',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              border: `2px solid ${isDarkTheme ? '#4a5568' : '#d1d5db'}`,
-              borderRadius: '8px',
-              backgroundColor: isDarkTheme ? '#282c34' : '#fafafa',
-              color: isDarkTheme ? '#9ca3af' : '#6b7280',
-              fontStyle: 'italic'
-            }}
-          >
-            Result will appear here...
-          </div>
-        )}
-      </div>
+        </div>
 
-      {output && (
-        <div className="button-group">
-          <button className="btn btn-outline" onClick={handleCopy}>
-            Copy Result
-          </button>
-          {mode === 'decode' && (
+        {/* Action Column */}
+        <div className="action-column">
+          <div className="mode-toggle">
+            <div className="tab-group">
+              <button
+                className={`tab-btn ${mode === 'encode' ? 'active' : ''}`}
+                onClick={() => setMode('encode')}
+              >
+                Encode
+              </button>
+              <button
+                className={`tab-btn ${mode === 'decode' ? 'active' : ''}`}
+                onClick={() => setMode('decode')}
+              >
+                Decode
+              </button>
+            </div>
+          </div>
+
+          <div className="primary-actions">
+            <button className="btn btn-primary" onClick={handleConvert}>
+              {mode === 'encode' ? '🔒 Encode' : '🔓 Decode'}
+            </button>
+          </div>
+
+          <div className="secondary-actions">
+            <button className="btn btn-outline" onClick={loadSampleHTML}>
+              📄 Sample
+            </button>
             <button 
               className="btn btn-outline" 
-              onClick={handleDownload}
-              title={getDownloadInfo(output).description}
+              onClick={() => setIsDarkTheme(!isDarkTheme)}
             >
-              📥 Download as {getDownloadInfo(output).type}
+              {isDarkTheme ? '☀️ Light' : '🌙 Dark'}
             </button>
-          )}
+            <button className="btn btn-outline" onClick={handleClear}>
+              🗑️ Clear
+            </button>
+            {output && (
+              <>
+                <button className="btn btn-outline" onClick={handleCopy}>
+                  📋 Copy
+                </button>
+                {mode === 'decode' && (
+                  <button 
+                    className="btn btn-outline" 
+                    onClick={handleDownload}
+                    title={getDownloadInfo(output).description}
+                  >
+                    📥 Download as {getDownloadInfo(output).type}
+                  </button>
+                )}
+              </>
+            )}
+          </div>
         </div>
-      )}
+
+        {/* Output Column */}
+        <div className="output-column">
+          <div className="input-group">
+            <label className="input-label">
+              {mode === 'encode' ? 'Encoded Result' : 'Decoded Result'}
+            </label>
+            {output ? (
+              <div className={`code-output ${isDarkTheme ? 'dark-theme' : 'light-theme'}`}>
+                <SyntaxHighlighter
+                  language={mode === 'decode' ? 'html' : 'text'}
+                  style={isDarkTheme ? (oneDark || fallbackDarkTheme) : (oneLight || fallbackLightTheme)}
+                  customStyle={{
+                    margin: 0,
+                    borderRadius: '8px',
+                    fontSize: '14px',
+                    fontFamily: "'Source Code Pro', 'Courier New', monospace",
+                    minHeight: 'calc(100vh - 16rem)',
+                    border: `2px solid ${isDarkTheme ? '#4a5568' : '#d1d5db'}`,
+                    backgroundColor: isDarkTheme ? '#282c34' : '#fafafa',
+                    whiteSpace: 'pre-wrap',
+                    wordWrap: 'break-word',
+                    overflowWrap: 'break-word',
+                    maxWidth: '100%',
+                    overflowX: 'auto'
+                  }}
+                  wrapLongLines={true}
+                  showLineNumbers={false}
+                >
+                  {output}
+                </SyntaxHighlighter>
+              </div>
+            ) : (
+              <div 
+                className={`code-placeholder ${isDarkTheme ? 'dark' : 'light'}`}
+                style={{
+                  minHeight: 'calc(100vh - 16rem)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  border: `2px solid ${isDarkTheme ? '#4a5568' : '#d1d5db'}`,
+                  borderRadius: '8px',
+                  backgroundColor: isDarkTheme ? '#282c34' : '#fafafa',
+                  color: isDarkTheme ? '#9ca3af' : '#6b7280',
+                  fontStyle: 'italic'
+                }}
+              >
+                Result will appear here...
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

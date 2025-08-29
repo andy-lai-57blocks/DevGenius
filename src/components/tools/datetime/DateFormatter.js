@@ -218,11 +218,6 @@ const DateFormatter = () => {
   return (
     <div className="content-area">
       <div className="tool-container">
-        <div className="tool-header">
-          <h2>📅 Date Formatter</h2>
-          <p>Format dates in various formats, locales, and timezones for different use cases</p>
-        </div>
-
         <div className="input-section">
           <div className="input-group">
             <label className="input-label">Input Date & Time</label>
