@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import * as pako from 'pako';
 import { downloadAsFile, getDownloadInfo } from '../../../utils/downloadUtils';
 import SimpleAd from '../../ads/SimpleAd';
+import CodeEditor from '../../common/CodeEditor';
 
 const GzipTool = () => {
   const [input, setInput] = useState('');
@@ -92,28 +93,14 @@ const GzipTool = () => {
             <label className="input-label">
               {mode === 'compress' ? 'Text to Compress' : 'Base64 Data to Decompress'}
             </label>
-            <textarea
-              className="text-area code-input enhanced-code-input"
+            <CodeEditor
               value={input}
-              onChange={(e) => setInput(e.target.value)}
+              onChange={setInput}
+              language="text"
               placeholder={mode === 'compress' ? 'Enter text to compress...' : 'Paste base64 compressed data here...'}
-              spellCheck={false}
-              style={{
-                minHeight: 'calc(100vh - 16rem)',
-                fontFamily: "'Source Code Pro', 'Courier New', monospace",
-                fontSize: '14px',
-                lineHeight: '1.5',
-                padding: '1rem',
-                resize: 'vertical',
-                outline: 'none',
-                whiteSpace: 'pre-wrap',
-                wordWrap: 'break-word',
-                overflowWrap: 'break-word',
-                tabSize: 2,
-                MozTabSize: 2,
-                overflowX: 'hidden',
-                overflowY: 'auto'
-              }}
+              name="gzip-input-editor"
+              height="calc(100vh - 16rem)"
+              isDarkTheme={false}
             />
           </div>
         </div>
@@ -177,44 +164,17 @@ const GzipTool = () => {
             <label className="input-label">
               {mode === 'compress' ? 'Compressed Result' : 'Decompressed Result'}
             </label>
-            {output ? (
-              <textarea
-                className="text-area code-output enhanced-code-input"
-                value={output}
-                readOnly
-                style={{
-                  minHeight: 'calc(100vh - 16rem)',
-                  fontFamily: "'Source Code Pro', 'Courier New', monospace",
-                  fontSize: '14px',
-                  lineHeight: '1.5',
-                  padding: '1rem',
-                  whiteSpace: 'pre-wrap',
-                  wordWrap: 'break-word',
-                  overflowWrap: 'break-word',
-                  overflowX: 'hidden',
-                  overflowY: 'auto',
-                  backgroundColor: '#f8fafc',
-                  border: '2px solid #e2e8f0'
-                }}
-              />
-            ) : (
-              <div 
-                className="code-placeholder"
-                style={{
-                  minHeight: 'calc(100vh - 16rem)',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  border: '2px solid #d1d5db',
-                  borderRadius: '8px',
-                  backgroundColor: '#fafafa',
-                  color: '#6b7280',
-                  fontStyle: 'italic'
-                }}
-              >
-                Result will appear here...
-              </div>
-            )}
+            <CodeEditor
+              value={output}
+              onChange={() => {}} // Read-only
+              language="text"
+              readOnly={true}
+              name="gzip-output-editor"
+              height="calc(100vh - 16rem)"
+              isDarkTheme={false}
+              showLineNumbers={true}
+              placeholder="Result will appear here..."
+            />
           </div>
         </div>
       </div>

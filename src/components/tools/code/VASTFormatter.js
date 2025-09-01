@@ -1,28 +1,8 @@
 import React, { useState } from 'react';
-import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { oneDark, oneLight } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import SimpleAd from '../../ads/SimpleAd';
+import CodeEditor from '../../common/CodeEditor';
 
-// Fallback themes in case the imports fail
-const fallbackDarkTheme = {
-  'code[class*="language-"]': { color: '#abb2bf', background: '#282c34' },
-  'pre[class*="language-"]': { color: '#abb2bf', background: '#282c34' },
-  '.token.tag': { color: '#e06c75' },
-  '.token.attr-name': { color: '#d19a66' },
-  '.token.attr-value': { color: '#98c379' },
-  '.token.string': { color: '#98c379' },
-  '.token.punctuation': { color: '#abb2bf' }
-};
-
-const fallbackLightTheme = {
-  'code[class*="language-"]': { color: '#1f2937', background: '#fafafa' },
-  'pre[class*="language-"]': { color: '#1f2937', background: '#fafafa' },
-  '.token.tag': { color: '#e74c3c' },
-  '.token.attr-name': { color: '#f39c12' },
-  '.token.attr-value': { color: '#16a085' },
-  '.token.string': { color: '#16a085' },
-  '.token.punctuation': { color: '#1f2937' }
-};
+// Removed fallback themes - now using Ace Editor built-in themes
 
 const VASTFormatter = () => {
   const [input, setInput] = useState('');
@@ -444,28 +424,14 @@ const VASTFormatter = () => {
         <div className="input-column">
           <div className="input-group">
             <label className="input-label">VAST XML Input</label>
-            <textarea
-              className="text-area code-input enhanced-code-input"
+            <CodeEditor
               value={input}
-              onChange={(e) => setInput(e.target.value)}
+              onChange={setInput}
+              language="xml"
               placeholder="Paste your VAST XML here..."
-              spellCheck={false}
-              style={{
-                minHeight: 'calc(100vh - 16rem)',
-                fontFamily: "'Source Code Pro', 'Courier New', monospace",
-                fontSize: '14px',
-                lineHeight: '1.5',
-                padding: '1rem',
-                resize: 'vertical',
-                outline: 'none',
-                whiteSpace: 'pre-wrap',
-                wordWrap: 'break-word',
-                overflowWrap: 'break-word',
-                tabSize: 2,
-                MozTabSize: 2,
-                overflowX: 'hidden',
-                overflowY: 'auto'
-              }}
+              name="vast-input-editor"
+              height="calc(100vh - 16rem)"
+              isDarkTheme={false}
             />
           </div>
         </div>
@@ -525,51 +491,17 @@ const VASTFormatter = () => {
               {isValid === true && <span className="status-indicator valid">✅ Valid</span>}
               {isValid === false && <span className="status-indicator invalid">❌ Invalid</span>}
             </label>
-            {output && isValid !== false ? (
-              <div className={`code-output ${isDarkTheme ? 'dark-theme' : 'light-theme'}`}>
-                <SyntaxHighlighter
-                  language={output.startsWith('📊') || output.startsWith('📹') || output.startsWith('✅') || output.startsWith('⚠️') ? 'text' : 'xml'}
-                  style={isDarkTheme ? (oneDark || fallbackDarkTheme) : (oneLight || fallbackLightTheme)}
-                  customStyle={{
-                    margin: 0,
-                    borderRadius: '8px',
-                    fontSize: '14px',
-                    fontFamily: "'Source Code Pro', 'Courier New', monospace",
-                    minHeight: 'calc(100vh - 16rem)',
-                    border: `2px solid ${isValid === true ? '#10b981' : (isDarkTheme ? '#4a5568' : '#d1d5db')}`,
-                    backgroundColor: isDarkTheme ? '#282c34' : '#fafafa',
-                    whiteSpace: 'pre-wrap',
-                    wordWrap: 'break-word',
-                    overflowWrap: 'break-word',
-                    maxWidth: '100%',
-                    overflowX: 'auto'
-                  }}
-                  wrapLongLines={true}
-                  showLineNumbers={false}
-                >
-                  {output}
-                </SyntaxHighlighter>
-              </div>
-            ) : (
-              <div 
-                className={`code-placeholder ${isDarkTheme ? 'dark' : 'light'}`}
-                style={{
-                  minHeight: 'calc(100vh - 16rem)',
-                  border: `2px solid ${isValid === false ? '#ef4444' : (isDarkTheme ? '#4a5568' : '#d1d5db')}`,
-                  borderRadius: '8px',
-                  padding: '1rem',
-                  backgroundColor: isDarkTheme ? '#282c34' : '#f8fafc',
-                  fontFamily: "'Source Code Pro', 'Courier New', monospace",
-                  fontSize: '14px',
-                  color: isValid === false ? '#ef4444' : (isDarkTheme ? '#abb2bf' : '#64748b'),
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center'
-                }}
-              >
-                {output || 'Formatted VAST XML will appear here...'}
-              </div>
-            )}
+            <CodeEditor
+              value={output}
+              onChange={() => {}} // Read-only
+              language={output.startsWith('📊') || output.startsWith('📹') || output.startsWith('✅') || output.startsWith('⚠️') ? 'text' : 'xml'}
+              readOnly={true}
+              name="vast-output-editor"
+              height="calc(100vh - 16rem)"
+              isDarkTheme={isDarkTheme}
+              showLineNumbers={true}
+              placeholder="Formatted VAST XML will appear here..."
+            />
           </div>
         </div>
       </div>

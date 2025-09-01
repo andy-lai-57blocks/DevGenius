@@ -1,43 +1,9 @@
 import React, { useState } from 'react';
-import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { oneDark, oneLight } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import { downloadAsFile, getDownloadInfo } from '../../../utils/downloadUtils';
 import SimpleAd from '../../ads/SimpleAd';
+import CodeEditor from '../../common/CodeEditor';
 
-// Fallback themes in case imports fail
-const fallbackDarkTheme = {
-  'code[class*="language-"]': {
-    color: '#abb2bf',
-    background: '#282c34',
-    fontFamily: "'Source Code Pro', 'Courier New', monospace",
-    fontSize: '14px',
-    lineHeight: '1.5'
-  },
-  'pre[class*="language-"]': {
-    color: '#abb2bf',
-    background: '#282c34',
-    fontFamily: "'Source Code Pro', 'Courier New', monospace",
-    fontSize: '14px',
-    lineHeight: '1.5'
-  }
-};
-
-const fallbackLightTheme = {
-  'code[class*="language-"]': {
-    color: '#383a42',
-    background: '#fafafa',
-    fontFamily: "'Source Code Pro', 'Courier New', monospace",
-    fontSize: '14px',
-    lineHeight: '1.5'
-  },
-  'pre[class*="language-"]': {
-    color: '#383a42',
-    background: '#fafafa',
-    fontFamily: "'Source Code Pro', 'Courier New', monospace",
-    fontSize: '14px',
-    lineHeight: '1.5'
-  }
-};
+// Removed fallback themes - now using Ace Editor built-in themes
 
 const Base64Tool = () => {
   const [input, setInput] = useState('');
@@ -241,11 +207,14 @@ const Base64Tool = () => {
             <label className="input-label">
               {mode === 'encode' ? 'Text to Encode' : 'Base64 to Decode'}
             </label>
-            <textarea
-              className="text-area code-editor"
+            <CodeEditor
               value={input}
-              onChange={(e) => setInput(e.target.value)}
+              onChange={setInput}
+              language="text"
               placeholder={mode === 'encode' ? 'Enter text to encode...' : 'Enter Base64 to decode...'}
+              name="base64-input-editor"
+              height="calc(100vh - 16rem)"
+              isDarkTheme={false}
             />
           </div>
         </div>
@@ -317,51 +286,17 @@ const Base64Tool = () => {
             <label className="input-label">
               {mode === 'encode' ? 'Encoded Result' : `Decoded Result ${contentType !== 'text' ? `(${contentType.toUpperCase()})` : ''}`}
             </label>
-            {output && (contentType === 'json' || contentType === 'html') ? (
-              <div className={`code-output ${isDarkTheme ? 'dark-theme' : 'light-theme'}`}>
-                <SyntaxHighlighter
-                  language={contentType}
-                  style={isDarkTheme ? (oneDark || fallbackDarkTheme) : (oneLight || fallbackLightTheme)}
-                  customStyle={{
-                    margin: 0,
-                    borderRadius: '8px',
-                    fontSize: '14px',
-                    fontFamily: "'Source Code Pro', 'Courier New', monospace",
-                    minHeight: 'calc(100vh - 16rem)',
-                    border: `2px solid ${isDarkTheme ? '#4a5568' : '#d1d5db'}`,
-                    backgroundColor: isDarkTheme ? '#282c34' : '#fafafa',
-                    whiteSpace: 'pre-wrap',
-                    wordWrap: 'break-word',
-                    overflowWrap: 'break-word',
-                    maxWidth: '100%',
-                    overflowX: 'auto'
-                  }}
-                  wrapLongLines={true}
-                  showLineNumbers={false}
-                >
-                  {output}
-                </SyntaxHighlighter>
-              </div>
-            ) : (
-              <textarea
-                className="text-area code-input enhanced-code-input"
-                value={output}
-                readOnly
-                placeholder="Result will appear here..."
-                style={{
-                  minHeight: 'calc(100vh - 16rem)',
-                  fontFamily: "'Source Code Pro', 'Courier New', monospace",
-                  fontSize: '14px',
-                  lineHeight: '1.5',
-                  padding: '1rem',
-                  whiteSpace: 'pre-wrap',
-                  wordWrap: 'break-word',
-                  overflowWrap: 'break-word',
-                  overflowX: 'hidden',
-                  overflowY: 'auto'
-                }}
-              />
-            )}
+            <CodeEditor
+              value={output}
+              onChange={() => {}} // Read-only
+              language={contentType === 'json' ? 'json' : contentType === 'html' ? 'html' : 'text'}
+              readOnly={true}
+              name="base64-output-editor"
+              height="calc(100vh - 16rem)"
+              isDarkTheme={isDarkTheme}
+              showLineNumbers={true}
+              placeholder="Result will appear here..."
+            />
           </div>
         </div>
       </div>

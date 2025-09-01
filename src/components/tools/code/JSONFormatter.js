@@ -1,54 +1,9 @@
 import React, { useState } from 'react';
-import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { oneDark, oneLight } from 'react-syntax-highlighter/dist/esm/styles/prism';
+// Removed unused SyntaxHighlighter imports - now using CodeEditor
 import SimpleAd from '../../ads/SimpleAd';
+import CodeEditor from '../../common/CodeEditor';
 
-// Fallback themes in case imports fail
-const fallbackDarkTheme = {
-  'code[class*="language-"]': {
-    color: '#abb2bf',
-    background: '#282c34',
-    fontFamily: "'Source Code Pro', 'Courier New', monospace",
-    fontSize: '14px',
-    lineHeight: '1.5'
-  },
-  'pre[class*="language-"]': {
-    color: '#abb2bf',
-    background: '#282c34',
-    fontFamily: "'Source Code Pro', 'Courier New', monospace",
-    fontSize: '14px',
-    lineHeight: '1.5'
-  },
-  '.token.string': { color: '#98c379' },
-  '.token.number': { color: '#d19a66' },
-  '.token.boolean': { color: '#56b6c2' },
-  '.token.null': { color: '#56b6c2' },
-  '.token.property': { color: '#e06c75' },
-  '.token.punctuation': { color: '#abb2bf' }
-};
-
-const fallbackLightTheme = {
-  'code[class*="language-"]': {
-    color: '#1f2937',
-    background: '#fafafa',
-    fontFamily: "'Source Code Pro', 'Courier New', monospace",
-    fontSize: '14px',
-    lineHeight: '1.5'
-  },
-  'pre[class*="language-"]': {
-    color: '#1f2937',
-    background: '#fafafa',
-    fontFamily: "'Source Code Pro', 'Courier New', monospace",
-    fontSize: '14px',
-    lineHeight: '1.5'
-  },
-  '.token.string': { color: '#16a085' },
-  '.token.number': { color: '#e67e22' },
-  '.token.boolean': { color: '#3498db' },
-  '.token.null': { color: '#3498db' },
-  '.token.property': { color: '#e74c3c' },
-  '.token.punctuation': { color: '#1f2937' }
-};
+// Removed fallback themes - now using Ace Editor built-in themes
 
 const JSONFormatter = () => {
   const [input, setInput] = useState('');
@@ -206,38 +161,14 @@ const JSONFormatter = () => {
         <div className="input-column">
           <div className="input-group">
             <label className="input-label">JSON Input</label>
-            <textarea
-              className="text-area code-input enhanced-code-input"
+            <CodeEditor
               value={input}
-              onChange={(e) => setInput(e.target.value)}
+              onChange={setInput}
+              language="json"
               placeholder="Paste your JSON here..."
-              spellCheck={false}
-              style={{
-                minHeight: 'calc(100vh - 16rem)',
-                border: `2px solid ${isDarkTheme ? '#4a5568' : '#d1d5db'}`,
-                backgroundColor: isDarkTheme ? '#282c34' : '#fafafa',
-                color: isDarkTheme ? '#abb2bf' : '#374151',
-                borderRadius: '8px',
-                fontFamily: "'Source Code Pro', 'Courier New', monospace",
-                fontSize: '14px',
-                lineHeight: '1.5',
-                padding: '1rem',
-                resize: 'vertical',
-                outline: 'none',
-                whiteSpace: 'pre-wrap',
-                wordWrap: 'break-word',
-                overflowWrap: 'break-word',
-                tabSize: 2,
-                MozTabSize: 2,
-                overflowX: 'hidden',
-                overflowY: 'auto'
-              }}
-              onFocus={(e) => {
-                e.target.style.borderColor = isDarkTheme ? '#60a5fa' : '#3b82f6';
-              }}
-              onBlur={(e) => {
-                e.target.style.borderColor = isDarkTheme ? '#4a5568' : '#d1d5db';
-              }}
+              name="json-input-editor"
+              height="calc(100vh - 16rem)"
+              isDarkTheme={false}
             />
           </div>
         </div>
@@ -294,51 +225,17 @@ const JSONFormatter = () => {
               {isValid === true && <span className="status-indicator valid">✅ Valid</span>}
               {isValid === false && <span className="status-indicator invalid">❌ Invalid</span>}
             </label>
-            {output && isValid !== false ? (
-              <div className={`code-output ${isDarkTheme ? 'dark-theme' : 'light-theme'}`}>
-                <SyntaxHighlighter
-                  language="json"
-                  style={isDarkTheme ? (oneDark || fallbackDarkTheme) : (oneLight || fallbackLightTheme)}
-                  customStyle={{
-                    margin: 0,
-                    borderRadius: '8px',
-                    fontSize: '14px',
-                    fontFamily: "'Source Code Pro', 'Courier New', monospace",
-                    minHeight: 'calc(100vh - 16rem)',
-                    border: `2px solid ${isValid === true ? '#10b981' : (isDarkTheme ? '#4a5568' : '#d1d5db')}`,
-                    backgroundColor: isDarkTheme ? '#282c34' : '#fafafa',
-                    whiteSpace: 'pre-wrap',
-                    wordWrap: 'break-word',
-                    overflowWrap: 'break-word',
-                    maxWidth: '100%',
-                    overflowX: 'auto'
-                  }}
-                  wrapLongLines={true}
-                  showLineNumbers={false}
-                >
-                  {output}
-                </SyntaxHighlighter>
-              </div>
-            ) : (
-              <div 
-                className={`code-placeholder ${isDarkTheme ? 'dark' : 'light'}`}
-                style={{
-                  minHeight: 'calc(100vh - 16rem)',
-                  border: `2px solid ${isValid === false ? '#ef4444' : (isDarkTheme ? '#4a5568' : '#d1d5db')}`,
-                  borderRadius: '8px',
-                  padding: '1rem',
-                  backgroundColor: isDarkTheme ? '#282c34' : '#f8fafc',
-                  fontFamily: "'Source Code Pro', 'Courier New', monospace",
-                  fontSize: '14px',
-                  color: isValid === false ? '#ef4444' : (isDarkTheme ? '#abb2bf' : '#64748b'),
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center'
-                }}
-              >
-                {output || 'Formatted JSON will appear here...'}
-              </div>
-            )}
+            <CodeEditor
+              value={output}
+              onChange={() => {}} // Read-only
+              language="json"
+              readOnly={true}
+              name="json-output-editor"
+              height="calc(100vh - 16rem)"
+              isDarkTheme={isDarkTheme}
+              showLineNumbers={true}
+              placeholder="Formatted JSON will appear here..."
+            />
           </div>
         </div>
       </div>

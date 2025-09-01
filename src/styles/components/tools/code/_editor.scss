@@ -1,6 +1,6 @@
 @import '../../../shared/variables';
 
-// Enhanced Code Editor Styles for All Code Tools
+// Enhanced IDE-like Code Editor Styles for All Code Tools
 
 // Source Code Pro font for all code-related text areas and code output
 .text-area.code-editor,
@@ -10,10 +10,104 @@
 .password-result,
 .password-output {
   font-family: $font-family-mono !important;
-  font-size: $font-size-sm !important;
-  line-height: 1.5 !important;
+  font-size: 14px !important;
+  line-height: 1.6 !important;
   tab-size: 2;
   letter-spacing: 0.025em;
+  font-weight: 400;
+}
+
+// IDE-like Enhanced Input Editor Styling
+.enhanced-code-input {
+  // Professional IDE appearance
+  border: 2px solid #e2e8f0 !important;
+  border-radius: 8px !important;
+  background: #fafafa !important;
+  color: #2d3748 !important;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.05) !important;
+  transition: all 0.2s ease-in-out !important;
+  position: relative;
+  
+  // Line numbers background effect
+  background-image: linear-gradient(90deg, 
+    #f1f5f9 0px, 
+    #f1f5f9 50px, 
+    transparent 50px, 
+    transparent 100%
+  ) !important;
+  padding-left: 60px !important; // Space for line numbers
+  background-attachment: local !important;
+  
+  // IDE-like focus state
+  &:focus {
+    outline: none !important;
+    border-color: #3b82f6 !important;
+    box-shadow: 
+      inset 0 1px 3px rgba(0, 0, 0, 0.1),
+      0 0 0 3px rgba(59, 130, 246, 0.1),
+      0 4px 6px rgba(0, 0, 0, 0.05) !important;
+    background-color: #ffffff !important;
+  }
+  
+  // Enhanced hover state
+  &:hover:not(:focus) {
+    border-color: #cbd5e0 !important;
+    box-shadow: 
+      inset 0 1px 3px rgba(0, 0, 0, 0.1),
+      0 2px 4px rgba(0, 0, 0, 0.06) !important;
+  }
+  
+  // Professional text selection
+  &::selection {
+    background: rgba(59, 130, 246, 0.25) !important;
+    color: inherit !important;
+  }
+  
+  &::-moz-selection {
+    background: rgba(59, 130, 246, 0.25) !important;
+    color: inherit !important;
+  }
+  
+  // Enhanced placeholder
+  &::placeholder {
+    color: #94a3b8 !important;
+    font-style: normal !important;
+    opacity: 0.8 !important;
+  }
+  
+  // IDE-like scrollbar
+  &::-webkit-scrollbar {
+    width: 12px !important;
+    height: 12px !important;
+  }
+  
+  &::-webkit-scrollbar-track {
+    background: #f1f5f9 !important;
+    border-radius: 6px !important;
+    border: 1px solid #e2e8f0 !important;
+  }
+  
+  &::-webkit-scrollbar-thumb {
+    background: #cbd5e0 !important;
+    border-radius: 6px !important;
+    border: 2px solid #f1f5f9 !important;
+    
+    &:hover {
+      background: #9ca3af !important;
+    }
+    
+    &:active {
+      background: #6b7280 !important;
+    }
+  }
+  
+  &::-webkit-scrollbar-corner {
+    background: #f1f5f9 !important;
+  }
+  
+  // Firefox scrollbar
+  scrollbar-width: auto !important;
+  scrollbar-color: #cbd5e0 #f1f5f9 !important;
 }
 
 // Light theme (default)
@@ -40,36 +134,292 @@
   }
 }
 
-// Dark theme styles - only for code-output area
+// IDE-like Code Output Styles - Professional appearance
 .code-output {
   position: relative;
-  border-radius: $border-radius-lg;
+  border-radius: 8px;
   overflow: hidden;
-  transition: $transition-normal;
-
-  &.light-theme {
-    box-shadow: $shadow-sm;
+  transition: all 0.2s ease-in-out;
+  border: 2px solid #e2e8f0;
+  box-shadow: 
+    inset 0 1px 0 rgba(255, 255, 255, 0.1),
+    0 1px 3px rgba(0, 0, 0, 0.1),
+    0 1px 2px rgba(0, 0, 0, 0.06);
+  background-color: #ffffff;
+  
+  // IDE-like inner shadow for depth
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(0, 0, 0, 0.1), transparent);
+    z-index: 1;
+    pointer-events: none;
   }
 
-  &.dark-theme {
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-    background-color: $code-bg-dark !important;
-    border: 2px solid $code-border-dark !important;
-
-    pre {
-      background-color: $code-bg-dark !important;
-      color: $code-text-dark !important;
+  pre {
+    // Enhanced padding for better readability
+    padding: 16px 20px !important;
+    margin: 0 !important;
+    font-size: 14px !important;
+    line-height: 1.6 !important;
+    
+    // Ensure syntax highlighter background fills height
+    &[class*="language-"] {
+      height: 100% !important;
+      min-height: 100% !important;
+      border-radius: 6px !important;
+      
+      > code[class*="language-"] {
+        height: 100% !important;
+        min-height: 100% !important;
+        padding: 0 !important; // Pre handles padding
+      }
     }
-
-    code {
-      background-color: $code-bg-dark !important;
-      color: $code-text-dark !important;
+    
+    // Enhanced default background for non-highlighted code
+    &:not([class*="language-"]) {
+      background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%) !important;
+      height: 100% !important;
+      min-height: 100% !important;
+      border-radius: 6px !important;
+      border: 1px solid rgba(226, 232, 240, 0.5) !important;
+    }
+    
+    // Professional scrollbar for code output
+    &::-webkit-scrollbar {
+      width: 12px;
+      height: 12px;
+    }
+    
+    &::-webkit-scrollbar-track {
+      background: rgba(241, 245, 249, 0.8);
+      border-radius: 6px;
+    }
+    
+    &::-webkit-scrollbar-thumb {
+      background: #cbd5e0;
+      border-radius: 6px;
+      border: 2px solid rgba(241, 245, 249, 0.8);
+      
+      &:hover {
+        background: #9ca3af;
+      }
+    }
+  }
+  
+  code {
+    height: 100% !important;
+    min-height: 100% !important;
+    font-size: 14px !important;
+    line-height: 1.6 !important;
+    
+    &[class*="language-"] {
+      height: 100% !important;
+      min-height: 100% !important;
     }
   }
 
-  &:hover {
-    transform: translateY(-1px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  // Enhanced hover effects for desktop
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
+      transform: translateY(-1px);
+      box-shadow: 
+        inset 0 1px 0 rgba(255, 255, 255, 0.1),
+        0 4px 12px rgba(0, 0, 0, 0.15),
+        0 2px 4px rgba(0, 0, 0, 0.08);
+      border-color: #cbd5e0;
+    }
+  }
+}
+
+// Enhanced IDE-like Dark Theme - ONLY for output column when dark-theme class is applied
+.output-column .code-output.dark-theme {
+  background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%) !important;
+  border: 2px solid #334155 !important;
+  box-shadow: 
+    inset 0 1px 0 rgba(255, 255, 255, 0.05),
+    0 4px 12px rgba(0, 0, 0, 0.4),
+    0 2px 4px rgba(0, 0, 0, 0.3);
+  
+  // Enhanced dark theme inner shadow
+  &::before {
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.05), transparent);
+  }
+
+  pre {
+    color: #e2e8f0 !important;
+    padding: 16px 20px !important;
+    
+    // For syntax highlighted code - preserve React Syntax Highlighter's dark theme
+    &[class*="language-"] {
+      height: 100% !important;
+      min-height: 100% !important;
+      border-radius: 6px !important;
+      // Enhanced dark theme for syntax highlighter
+      background: #0f172a !important;
+      
+      > code[class*="language-"] {
+        height: 100% !important;
+        min-height: 100% !important;
+        color: #e2e8f0 !important;
+        // Preserve syntax highlighter's dark theme colors for tokens
+      }
+    }
+    
+    // Enhanced dark background for non-highlighted code
+    &:not([class*="language-"]) {
+      background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%) !important;
+      height: 100% !important;
+      min-height: 100% !important;
+      border-radius: 6px !important;
+      border: 1px solid rgba(51, 65, 85, 0.6) !important;
+    }
+    
+    // Professional dark scrollbar
+    &::-webkit-scrollbar {
+      width: 12px;
+      height: 12px;
+    }
+    
+    &::-webkit-scrollbar-track {
+      background: rgba(15, 23, 42, 0.8);
+      border-radius: 6px;
+    }
+    
+    &::-webkit-scrollbar-thumb {
+      background: #475569;
+      border-radius: 6px;
+      border: 2px solid rgba(15, 23, 42, 0.8);
+      
+      &:hover {
+        background: #64748b;
+      }
+      
+      &:active {
+        background: #94a3b8;
+      }
+    }
+  }
+
+  code {
+    color: #e2e8f0 !important;
+    height: 100% !important;
+    min-height: 100% !important;
+    
+    // For syntax highlighted code - enhance readability
+    &[class*="language-"] {
+      height: 100% !important;
+      min-height: 100% !important;
+      color: #e2e8f0 !important;
+    }
+    
+    // Enhanced dark background for non-syntax highlighted code
+    &:not([class*="language-"]) {
+      background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%) !important;
+      color: #cbd5e1 !important;
+    }
+  }
+
+  // Enhanced dark theme hover effects
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
+      transform: translateY(-1px);
+      box-shadow: 
+        inset 0 1px 0 rgba(255, 255, 255, 0.08),
+        0 6px 20px rgba(0, 0, 0, 0.5),
+        0 4px 8px rgba(0, 0, 0, 0.3);
+      border-color: #475569;
+    }
+  }
+}
+
+// Input areas stay light even in dark mode
+.input-column .code-output.dark-theme {
+  // Override dark theme for input areas - keep them light
+  box-shadow: $shadow-sm;
+  background-color: #ffffff !important;
+  border: 1px solid #e2e8f0 !important;
+
+  pre {
+    color: $text-primary !important;
+    
+    &:not([class*="language-"]) {
+      background-color: #f8fafc !important;
+    }
+  }
+
+  code {
+    color: $text-primary !important;
+    
+    &:not([class*="language-"]) {
+      color: $text-primary !important;
+    }
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    }
+  }
+}
+
+// Specific overrides for React Syntax Highlighter to ensure proper background fill
+.code-output {
+  // Target React Syntax Highlighter's structure directly
+  pre[class*="language-"] {
+    height: 100% !important;
+    min-height: 100% !important;
+    margin: 0 !important;
+    
+    // Ensure the code element inside also fills height
+    > code[class*="language-"] {
+      height: 100% !important;
+      min-height: 100% !important;
+      display: block !important;
+      padding: $spacing-md !important; // Maintain consistent padding
+    }
+  }
+  
+  // For any background that React Syntax Highlighter doesn't cover
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: inherit;
+    z-index: -1;
+  }
+}
+
+// Enhanced React Syntax Highlighter overrides for dark theme when applied
+.output-column .code-output.dark-theme {
+  // Ensure dark theme syntax highlighter fills properly
+  pre[class*="language-"] {
+    height: 100% !important;
+    min-height: 100% !important;
+    margin: 0 !important;
+    
+    // Dark theme specific code element styling
+    > code[class*="language-"] {
+      height: 100% !important;
+      min-height: 100% !important;
+      display: block !important;
+      padding: $spacing-md !important;
+      // Let React Syntax Highlighter's oneDark theme handle background colors
+    }
+  }
+  
+  // Dark background fallback for areas not covered by syntax highlighter
+  &::before {
+    background: $code-bg-dark;
+    z-index: -1;
   }
 }
 
@@ -100,35 +450,81 @@
 .code-output pre {
   margin: 0 !important;
   padding: $spacing-md !important;
-  background: transparent !important;
   font-family: $font-family-mono !important;
   font-size: $font-size-sm !important;
   line-height: 1.5 !important;
   tab-size: 2 !important;
   white-space: pre-wrap !important;
   word-wrap: break-word !important;
+  
+  // Ensure syntax highlighted code fills container but preserves theme colors
+  &[class*="language-"] {
+    height: 100% !important;
+    min-height: 100% !important;
+    // Don't override background - let React Syntax Highlighter handle theme colors
+  }
+  
+  // Default background for non-highlighted code
+  &:not([class*="language-"]) {
+    background: #f8fafc !important; // Light gray background for plain text
+    height: 100% !important;
+    min-height: 100% !important;
+  }
 }
 
-// Custom scrollbar for code areas
+// IDE-like Custom scrollbar for all code areas (legacy compatibility)
 .code-output pre::-webkit-scrollbar,
 .code-input::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+  width: 12px;
+  height: 12px;
 }
 
 .code-output pre::-webkit-scrollbar-track,
 .code-input::-webkit-scrollbar-track {
-  background: rgba(0, 0, 0, 0.1);
-  border-radius: 4px;
+  background: #f1f5f9;
+  border-radius: 6px;
+  border: 1px solid #e2e8f0;
 }
 
 .code-output pre::-webkit-scrollbar-thumb,
 .code-input::-webkit-scrollbar-thumb {
-  background: rgba(0, 0, 0, 0.3);
-  border-radius: 4px;
+  background: #cbd5e0;
+  border-radius: 6px;
+  border: 2px solid #f1f5f9;
 
   &:hover {
-    background: rgba(0, 0, 0, 0.5);
+    background: #9ca3af;
+  }
+  
+  &:active {
+    background: #6b7280;
+  }
+}
+
+// Line numbers simulation for code areas
+.code-input,
+.enhanced-code-input {
+  // Add line numbers counter
+  counter-reset: line-number;
+  position: relative;
+  
+  // Simulate line numbers with a pseudo-element overlay
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 50px;
+    height: 100%;
+    background: linear-gradient(180deg, 
+      #f8fafc 0%, 
+      #f1f5f9 50%, 
+      #f8fafc 100%
+    );
+    border-right: 1px solid #e2e8f0;
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0.8;
   }
 }
 
@@ -151,9 +547,26 @@
     font-size: 12px;
   }
   
-  .code-output pre {
-    font-size: 12px;
-    padding: $spacing-sm;
+  .code-output {
+    // Ensure consistent border on very small screens
+    border: 1px solid #e2e8f0 !important;
+    display: flex !important; // Maintain flex layout on small screens
+    flex-direction: column !important;
+    
+    pre {
+      font-size: 12px;
+      padding: $spacing-sm;
+      height: auto !important;
+      min-height: 100% !important; // Fill container height
+      flex: 1 !important; // Stretch to fill parent
+    }
+  }
+  
+  // Dark theme only for output column on very small screens when dark-theme is applied
+  .output-column .code-output.dark-theme {
+    border: 1px solid $code-border-dark !important; // Thinner border on small screens
+    background-color: $code-bg-dark !important;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
   }
   
   .button-group {
@@ -627,11 +1040,11 @@
       white-space: pre-wrap; // Preserve formatting but wrap long lines
     }
 
-    // Enhanced code input - professional code editor styling
+    // IDE-like Enhanced Code Input - Professional appearance
     .enhanced-code-input {
       font-family: 'Source Code Pro', 'Monaco', 'Menlo', monospace !important;
-      font-size: 14px;
-      line-height: 1.5;
+      font-size: 14px !important;
+      line-height: 1.6 !important;
       tab-size: 2;
       -moz-tab-size: 2;
       white-space: pre-wrap;
@@ -640,80 +1053,111 @@
       word-break: break-word;
       overflow-x: hidden;
       overflow-y: auto;
-      transition: all $transition-fast;
+      transition: all 0.2s ease-in-out !important;
+      
+      // Professional IDE appearance
+      border: 2px solid #e2e8f0 !important;
+      border-radius: 8px !important;
+      background: #fafafa !important;
+      color: #2d3748 !important;
+      box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.05) !important;
+      position: relative;
+      
+      // Line numbers background effect
+      background-image: linear-gradient(90deg, 
+        #f1f5f9 0px, 
+        #f1f5f9 50px, 
+        transparent 50px, 
+        transparent 100%
+      ) !important;
+      padding-left: 60px !important;
+      background-attachment: local !important;
 
-      // Text selection styling
+      // Enhanced text selection
       &::selection {
-        background: rgba(59, 130, 246, 0.2);
-        color: inherit;
+        background: rgba(59, 130, 246, 0.25) !important;
+        color: inherit !important;
       }
 
       &::-moz-selection {
-        background: rgba(59, 130, 246, 0.2);
-        color: inherit;
+        background: rgba(59, 130, 246, 0.25) !important;
+        color: inherit !important;
       }
 
-      // Placeholder styling
+      // Professional placeholder
       &::placeholder {
-        color: rgba(107, 114, 128, 0.6);
-        font-style: italic;
+        color: #94a3b8 !important;
+        font-style: normal !important;
+        opacity: 0.8 !important;
       }
 
-      // Focus state with proper box-shadow
+      // IDE-like focus state
       &:focus {
-        outline: none;
-        box-shadow: 0 0 0 3px rgba($primary-color, 0.1);
+        outline: none !important;
+        border-color: #3b82f6 !important;
+        box-shadow: 
+          inset 0 1px 3px rgba(0, 0, 0, 0.1),
+          0 0 0 3px rgba(59, 130, 246, 0.1),
+          0 4px 6px rgba(0, 0, 0, 0.05) !important;
+        background-color: #ffffff !important;
+      }
+      
+      // Enhanced hover state
+      &:hover:not(:focus) {
+        border-color: #cbd5e0 !important;
+        box-shadow: 
+          inset 0 1px 3px rgba(0, 0, 0, 0.1),
+          0 2px 4px rgba(0, 0, 0, 0.06) !important;
       }
 
-      // Custom scrollbar
+      // Professional scrollbar
       &::-webkit-scrollbar {
-        width: 8px;
-        height: 0px;
+        width: 12px !important;
+        height: 12px !important;
       }
 
       &::-webkit-scrollbar-track {
-        background: rgba(0, 0, 0, 0.1);
-        border-radius: 4px;
+        background: #f1f5f9 !important;
+        border-radius: 6px !important;
+        border: 1px solid #e2e8f0 !important;
       }
 
       &::-webkit-scrollbar-thumb {
-        background: rgba(0, 0, 0, 0.3);
-        border-radius: 4px;
+        background: #cbd5e0 !important;
+        border-radius: 6px !important;
+        border: 2px solid #f1f5f9 !important;
         
         &:hover {
-          background: rgba(0, 0, 0, 0.5);
+          background: #9ca3af !important;
+        }
+        
+        &:active {
+          background: #6b7280 !important;
         }
       }
 
       // Firefox scrollbar
-      scrollbar-width: thin;
-      scrollbar-color: rgba(0, 0, 0, 0.3) transparent;
+      scrollbar-width: auto !important;
+      scrollbar-color: #cbd5e0 #f1f5f9 !important;
 
-      // Enhanced dark mode support when parent has dark-mode class
-      .tool-container.dark-mode & {
-        &::placeholder {
-          color: rgba(171, 178, 191, 0.6);
-        }
-
-        &::selection {
-          background: rgba(96, 165, 250, 0.3);
-        }
-
-        &::-moz-selection {
-          background: rgba(96, 165, 250, 0.3);
-        }
-
-        &::-webkit-scrollbar-track {
-          background: rgba(255, 255, 255, 0.1);
-        }
-
-        &::-webkit-scrollbar-thumb {
-          background: rgba(255, 255, 255, 0.3);
-          
-          &:hover {
-            background: rgba(255, 255, 255, 0.5);
-          }
-        }
+      // Line numbers overlay effect
+      &::after {
+        content: '';
+        position: absolute;
+        top: 2px;
+        left: 2px;
+        width: 48px;
+        height: calc(100% - 4px);
+        background: linear-gradient(180deg, 
+          #f8fafc 0%, 
+          #f1f5f9 50%, 
+          #f8fafc 100%
+        );
+        border-right: 1px solid #e2e8f0;
+        border-radius: 6px 0 0 6px;
+        pointer-events: none;
+        z-index: 1;
+        opacity: 0.9;
       }
     }
   }
@@ -725,7 +1169,7 @@
     align-items: center;
     gap: $spacing-sm;
     padding: $spacing-md 0;
-    min-width: 220px;
+    min-width: 300px;
 
     .mode-toggle {
       margin-bottom: $spacing-md;
@@ -828,11 +1272,50 @@
 
     // Specific handling for SyntaxHighlighter in output
     .code-output {
+      display: flex; // Make container flexbox
+      flex-direction: column; // Stack content vertically
+      
       pre {
+        flex: 1 !important; // Fill remaining container height
+        min-height: 100% !important; // Ensure it takes full height
         white-space: pre-wrap !important; // Wrap long lines
         word-wrap: break-word !important;
         overflow-wrap: break-word !important;
         max-width: 100% !important;
+        margin: 0 !important; // Remove default margins that could affect height
+        
+        // Ensure syntax highlighter background fills full height
+        > code {
+          display: block !important;
+          height: 100% !important;
+          min-height: 100% !important;
+          padding: 0 !important; // Pre handles padding
+        }
+        
+        // Handle react-syntax-highlighter specific classes
+        &[class*="language-"] {
+          height: 100% !important;
+          min-height: 100% !important;
+          // Don't override background - let React Syntax Highlighter handle theme colors
+          
+          > code[class*="language-"] {
+            height: 100% !important;
+            min-height: 100% !important;
+            display: block !important;
+            // Don't force background - preserve syntax highlighter's theme colors
+          }
+        }
+        
+        // For plain text (non-highlighted) - provide fallback background
+        &:not([class*="language-"]) {
+          height: 100% !important;
+          min-height: 100% !important;
+          background-color: #f8fafc; // Light background for plain text
+          
+          .dark-theme & {
+            background-color: $code-bg-dark; // Dark background for plain text in dark mode
+          }
+        }
       }
 
       code {
@@ -841,6 +1324,8 @@
         overflow-wrap: break-word !important;
         display: block !important;
         max-width: 100% !important;
+        min-height: 100% !important; // Fill parent height
+        height: 100% !important;
       }
     }
 
@@ -891,6 +1376,28 @@
       .code-placeholder {
         min-height: 250px; /* Smaller min-height for shorter screens */
       }
+      
+      // Fix border height on short screens
+      .code-output {
+        border: 1px solid #e2e8f0;
+        overflow: visible; // Prevent border clipping
+        display: flex !important; // Maintain flex layout
+        flex-direction: column !important;
+        
+        pre {
+          max-height: 230px; // Ensure it fits within container
+          overflow-y: auto;
+          flex: 1 !important; // Fill available space
+          min-height: 100% !important;
+        }
+      }
+      
+      // Dark theme only for output column on short screens when dark-theme is applied
+      &.output-column .code-output.dark-theme {
+        border: 1px solid $code-border-dark !important;
+        background-color: $code-bg-dark !important;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+      }
     }
   }
   
@@ -906,7 +1413,7 @@
     gap: $spacing-lg;
 
     .action-column {
-      min-width: 180px;
+      min-width: 250px;
     }
   }
 }
@@ -925,6 +1432,28 @@
       .code-output,
       .code-placeholder {
         min-height: 300px; /* Smaller but still usable on mobile */
+      }
+      
+      // Fix code-output border height issues on mobile
+      .code-output {
+        border: 1px solid #e2e8f0;
+        height: auto;
+        display: flex !important; // Maintain flex layout on mobile
+        flex-direction: column !important;
+        
+        // Ensure proper container height
+        pre {
+          height: auto !important;
+          min-height: 280px !important; // Slightly smaller than container
+          flex: 1 !important; // Fill available space
+        }
+      }
+      
+      // Dark theme only for output column on mobile when dark-theme is applied
+      &.output-column .code-output.dark-theme {
+        border: 2px solid $code-border-dark !important;
+        background-color: $code-bg-dark !important;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
       }
     }
 

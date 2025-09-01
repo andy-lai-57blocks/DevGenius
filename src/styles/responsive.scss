@@ -20,11 +20,11 @@
   }
   
   .main-content {
-    padding: 1.5rem 3rem 3rem 3rem;
+    padding: 0.5rem 2rem 2rem 2rem;
   }
   
   .tool-container {
-    padding: 2.5rem;
+    padding: 1.5rem;
   }
   
   .tools-grid {
@@ -126,7 +126,7 @@
   /* Adjust main content for mobile */
   .main-content {
     margin-left: 0;
-    padding: 3rem 1rem 1rem 1rem; /* Reduced top padding for mobile header */
+    padding: 4.5rem 0.75rem 0.75rem 0.75rem; /* Increased top padding for better mobile header clearance */
   }
   
   .content-container {
@@ -144,7 +144,7 @@
   
   /* Mobile-specific tool container adjustments */
   .tool-container {
-    padding: 1rem;
+    padding: 0.75rem;
     border-radius: 0.75rem;
   }
   
@@ -260,7 +260,7 @@
   
   /* Mobile Tool Container */
   .tool-container {
-    padding: 1rem;
+    padding: 0.75rem;
     margin: 0;
     border-radius: 0.375rem;
   }
@@ -385,7 +385,7 @@
 /* Extra Small Mobile (320px and below) */
 @media (max-width: 320px) {
   .main-content {
-    padding: 2rem 0.75rem 0.75rem 0.75rem;
+    padding: 4.5rem 0.5rem 0.5rem 0.5rem; /* Increased top padding for better mobile header clearance */
   }
   
   .tool-container {

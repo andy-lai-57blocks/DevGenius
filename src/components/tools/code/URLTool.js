@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { downloadAsFile, getDownloadInfo } from '../../../utils/downloadUtils';
 import SimpleAd from '../../ads/SimpleAd';
+import CodeEditor from '../../common/CodeEditor';
 
 const URLTool = () => {
   const [input, setInput] = useState('');
@@ -67,11 +68,14 @@ const URLTool = () => {
             <label className="input-label">
               {mode === 'encode' ? 'Text/URL to Encode' : 'URL Encoded Text to Decode'}
             </label>
-            <textarea
-              className="text-area code-editor"
+            <CodeEditor
               value={input}
-              onChange={(e) => setInput(e.target.value)}
+              onChange={setInput}
+              language="text"
               placeholder={mode === 'encode' ? 'Enter text or URL to encode...' : 'Enter URL encoded text to decode...'}
+              name="url-input-editor"
+              height="calc(100vh - 16rem)"
+              isDarkTheme={false}
             />
           </div>
         </div>
@@ -132,10 +136,15 @@ const URLTool = () => {
             <label className="input-label">
               {mode === 'encode' ? 'Encoded Result' : 'Decoded Result'}
             </label>
-            <textarea
-              className="text-area code-editor"
+            <CodeEditor
               value={output}
-              readOnly
+              onChange={() => {}} // Read-only
+              language="text"
+              readOnly={true}
+              name="url-output-editor"
+              height="calc(100vh - 16rem)"
+              isDarkTheme={false}
+              showLineNumbers={true}
               placeholder="Result will appear here..."
             />
           </div>
