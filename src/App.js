@@ -44,6 +44,8 @@ import {
 } from './components/pages';
 
 import { GoogleAd, SEOHead, Breadcrumbs } from './components/shared';
+import { AdProvider } from './contexts/AdContext';
+import Ad from './components/ads/Ad';
 
 // Legacy category imports for backward compatibility
 // Legacy components removed - using category-based organization
@@ -66,13 +68,13 @@ const Sidebar = () => {
       label: 'Code', 
       icon: '🖥️',
       submenu: [
+        { path: '/code/json', title: 'JSON Formatter', icon: '📋' },
+        { path: '/code/xml', title: 'XML Formatter', icon: '📄' },
+        { path: '/code/vast', title: 'VAST Formatter', icon: '📺' },
         { path: '/code/base64', title: 'Base64 Encoder/Decoder', icon: '🔐' },
         { path: '/code/url', title: 'URL Encoder/Decoder', icon: '🌐' },
         { path: '/code/html', title: 'HTML Encoder/Decoder', icon: '🏷️' },
         { path: '/code/gzip', title: 'Gzip Compression', icon: '🗜️' },
-        { path: '/code/json', title: 'JSON Formatter', icon: '📋' },
-        { path: '/code/xml', title: 'XML Formatter', icon: '📄' },
-        { path: '/code/vast', title: 'VAST Formatter', icon: '📺' },
         { path: '/code/uuid', title: 'UUID Generator', icon: '🆔' },
         { path: '/code/password', title: 'Password Generator', icon: '🔑' },
         { path: '/code/hls', title: 'HLS Stream Player', icon: '📺' }
@@ -268,6 +270,7 @@ const Layout = ({ children }) => (
     <Sidebar />
     <main className="main-content">
       <div className="content-container">
+        <Ad type="banner" lazy={false} />
         <div className="content-area">
           <Breadcrumbs />
           {children}
@@ -289,7 +292,8 @@ function App() {
         }}
       />
       <Router>
-        <Layout>
+        <AdProvider>
+          <Layout>
         <Routes>
           {/* Home */}
           <Route path="/" element={<Home />} />
@@ -363,8 +367,9 @@ function App() {
           <Route path="/xml" element={<XMLFormatter />} />
           <Route path="/case" element={<CaseConverter />} />
         </Routes>
-      </Layout>
-    </Router>
+          </Layout>
+        </AdProvider>
+      </Router>
     </HelmetProvider>
   );
 }

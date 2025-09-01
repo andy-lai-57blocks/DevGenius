@@ -20,11 +20,11 @@
   }
   
   .main-content {
-    padding: 3rem;
+    padding: 1.5rem 3rem 3rem 3rem;
   }
   
   .tool-container {
-    padding: 3.5rem;
+    padding: 2.5rem;
   }
   
   .tools-grid {
@@ -126,8 +126,7 @@
   /* Adjust main content for mobile */
   .main-content {
     margin-left: 0;
-    padding: 1rem;
-    padding-top: 5rem; /* Account for mobile header */
+    padding: 3rem 1rem 1rem 1rem; /* Reduced top padding for mobile header */
   }
   
   .content-container {
@@ -145,7 +144,7 @@
   
   /* Mobile-specific tool container adjustments */
   .tool-container {
-    padding: 1.5rem;
+    padding: 1rem;
     border-radius: 0.75rem;
   }
   
@@ -261,7 +260,7 @@
   
   /* Mobile Tool Container */
   .tool-container {
-    padding: 1.5rem;
+    padding: 1rem;
     margin: 0;
     border-radius: 0.375rem;
   }
@@ -386,11 +385,11 @@
 /* Extra Small Mobile (320px and below) */
 @media (max-width: 320px) {
   .main-content {
-    padding: 0.75rem;
+    padding: 2rem 0.75rem 0.75rem 0.75rem;
   }
   
   .tool-container {
-    padding: 1rem;
+    padding: 0.75rem;
   }
   
   .hero-content {

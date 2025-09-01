@@ -17,7 +17,7 @@ export const detectFileType = (content) => {
       trimmedContent.toLowerCase().startsWith('<html') ||
       trimmedContent.toLowerCase().startsWith('<div') || // Content starting with <div
       (trimmedContent.includes('<') && trimmedContent.includes('>') && 
-       (trimmedContent.includes('<head>') || trimmedContent.includes('<body>') || trimmedContent.includes('<div>')))) {
+       (trimmedContent.includes('<head>') || trimmedContent.includes('<body>') || trimmedContent.includes('<div>') || trimmedContent.includes('<html>')))) {
     return { mimeType: 'text/html', extension: 'html', type: 'HTML' };
   }
 

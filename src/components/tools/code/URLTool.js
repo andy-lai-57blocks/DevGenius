@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { downloadAsFile, getDownloadInfo } from '../../../utils/downloadUtils';
+import Ad from '../../ads/Ad';
 
 const URLTool = () => {
   const [input, setInput] = useState('');
@@ -121,6 +122,8 @@ const URLTool = () => {
               </>
             )}
           </div>
+          
+          <Ad type="mrec" />
         </div>
 
         {/* Output Column */}

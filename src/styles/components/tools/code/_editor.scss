@@ -725,7 +725,7 @@
     align-items: center;
     gap: $spacing-sm;
     padding: $spacing-md 0;
-    min-width: 140px;
+    min-width: 220px;
 
     .mode-toggle {
       margin-bottom: $spacing-md;
@@ -906,7 +906,7 @@
     gap: $spacing-lg;
 
     .action-column {
-      min-width: 120px;
+      min-width: 180px;
     }
   }
 }

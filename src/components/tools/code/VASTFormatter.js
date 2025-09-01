@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { oneDark, oneLight } from 'react-syntax-highlighter/dist/esm/styles/prism';
+import Ad from '../../ads/Ad';
 
 // Fallback themes in case the imports fail
 const fallbackDarkTheme = {
@@ -512,6 +513,8 @@ const VASTFormatter = () => {
               </button>
             )}
           </div>
+          
+          <Ad type="mrec" />
         </div>
 
         {/* Output Column */}

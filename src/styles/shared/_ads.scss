@@ -68,3 +68,76 @@
     max-width: 336px; // Standard sidebar width
   }
 }
+
+// Banner Ad (Top of Content)
+.banner-ad {
+  width: 100%;
+  height: 90px !important;
+  max-height: 90px !important;
+  min-height: 90px !important;
+  margin-bottom: $spacing-lg;
+  overflow: hidden !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+
+  .adsbygoogle,
+  .adsbygoogle > * {
+    width: 100% !important;
+    height: 90px !important;
+    max-height: 90px !important;
+    min-height: 90px !important;
+    overflow: hidden !important;
+    display: block !important;
+    margin: 0 auto !important;
+    text-align: center !important;
+  }
+
+  // Force height on any nested AdSense elements
+  ins,
+  iframe,
+  div {
+    height: 90px !important;
+    max-height: 90px !important;
+    min-height: 90px !important;
+    overflow: hidden !important;
+    margin: 0 auto !important;
+    text-align: center !important;
+  }
+
+  // Additional override for AdSense generated content
+  > * {
+    height: 90px !important;
+    max-height: 90px !important;
+    overflow: hidden !important;
+    margin: 0 auto !important;
+    text-align: center !important;
+  }
+}
+
+// Mrec Ad (Medium Rectangle) in Action Column
+.mrec-ad {
+  width: 100%;
+  max-width: 300px;
+  margin: $spacing-lg auto 0;
+  text-align: center;
+  
+  .adsbygoogle {
+    display: block !important;
+    margin: 0 auto;
+    text-align: center;
+    max-width: 300px;
+    min-height: 250px;
+  }
+}
+
+// General ad container styles
+.ad-container {
+  transition: opacity 0.3s ease;
+  
+  // Hide ads on mobile devices for cleaner layout
+  @media (max-width: 768px) {
+    display: none !important;
+  }
+}
