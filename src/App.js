@@ -43,9 +43,8 @@ import {
   DateTime 
 } from './components/pages';
 
-import { GoogleAd, SEOHead, Breadcrumbs } from './components/shared';
-import { AdProvider } from './contexts/AdContext';
-import Ad from './components/ads/Ad';
+import { SEOHead, Breadcrumbs } from './components/shared';
+import SimpleAd from './components/ads/SimpleAd';
 
 // Legacy category imports for backward compatibility
 // Legacy components removed - using category-based organization
@@ -270,7 +269,7 @@ const Layout = ({ children }) => (
     <Sidebar />
     <main className="main-content">
       <div className="content-container">
-        <Ad type="banner" lazy={false} />
+        <SimpleAd type="banner" />
         <div className="content-area">
           <Breadcrumbs />
           {children}
@@ -292,8 +291,7 @@ function App() {
         }}
       />
       <Router>
-        <AdProvider>
-          <Layout>
+        <Layout>
         <Routes>
           {/* Home */}
           <Route path="/" element={<Home />} />
@@ -367,8 +365,7 @@ function App() {
           <Route path="/xml" element={<XMLFormatter />} />
           <Route path="/case" element={<CaseConverter />} />
         </Routes>
-          </Layout>
-        </AdProvider>
+        </Layout>
       </Router>
     </HelmetProvider>
   );

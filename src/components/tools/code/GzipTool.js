@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import * as pako from 'pako';
 import { downloadAsFile, getDownloadInfo } from '../../../utils/downloadUtils';
-import Ad from '../../ads/Ad';
+import SimpleAd from '../../ads/SimpleAd';
 
 const GzipTool = () => {
   const [input, setInput] = useState('');
@@ -168,7 +168,7 @@ const GzipTool = () => {
             )}
           </div>
           
-          <Ad type="mrec" />
+          <SimpleAd type="mrec" />
         </div>
 
         {/* Output Column */}

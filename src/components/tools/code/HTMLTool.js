@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { oneDark, oneLight } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import { downloadAsFile, getDownloadInfo } from '../../../utils/downloadUtils';
-import Ad from '../../ads/Ad';
+import SimpleAd from '../../ads/SimpleAd';
 
 // Fallback themes in case imports fail
 const fallbackDarkTheme = {
@@ -285,7 +285,7 @@ const HTMLTool = () => {
             )}
           </div>
           
-          <Ad type="mrec" />
+          <SimpleAd type="mrec" />
         </div>
 
         {/* Output Column */}

@@ -72,6 +72,47 @@
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8806399994474387"
             crossorigin="anonymous"></script>
     
+    <!-- Initialize AdSense when DOM is ready -->
+    <script>
+      // Auto-initialize AdSense ads after page load
+      window.addEventListener('load', function() {
+        // Only load ads in production
+        if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+          console.log('🚫 AdSense disabled on localhost');
+          return;
+        }
+        
+        // Initialize all ads on the page
+        try {
+          (adsbygoogle = window.adsbygoogle || []).push({});
+        } catch (e) {
+          console.error('AdSense initialization error:', e);
+        }
+      });
+      
+      // Re-initialize ads when React Router navigates (SPA)
+      let lastPath = window.location.pathname;
+      setInterval(function() {
+        if (window.location.pathname !== lastPath) {
+          lastPath = window.location.pathname;
+          console.log('🔄 Route changed, refreshing ads');
+          
+          // Wait a bit for React to update DOM
+          setTimeout(function() {
+            try {
+              // Find new ad elements that haven't been processed
+              const newAds = document.querySelectorAll('.adsbygoogle:not([data-adsbygoogle-status])');
+              newAds.forEach(function() {
+                (adsbygoogle = window.adsbygoogle || []).push({});
+              });
+            } catch (e) {
+              console.error('AdSense refresh error:', e);
+            }
+          }, 500);
+        }
+      }, 100);
+    </script>
+    
     <!-- Structured Data (JSON-LD) -->
     <script type="application/ld+json">
     {
