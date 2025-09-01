@@ -308,7 +308,7 @@ const Base64Tool = () => {
             )}
           </div>
           
-          <SimpleAd type="mrec" />
+          <SimpleAd />
         </div>
 
         {/* Output Column */}

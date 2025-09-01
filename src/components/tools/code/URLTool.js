@@ -123,7 +123,7 @@ const URLTool = () => {
             )}
           </div>
           
-          <SimpleAd type="mrec" />
+          <SimpleAd />
         </div>
 
         {/* Output Column */}

@@ -1,23 +1,14 @@
 import React from 'react';
 
 const SimpleAd = ({ 
-  type = 'mrec', // 'banner' or 'mrec'
   className = '',
   style = {} 
 }) => {
-  // Get ad configuration
-  const adConfig = {
-    banner: {
-      slot: '8870579772',
-      style: { width: '100%', height: '90px' }
-    },
-    mrec: {
-      slot: '1681486325',
-      style: { maxWidth: '300px', minHeight: '250px' }
-    }
+  // Mrec ad configuration
+  const config = {
+    slot: '1681486325',
+    style: { maxWidth: '300px', minHeight: '250px' }
   };
-
-  const config = adConfig[type];
   
   // Show placeholder on localhost
   const isLocalhost = window.location.hostname === 'localhost' || 
@@ -26,7 +17,7 @@ const SimpleAd = ({
   if (isLocalhost) {
     return (
       <div 
-        className={`ad-container ${type}-ad ${className} ad-placeholder-dev`}
+        className={`ad-container mrec-ad ${className} ad-placeholder-dev`}
         style={{
           ...style,
           display: 'flex',
@@ -41,13 +32,13 @@ const SimpleAd = ({
           ...config.style
         }}
       >
-        🚫 AdSense ({type.toUpperCase()}) - DEV MODE
+        🚫 AdSense (MREC) - DEV MODE
       </div>
     );
   }
 
   return (
-    <div className={`ad-container ${type}-ad ${className}`} style={style}>
+    <div className={`ad-container mrec-ad ${className}`} style={style}>
       <ins 
         className="adsbygoogle"
         style={{ display: 'block', ...config.style }}

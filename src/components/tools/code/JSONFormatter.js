@@ -283,7 +283,7 @@ const JSONFormatter = () => {
             )}
           </div>
           
-          <SimpleAd type="mrec" />
+          <SimpleAd />
         </div>
 
         {/* Output Column */}

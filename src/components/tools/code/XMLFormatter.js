@@ -338,7 +338,7 @@ const XMLFormatter = () => {
             )}
           </div>
           
-          <SimpleAd type="mrec" />
+          <SimpleAd />
         </div>
 
         {/* Output Column */}

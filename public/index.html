@@ -82,7 +82,7 @@
           return;
         }
         
-        // Initialize all ads on the page
+        // Initialize all mrec ads on the page
         try {
           (adsbygoogle = window.adsbygoogle || []).push({});
         } catch (e) {
@@ -95,7 +95,7 @@
       setInterval(function() {
         if (window.location.pathname !== lastPath) {
           lastPath = window.location.pathname;
-          console.log('🔄 Route changed, refreshing ads');
+          console.log('🔄 Route changed, refreshing mrec ads');
           
           // Wait a bit for React to update DOM
           setTimeout(function() {

@@ -44,7 +44,6 @@ import {
 } from './components/pages';
 
 import { SEOHead, Breadcrumbs } from './components/shared';
-import SimpleAd from './components/ads/SimpleAd';
 
 // Legacy category imports for backward compatibility
 // Legacy components removed - using category-based organization
@@ -269,12 +268,10 @@ const Layout = ({ children }) => (
     <Sidebar />
     <main className="main-content">
       <div className="content-container">
-        <SimpleAd type="banner" />
         <div className="content-area">
           <Breadcrumbs />
           {children}
         </div>
-
       </div>
     </main>
   </div>
