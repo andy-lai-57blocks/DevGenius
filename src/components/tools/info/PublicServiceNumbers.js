@@ -443,8 +443,7 @@ const PublicServiceNumbers = () => {
   };
 
   return (
-    <div className="content-area">
-      <div className="tool-container">
+    <div className="tool-container">
         {/* Country Selection */}
         <div className="country-selection-section">
           <h3>🌍 Select Country/Region</h3>
@@ -603,7 +602,6 @@ const PublicServiceNumbers = () => {
             </div>
           </div>
         </div>
-      </div>
     </div>
   );
 };

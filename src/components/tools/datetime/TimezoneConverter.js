@@ -225,8 +225,7 @@ const TimezoneConverter = () => {
   ];
 
   return (
-    <div className="content-area">
-      <div className="tool-container">
+    <div className="tool-container">
         {/* Current World Clock */}
         <div className="world-clock-section">
           <h3>🕐 Current Time Around the World</h3>
@@ -379,7 +378,6 @@ const TimezoneConverter = () => {
             </div>
           </div>
         </div>
-      </div>
     </div>
   );
 

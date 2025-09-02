@@ -12,6 +12,9 @@ import 'ace-builds/src-noconflict/mode-text';
 // Import Ace Editor themes
 import 'ace-builds/src-noconflict/theme-github';
 import 'ace-builds/src-noconflict/theme-tomorrow_night';
+import 'ace-builds/src-noconflict/theme-eclipse';
+import 'ace-builds/src-noconflict/theme-xcode';
+import 'ace-builds/src-noconflict/theme-chrome';
 
 // Import Ace Editor extensions
 import 'ace-builds/src-noconflict/ext-language_tools';
@@ -26,7 +29,7 @@ ace.config.set('useWorker', false);
  * Same beautiful appearance for all languages, but syntax highlighting will be language-specific
  */
 const getTheme = (isDarkTheme) => {
-  return isDarkTheme ? 'tomorrow_night' : 'github';
+  return isDarkTheme ? 'tomorrow_night' : 'chrome';
 };
 
 /**
@@ -150,7 +153,7 @@ const CodeEditor = ({
   };
 
   return (
-    <div className="code-editor-container" style={{ width, height }}>
+    <div className={`code-editor-container ${isDarkTheme ? 'dark-theme' : 'light-theme'}`} style={{ width, height }}>
       <AceEditor
         mode={mode}
         theme={theme}
@@ -191,65 +194,6 @@ const CodeEditor = ({
         ]}
         {...props}
       />
-      
-      <style jsx>{`
-        .code-editor-container {
-          position: relative;
-          border-radius: 8px;
-          overflow: hidden;
-          border: 2px solid ${isDarkTheme ? '#334155' : '#e2e8f0'};
-          box-shadow: 
-            inset 0 1px 0 rgba(255, 255, 255, ${isDarkTheme ? '0.05' : '0.1'}),
-            0 1px 3px rgba(0, 0, 0, ${isDarkTheme ? '0.4' : '0.1'}),
-            0 1px 2px rgba(0, 0, 0, ${isDarkTheme ? '0.3' : '0.06'});
-          transition: all 0.2s ease-in-out;
-        }
-        
-        .code-editor-container:hover {
-          border-color: ${isDarkTheme ? '#475569' : '#cbd5e0'};
-          box-shadow: 
-            inset 0 1px 0 rgba(255, 255, 255, ${isDarkTheme ? '0.08' : '0.1'}),
-            0 4px 12px rgba(0, 0, 0, ${isDarkTheme ? '0.5' : '0.15'}),
-            0 2px 4px rgba(0, 0, 0, ${isDarkTheme ? '0.3' : '0.08'});
-          transform: translateY(-1px);
-        }
-        
-        .code-editor-container :global(.ace_editor) {
-          border-radius: 6px;
-          font-family: 'Source Code Pro', 'Monaco', 'Menlo', 'Courier New', monospace !important;
-        }
-        
-        .code-editor-container :global(.ace_gutter) {
-          border-right: 1px solid ${isDarkTheme ? '#334155' : '#e2e8f0'};
-          background: ${isDarkTheme 
-            ? 'linear-gradient(180deg, #1e293b 0%, #0f172a 100%)' 
-            : 'linear-gradient(180deg, #f8fafc 0%, #f1f5f9 100%)'};
-        }
-        
-        .code-editor-container :global(.ace_gutter-active-line) {
-          background: ${isDarkTheme ? '#334155' : '#dbeafe'};
-        }
-        
-        .code-editor-container :global(.ace_active-line) {
-          background: ${isDarkTheme ? 'rgba(51, 65, 85, 0.3)' : 'rgba(59, 130, 246, 0.1)'} !important;
-        }
-        
-        .code-editor-container :global(.ace_selection) {
-          background: ${isDarkTheme ? 'rgba(96, 165, 250, 0.3)' : 'rgba(59, 130, 246, 0.25)'} !important;
-        }
-        
-        .code-editor-container :global(.ace_cursor) {
-          color: ${isDarkTheme ? '#60a5fa' : '#3b82f6'} !important;
-        }
-        
-        .code-editor-container :global(.ace_scrollbar-h) {
-          height: 12px !important;
-        }
-        
-        .code-editor-container :global(.ace_scrollbar-v) {
-          width: 12px !important;
-        }
-      `}</style>
     </div>
   );
 };

@@ -193,8 +193,7 @@ const TimestampConverter = () => {
   ];
 
   return (
-    <div className="content-area">
-      <div className="tool-container">
+    <div className="tool-container">
         <div className="current-time-section">
           <h3>🕐 Current Time</h3>
           <div className="current-time-display">
@@ -356,7 +355,6 @@ const TimestampConverter = () => {
             </div>
           </div>
         ) : null}
-      </div>
     </div>
   );
 };

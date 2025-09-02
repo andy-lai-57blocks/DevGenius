@@ -184,3 +184,193 @@
   border-radius: $border-radius-lg;
   border: 2px solid #bfdbfe;
 }
+
+// Timezone Converter Specific Styles
+.timezone-selector {
+  margin-bottom: $spacing-md;
+}
+
+.selected-timezones {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $spacing-sm;
+  margin-top: $spacing-md;
+}
+
+.timezone-tag {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  padding: $spacing-sm $spacing-md;
+  background: $primary-color;
+  color: white;
+  border-radius: $border-radius-lg;
+  font-size: $font-size-sm;
+  font-weight: 600;
+  transition: all $transition-fast;
+
+  &:hover {
+    background: darken($primary-color, 10%);
+    transform: translateY(-1px);
+    box-shadow: $shadow-sm;
+  }
+
+  .remove-timezone {
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    font-size: $font-size-lg;
+    font-weight: 700;
+    padding: 0;
+    margin: 0;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: background-color $transition-fast;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+  }
+}
+
+.conversion-results {
+  display: grid;
+  gap: $spacing-lg;
+  margin-top: $spacing-lg;
+}
+
+.conversion-item {
+  background: $bg-card;
+  border: 2px solid #f1f5f9;
+  border-radius: $border-radius-xl;
+  padding: $spacing-lg;
+  transition: all $transition-normal;
+
+  &:hover {
+    border-color: #e2e8f0;
+    transform: translateY(-2px);
+    box-shadow: $shadow-md;
+  }
+}
+
+.conversion-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: $spacing-md;
+  padding-bottom: $spacing-sm;
+  border-bottom: 2px solid #f1f5f9;
+
+  h4 {
+    font-size: $font-size-lg;
+    font-weight: 700;
+    color: $text-primary;
+    margin: 0;
+  }
+}
+
+.timezone-offset {
+  font-family: $font-family-mono;
+  font-size: $font-size-sm;
+  font-weight: 600;
+  color: $primary-color;
+  background: rgba($primary-color, 0.1);
+  padding: 0.25rem 0.5rem;
+  border-radius: $border-radius-md;
+}
+
+.conversion-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: $spacing-lg;
+  margin-bottom: $spacing-lg;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+    gap: $spacing-md;
+  }
+}
+
+.time-display,
+.date-display {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-sm;
+}
+
+.time-main,
+.date-full {
+  font-size: $font-size-lg;
+  font-weight: 700;
+  color: $text-primary;
+}
+
+.time-24,
+.date-short {
+  font-size: $font-size-sm;
+  color: $text-secondary;
+  font-family: $font-family-mono;
+}
+
+.conversion-actions {
+  display: flex;
+  gap: $spacing-sm;
+  flex-wrap: wrap;
+}
+
+.timezone-info {
+  background: linear-gradient(135deg, #f8fafc, $bg-card);
+  border: 2px solid #f1f5f9;
+  border-radius: $border-radius-xl;
+  padding: $spacing-lg;
+  margin-top: $spacing-xl;
+
+  h3 {
+    font-size: $font-size-lg;
+    font-weight: 700;
+    color: $text-primary;
+    margin-bottom: $spacing-md;
+    display: flex;
+    align-items: center;
+    gap: $spacing-sm;
+  }
+}
+
+.info-grid {
+  display: grid;
+  gap: $spacing-md;
+
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  }
+}
+
+.info-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: $spacing-md;
+  padding: $spacing-sm 0;
+  border-bottom: 1px solid #f1f5f9;
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.info-label {
+  font-weight: 600;
+  color: $text-secondary;
+}
+
+.info-value {
+  font-family: $font-family-mono;
+  color: $text-primary;
+  font-weight: 600;
+  text-align: right;
+}

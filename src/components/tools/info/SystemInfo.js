@@ -145,8 +145,7 @@ const SystemInfo = () => {
   );
 
   return (
-    <div className="content-area">
-      <div className="tool-container">
+    <div className="tool-container">
         <div className="button-group">
           <button className="btn btn-primary" onClick={copyToClipboard}>
             {copied ? '✓ Copied!' : '📋 Copy All Info'}
@@ -162,7 +161,6 @@ const SystemInfo = () => {
           {systemInfo.connection && <InfoSection title="Connection" data={systemInfo.connection} icon="📡" />}
           <InfoSection title="Time & Location" data={systemInfo.time || {}} icon="🌍" />
         </div>
-      </div>
     </div>
   );
 };

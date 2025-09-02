@@ -141,8 +141,7 @@ const NetworkInfo = () => {
   );
 
   return (
-    <div className="content-area">
-      <div className="tool-container">
+    <div className="tool-container">
         <div className="network-status">
           <div className={`status-indicator ${networkInfo.online ? 'online' : 'offline'}`}>
             <span className="status-dot"></span>
@@ -186,7 +185,6 @@ const NetworkInfo = () => {
         <div className="privacy-notice">
           <p><strong>🔒 Privacy Note:</strong> This information is retrieved from your browser and public IP services. No personal data is stored or transmitted to our servers.</p>
         </div>
-      </div>
     </div>
   );
 };

@@ -503,8 +503,7 @@ const CountdownTool = () => {
   };
 
   return (
-    <div className="content-area">
-      <div className="tool-container">
+    <div className="tool-container">
         <div className="countdown-controls">
           <button 
             className="btn btn-primary"
@@ -665,7 +664,6 @@ const CountdownTool = () => {
             <li><strong>Expired Events:</strong> Past events show "time since" information</li>
           </ul>
         </div>
-      </div>
     </div>
   );
 };

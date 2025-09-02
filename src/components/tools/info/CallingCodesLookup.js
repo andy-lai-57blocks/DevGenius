@@ -186,8 +186,7 @@ const CallingCodesLookup = () => {
   };
 
   return (
-    <div className="content-area">
-      <div className="tool-container">
+    <div className="tool-container">
         {/* Popular Calling Codes */}
         <div className="popular-codes-section">
           <h3>🌟 Most Popular Codes</h3>
@@ -323,7 +322,6 @@ const CallingCodesLookup = () => {
             </div>
           </div>
         </div>
-      </div>
     </div>
   );
 };

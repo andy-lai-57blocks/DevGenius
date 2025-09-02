@@ -191,8 +191,7 @@ const BrowserInfo = () => {
   );
 
   return (
-    <div className="content-area">
-      <div className="tool-container">
+    <div className="tool-container">
         <div className="button-group">
           <button className="btn btn-primary" onClick={copyToClipboard}>
             {copied ? '✓ Copied!' : '📋 Copy All Info'}
@@ -208,7 +207,6 @@ const BrowserInfo = () => {
         <div className="browser-notice">
           <p><strong>ℹ️ Note:</strong> Feature support may vary between browser versions. Some experimental features might not be available in all browsers.</p>
         </div>
-      </div>
     </div>
   );
 };

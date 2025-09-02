@@ -301,8 +301,7 @@ const DateCalculator = () => {
   };
 
   return (
-    <div className="content-area">
-      <div className="tool-container">
+    <div className="tool-container">
         <div className="operation-selector">
           <div className="button-group">
             <button 
@@ -584,7 +583,6 @@ const DateCalculator = () => {
             )}
           </div>
         ) : null}
-      </div>
     </div>
   );
 };

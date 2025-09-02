@@ -216,8 +216,7 @@ const DateFormatter = () => {
   );
 
   return (
-    <div className="content-area">
-      <div className="tool-container">
+    <div className="tool-container">
         <div className="input-section">
           <div className="input-group">
             <label className="input-label">Input Date & Time</label>
@@ -306,7 +305,6 @@ const DateFormatter = () => {
             )}
           </div>
         ) : null}
-      </div>
     </div>
   );
 };
