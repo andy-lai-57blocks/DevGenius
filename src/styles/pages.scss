@@ -582,3 +582,40 @@ body.dark-theme {
     }
   }
 }
+
+/* Home Bottom Ad Styles */
+.home-bottom-ad {
+  width: 100%;
+  padding: 2rem 1rem;
+  display: flex;
+  justify-content: center;
+  background: #f8f9fa;
+  border-top: 1px solid #e9ecef;
+  margin-top: 3rem;
+}
+
+.home-fluid-ad {
+  width: 100%;
+  max-width: 970px;
+  min-height: 90px;
+}
+
+/* Mobile positioning - ensure ad is at bottom */
+@media (max-width: 768px) {
+  .home-bottom-ad {
+    position: relative;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin-top: auto;
+    padding: 1.5rem 1rem;
+    background: #ffffff;
+    border-top: 2px solid #e9ecef;
+    box-shadow: 0 -4px 6px -1px rgba(0, 0, 0, 0.1);
+  }
+  
+  .home-fluid-ad {
+    max-width: 100%;
+    min-height: 120px;
+  }
+}

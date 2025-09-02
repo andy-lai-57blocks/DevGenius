@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import FluidAd from '../ads/FluidAd';
 
 const Home = () => {
   const categories = [
@@ -124,6 +125,11 @@ const Home = () => {
             <p>Hundreds of practical functions to streamline your workflow</p>
           </div>
         </div>
+      </div>
+
+      {/* Bottom Fluid Ad - Positioned at bottom on mobile */}
+      <div className="home-bottom-ad">
+        <FluidAd className="home-fluid-ad" />
       </div>
     </div>
   );
