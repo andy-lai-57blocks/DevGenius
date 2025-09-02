@@ -10,7 +10,7 @@ import './styles/main.scss';
 import { ThemeProvider, useTheme } from './contexts/ThemeContext';
 
 // Import components
-import AutoAdRefresh from './components/ads/AutoAdRefresh';
+
 import { 
   Base64Tool, 
   URLTool, 
@@ -313,7 +313,6 @@ function App() {
           }}
         />
         <Router>
-          <AutoAdRefresh />
           <Layout>
         <Routes>
           {/* Home */}

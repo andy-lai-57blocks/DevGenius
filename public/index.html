@@ -68,58 +68,9 @@
     <meta name="HandheldFriendly" content="True" />
     <meta name="MobileOptimized" content="320" />
     
-    <!-- Google AdSense -->
+    <!-- Google AdSense - SPA Optimized Loading -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8806399994474387"
             crossorigin="anonymous"></script>
-    
-    <!-- Initialize AdSense when DOM is ready -->
-    <script>
-      // Auto-initialize AdSense ads after page load
-      window.addEventListener('load', function() {
-        // Only load ads in production
-        if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
-          console.log('🚫 AdSense disabled on localhost');
-          return;
-        }
-        
-        // Initialize Google Auto ads (page-level ads) - ONLY ONCE PER PAGE
-        try {
-          (adsbygoogle = window.adsbygoogle || []).push({
-            google_ad_client: 'ca-pub-8806399994474387',
-            enable_page_level_ads: true
-          });
-          console.log('✅ Google Auto ads (page-level) initialized');
-        } catch (e) {
-          console.error('AdSense initialization error:', e);
-        }
-      });
-      
-      // Fallback: Handle Google Auto ads refresh (primary handling is in React components)
-      window.refreshGoogleAutoAds = function() {
-        try {
-          if (typeof adsbygoogle !== 'undefined') {
-            console.log('🔄 Refreshing Google Auto ads (fallback method)');
-            
-            // Signal Google Auto ads to refresh without reinitializing page-level ads
-            (adsbygoogle = window.adsbygoogle || []).push({
-              google_ad_modifications: {
-                eids: 'refresh'
-              }
-            });
-            
-            // Process any unloaded ad slots
-            const unprocessedAds = document.querySelectorAll('.adsbygoogle:not([data-adsbygoogle-status])');
-            if (unprocessedAds.length > 0) {
-              unprocessedAds.forEach(() => {
-                (adsbygoogle = window.adsbygoogle || []).push({});
-              });
-            }
-          }
-        } catch (e) {
-          console.error('❌ Google Auto ads fallback refresh error:', e);
-        }
-      };
-    </script>
     
     <!-- Structured Data (JSON-LD) -->
     <script type="application/ld+json">
