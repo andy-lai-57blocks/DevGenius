@@ -591,3 +591,237 @@
     font-size: $font-size-xs;
   }
 }
+
+/* ========================================
+   DARK THEME STYLES
+   ======================================== */
+
+body.dark-theme {
+  .format-info-section {
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.15), rgba(30, 41, 59, 0.8));
+    border: 2px solid rgba(96, 165, 250, 0.3);
+    box-shadow: 
+      0 4px 6px -1px rgba(0, 0, 0, 0.3), 
+      0 2px 4px -1px rgba(0, 0, 0, 0.2),
+      inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    
+    h3 {
+      color: #60a5fa;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+    }
+  }
+  
+  .format-card {
+    background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+    border: 1px solid rgba(96, 165, 250, 0.3);
+    box-shadow: 
+      0 2px 4px rgba(0, 0, 0, 0.3),
+      inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  }
+  
+  .format-item h4 {
+    color: #94c3f8;
+  }
+  
+  .format-pattern,
+  .format-example {
+    background: rgba(59, 130, 246, 0.1);
+    border: 1px solid rgba(96, 165, 250, 0.3);
+    color: #60a5fa;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  }
+  
+  .format-description {
+    color: #94c3f8;
+  }
+  
+  .format-examples h4 {
+    color: #94c3f8;
+  }
+  
+  .sample-code {
+    background: rgba(59, 130, 246, 0.1);
+    border: 1px solid rgba(96, 165, 250, 0.3);
+  }
+  
+  .sample-city {
+    color: #94c3f8;
+  }
+  
+  .sample-postal-code {
+    background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+    border: 1px solid rgba(96, 165, 250, 0.3);
+    color: #60a5fa;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  }
+  
+  .smart-search-section {
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.15), rgba(30, 41, 59, 0.8));
+    border: 2px solid rgba(52, 211, 153, 0.3);
+    box-shadow: 
+      0 4px 6px -1px rgba(0, 0, 0, 0.3), 
+      0 2px 4px -1px rgba(0, 0, 0, 0.2),
+      inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    
+    h3 {
+      color: #34d399;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+    }
+  }
+  
+  .smart-search {
+    background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+    color: #e2e8f0;
+    border: 2px solid rgba(52, 211, 153, 0.3) !important;
+    
+    &:focus {
+      border-color: #34d399 !important;
+      box-shadow: 0 0 0 3px rgba(52, 211, 153, 0.2) !important;
+    }
+    
+    &::placeholder {
+      color: #64748b;
+    }
+  }
+  
+  .search-icon {
+    color: #34d399;
+  }
+  
+  .suggestions-dropdown {
+    background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+    border: 2px solid rgba(52, 211, 153, 0.3);
+    box-shadow: 
+      0 8px 25px -8px rgba(0, 0, 0, 0.4),
+      0 4px 6px -2px rgba(0, 0, 0, 0.3);
+  }
+  
+  .suggestion-item {
+    border-bottom-color: #475569;
+    
+    &:hover,
+    &.selected {
+      background: rgba(16, 185, 129, 0.15);
+      border-left: 3px solid #34d399;
+    }
+  }
+  
+  .suggestion-text {
+    color: #f1f5f9;
+  }
+  
+  .suggestion-subtitle {
+    color: #94a3b8;
+  }
+  
+  .suggestion-count {
+    background: rgba(16, 185, 129, 0.15);
+    color: #34d399;
+    border: 1px solid rgba(52, 211, 153, 0.3);
+  }
+  
+  .quick-access-section {
+    background: linear-gradient(135deg, rgba(251, 191, 36, 0.15), rgba(30, 41, 59, 0.8));
+    border: 2px solid rgba(251, 191, 36, 0.3);
+    box-shadow: 
+      0 4px 6px -1px rgba(0, 0, 0, 0.3), 
+      0 2px 4px -1px rgba(0, 0, 0, 0.2),
+      inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    
+    h3 {
+      color: #fbbf24;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+    }
+  }
+  
+  .quick-city-button {
+    background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+    border: 2px solid rgba(251, 191, 36, 0.3);
+    box-shadow: 
+      0 2px 4px rgba(0, 0, 0, 0.3),
+      inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    
+    &:hover {
+      border-color: #fbbf24;
+      box-shadow: 
+        0 4px 8px rgba(251, 191, 36, 0.2),
+        0 2px 4px rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    }
+  }
+  
+  .quick-city-name {
+    color: #fbbf24;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  }
+  
+  .quick-city-meta {
+    color: #a16207;
+  }
+  
+  .quick-city-code {
+    background: rgba(251, 191, 36, 0.15);
+    color: #fbbf24;
+    border: 1px solid rgba(251, 191, 36, 0.3);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  }
+  
+  .postcode-card {
+    background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+    border: 2px solid #475569;
+    box-shadow: 
+      0 4px 6px -1px rgba(0, 0, 0, 0.3), 
+      0 2px 4px -1px rgba(0, 0, 0, 0.2),
+      inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    
+    &:hover {
+      border-color: #64748b;
+      box-shadow: 
+        0 8px 25px -8px rgba(0, 0, 0, 0.4), 
+        0 4px 6px -2px rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    }
+    
+    &::before {
+      background: linear-gradient(90deg, #60a5fa, #a855f7);
+      box-shadow: 0 0 8px rgba(96, 165, 250, 0.4);
+    }
+  }
+  
+  .city-name {
+    color: #f1f5f9;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  }
+  
+  .state-name {
+    color: #94a3b8;
+  }
+  
+  .region-badge {
+    background: rgba(96, 165, 250, 0.15);
+    color: #60a5fa;
+    border: 1px solid rgba(96, 165, 250, 0.3);
+  }
+  
+  .postcode-label {
+    color: #94a3b8;
+  }
+  
+  .postcode-value {
+    background: rgba(30, 64, 175, 0.2);
+    border: 1px solid rgba(59, 130, 246, 0.3);
+    color: #60a5fa;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+    box-shadow: 
+      0 2px 4px rgba(59, 130, 246, 0.2),
+      inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  }
+  
+  .type-label {
+    color: #94a3b8;
+  }
+  
+  .type-value {
+    color: #e2e8f0;
+  }
+}

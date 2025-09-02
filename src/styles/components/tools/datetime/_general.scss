@@ -374,3 +374,210 @@
   font-weight: 600;
   text-align: right;
 }
+
+/* ========================================
+   DARK THEME STYLES
+   ======================================== */
+
+body.dark-theme {
+  .current-time-section,
+  .world-clock-section {
+    background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+    border: 2px solid #475569;
+    box-shadow: 
+      0 4px 6px -1px rgba(0, 0, 0, 0.3), 
+      0 2px 4px -1px rgba(0, 0, 0, 0.2),
+      inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    
+    &:hover {
+      border-color: #64748b;
+      box-shadow: 
+        0 8px 25px -8px rgba(0, 0, 0, 0.4), 
+        0 4px 6px -2px rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    }
+  }
+  
+  .current-time-display {
+    .time-item {
+      border-bottom-color: #475569;
+    }
+  }
+  
+  .time-label {
+    color: #94a3b8;
+  }
+  
+  .time-value {
+    color: #e2e8f0;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  }
+  
+  .world-clock-item {
+    background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+    border: 2px solid #475569;
+    box-shadow: 
+      0 2px 4px rgba(0, 0, 0, 0.3),
+      inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    
+    &:hover {
+      border-color: #64748b;
+      box-shadow: 
+        0 8px 12px -2px rgba(0, 0, 0, 0.4),
+        0 4px 6px -1px rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+      transform: translateY(-3px);
+    }
+  }
+  
+  .clock-city {
+    color: #f1f5f9;
+  }
+  
+  .clock-time {
+    color: #60a5fa;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  }
+  
+  .clock-date {
+    color: #94a3b8;
+  }
+  
+  .clock-offset {
+    color: #64748b;
+  }
+  
+  .result-group {
+    background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+    border: 2px solid #475569;
+    box-shadow: 
+      0 4px 6px -1px rgba(0, 0, 0, 0.3), 
+      0 2px 4px -1px rgba(0, 0, 0, 0.2),
+      inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    
+    &:hover {
+      border-color: #64748b;
+      box-shadow: 
+        0 8px 25px -8px rgba(0, 0, 0, 0.4), 
+        0 4px 6px -2px rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    }
+    
+    h4 {
+      color: #f1f5f9;
+      border-bottom-color: #475569;
+      
+      .result-icon {
+        filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.3));
+      }
+    }
+  }
+  
+  .result-item {
+    background: rgba(30, 41, 59, 0.5);
+    border: 1px solid #475569;
+    
+    &:hover {
+      background: rgba(51, 65, 85, 0.7);
+      border-color: #64748b;
+    }
+  }
+  
+  .result-label {
+    color: #94a3b8;
+  }
+  
+  .result-value {
+    color: #e2e8f0;
+    
+    &.custom,
+    &.large {
+      color: #60a5fa;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+    }
+  }
+  
+  .human-readable-result {
+    background: linear-gradient(135deg, rgba(96, 165, 250, 0.15), rgba(59, 130, 246, 0.08));
+    border: 2px solid rgba(96, 165, 250, 0.3);
+    color: #60a5fa;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  }
+  
+  .timezone-tag {
+    background: linear-gradient(135deg, #3b82f6, #60a5fa);
+    box-shadow: 0 2px 4px rgba(59, 130, 246, 0.3);
+    
+    &:hover {
+      background: linear-gradient(135deg, #60a5fa, #93c5fd);
+      box-shadow: 0 4px 8px rgba(59, 130, 246, 0.4);
+    }
+  }
+  
+  .conversion-item {
+    background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+    border: 2px solid #475569;
+    box-shadow: 
+      0 4px 6px -1px rgba(0, 0, 0, 0.3), 
+      0 2px 4px -1px rgba(0, 0, 0, 0.2),
+      inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    
+    &:hover {
+      border-color: #64748b;
+      box-shadow: 
+        0 8px 25px -8px rgba(0, 0, 0, 0.4), 
+        0 4px 6px -2px rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    }
+  }
+  
+  .conversion-header {
+    border-bottom-color: #475569;
+    
+    h4 {
+      color: #f1f5f9;
+    }
+  }
+  
+  .timezone-offset {
+    background: rgba(96, 165, 250, 0.15);
+    color: #60a5fa;
+    border: 1px solid rgba(96, 165, 250, 0.3);
+  }
+  
+  .time-main,
+  .date-full {
+    color: #f1f5f9;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  }
+  
+  .time-24,
+  .date-short {
+    color: #94a3b8;
+  }
+  
+  .timezone-info {
+    background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+    border: 2px solid #475569;
+    box-shadow: 
+      0 4px 6px -1px rgba(0, 0, 0, 0.3), 
+      0 2px 4px -1px rgba(0, 0, 0, 0.2),
+      inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    
+    h3 {
+      color: #f1f5f9;
+    }
+  }
+  
+  .info-item {
+    border-bottom-color: #475569;
+    
+    .info-label {
+      color: #94a3b8;
+    }
+    
+    .info-value {
+      color: #e2e8f0;
+    }
+  }
+}
