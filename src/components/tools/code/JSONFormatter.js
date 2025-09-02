@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 // Removed unused SyntaxHighlighter imports - now using CodeEditor
 import SimpleAd from '../../ads/SimpleAd';
 import CodeEditor from '../../common/CodeEditor';
+import { useTheme } from '../../../contexts/ThemeContext';
 
 // Removed fallback themes - now using Ace Editor built-in themes
 
@@ -9,8 +10,8 @@ const JSONFormatter = () => {
   const [input, setInput] = useState('');
   const [output, setOutput] = useState('');
   const [isValid, setIsValid] = useState(null);
-  const [isDarkTheme, setIsDarkTheme] = useState(false);
   const [autoUnescape, setAutoUnescape] = useState(true);
+  const { isDarkTheme } = useTheme();
 
   // Helper function to detect if input appears to be escaped JSON
   const isEscapedJSON = (str) => {
@@ -198,12 +199,7 @@ const JSONFormatter = () => {
             >
               {autoUnescape ? '🔓 Auto-Unescape' : '🔒 Manual'}
             </button>
-            <button 
-              className="btn btn-outline" 
-              onClick={() => setIsDarkTheme(!isDarkTheme)}
-            >
-              {isDarkTheme ? '☀️ Light' : '🌙 Dark'}
-            </button>
+
             <button className="btn btn-outline" onClick={handleClear}>
               🗑️ Clear
             </button>
@@ -232,7 +228,7 @@ const JSONFormatter = () => {
               readOnly={true}
               name="json-output-editor"
               height="calc(100vh - 16rem)"
-              isDarkTheme={isDarkTheme}
+
               showLineNumbers={true}
               placeholder="Formatted JSON will appear here..."
             />

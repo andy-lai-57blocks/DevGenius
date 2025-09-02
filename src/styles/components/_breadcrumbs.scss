@@ -83,22 +83,22 @@
 }
 
 // Dark mode support
-[data-theme="dark"] {
+body.dark-theme {
   .breadcrumb-link {
-    color: $text-secondary;
+    color: #cbd5e1;
     
     &:hover {
-      color: $primary-color;
-      background: rgba($primary-color, 0.15);
+      color: #60a5fa;
+      background: rgba(96, 165, 250, 0.15);
     }
   }
   
   .breadcrumb-current {
-    color: $text-white;
+    color: #f1f5f9;
   }
   
   .breadcrumb-separator {
-    color: $text-secondary;
+    color: #94a3b8;
   }
 }
 

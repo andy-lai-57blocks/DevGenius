@@ -24,10 +24,11 @@ const AutoAdRefresh = () => {
               }
             });
 
-            // Method 2: Reinitialize auto ads system
+            // Method 2: Signal page update to Google Auto ads
             (window.adsbygoogle = window.adsbygoogle || []).push({
-              google_ad_client: 'ca-pub-8806399994474387',
-              enable_page_level_ads: true
+              google_ad_modifications: {
+                page_url: location.pathname
+              }
             });
 
             // Method 3: Force refresh of any unprocessed ad slots

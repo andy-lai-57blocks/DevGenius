@@ -82,9 +82,13 @@
           return;
         }
         
-        // Initialize all mrec ads on the page
+        // Initialize Google Auto ads (page-level ads) - ONLY ONCE PER PAGE
         try {
-          (adsbygoogle = window.adsbygoogle || []).push({});
+          (adsbygoogle = window.adsbygoogle || []).push({
+            google_ad_client: 'ca-pub-8806399994474387',
+            enable_page_level_ads: true
+          });
+          console.log('✅ Google Auto ads (page-level) initialized');
         } catch (e) {
           console.error('AdSense initialization error:', e);
         }
@@ -96,18 +100,20 @@
           if (typeof adsbygoogle !== 'undefined') {
             console.log('🔄 Refreshing Google Auto ads (fallback method)');
             
-            // Signal Google Auto ads to refresh
+            // Signal Google Auto ads to refresh without reinitializing page-level ads
             (adsbygoogle = window.adsbygoogle || []).push({
               google_ad_modifications: {
                 eids: 'refresh'
               }
             });
             
-            // Reinitialize page-level ads
-            (adsbygoogle = window.adsbygoogle || []).push({
-              google_ad_client: 'ca-pub-8806399994474387',
-              enable_page_level_ads: true
-            });
+            // Process any unloaded ad slots
+            const unprocessedAds = document.querySelectorAll('.adsbygoogle:not([data-adsbygoogle-status])');
+            if (unprocessedAds.length > 0) {
+              unprocessedAds.forEach(() => {
+                (adsbygoogle = window.adsbygoogle || []).push({});
+              });
+            }
           }
         } catch (e) {
           console.error('❌ Google Auto ads fallback refresh error:', e);

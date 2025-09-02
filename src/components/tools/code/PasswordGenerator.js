@@ -67,10 +67,10 @@ const PasswordGenerator = () => {
   };
 
   const getPasswordStrength = () => {
-    if (password.length < 8) return { text: 'Weak', color: '#ef4444' };
-    if (password.length < 12) return { text: 'Fair', color: '#f59e0b' };
-    if (password.length < 16) return { text: 'Good', color: '#3b82f6' };
-    return { text: 'Strong', color: '#10b981' };
+    if (password.length < 8) return { text: 'Weak', className: 'strength-weak' };
+    if (password.length < 12) return { text: 'Fair', className: 'strength-fair' };
+    if (password.length < 16) return { text: 'Good', className: 'strength-good' };
+    return { text: 'Strong', className: 'strength-strong' };
   };
 
   const strength = password ? getPasswordStrength() : null;
@@ -154,7 +154,7 @@ const PasswordGenerator = () => {
               <label className="input-label">
                 Generated Password 
                 {strength && (
-                  <span style={{ color: strength.color, marginLeft: '0.5rem', fontWeight: '600' }}>
+                  <span className={`password-strength ${strength.className}`}>
                     ({strength.text})
                   </span>
                 )}

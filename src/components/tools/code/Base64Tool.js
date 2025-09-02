@@ -3,14 +3,15 @@ import { downloadAsFile, getDownloadInfo } from '../../../utils/downloadUtils';
 import SimpleAd from '../../ads/SimpleAd';
 import CodeEditor from '../../common/CodeEditor';
 
+
 // Removed fallback themes - now using Ace Editor built-in themes
 
 const Base64Tool = () => {
   const [input, setInput] = useState('');
   const [output, setOutput] = useState('');
   const [mode, setMode] = useState('decode'); // 'encode' or 'decode'
-  const [isDarkTheme, setIsDarkTheme] = useState(false);
   const [contentType, setContentType] = useState('text'); // 'text', 'json', 'html'
+
 
   // Content detection functions
   const isValidJSON = (str) => {
@@ -251,14 +252,7 @@ const Base64Tool = () => {
             <button className="btn btn-outline" onClick={handleClear}>
               🗑️ Clear
             </button>
-            {(contentType === 'json' || contentType === 'html') && (
-              <button 
-                className="btn btn-outline" 
-                onClick={() => setIsDarkTheme(!isDarkTheme)}
-              >
-                {isDarkTheme ? '☀️ Light' : '🌙 Dark'}
-              </button>
-            )}
+
             {output && (
               <>
                 <button className="btn btn-outline" onClick={handleCopy}>
@@ -293,7 +287,7 @@ const Base64Tool = () => {
               readOnly={true}
               name="base64-output-editor"
               height="calc(100vh - 16rem)"
-              isDarkTheme={isDarkTheme}
+
               showLineNumbers={true}
               placeholder="Result will appear here..."
             />

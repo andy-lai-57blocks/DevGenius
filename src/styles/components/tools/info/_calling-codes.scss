@@ -346,3 +346,72 @@
     }
   }
 }
+
+// Dark mode support
+body.dark-theme {
+  .calling-code-card {
+    background: rgba(30, 41, 59, 0.6);
+    border: 2px solid #475569;
+    color: #cbd5e1;
+
+    &:hover {
+      border-color: #64748b;
+      background: rgba(51, 65, 85, 0.8);
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+    }
+
+    .card-content {
+      .country-name {
+        color: #f1f5f9;
+      }
+
+      .calling-code {
+        color: #94a3b8;
+      }
+    }
+  }
+
+  .popular-codes-grid {
+    .popular-code-item {
+      background: rgba(30, 41, 59, 0.6);
+      border: 2px solid #475569;
+
+      &:hover {
+        border-color: #64748b;
+        background: rgba(51, 65, 85, 0.8);
+      }
+
+      .popular-code {
+        color: #60a5fa;
+      }
+
+      .popular-country {
+        color: #cbd5e1;
+      }
+    }
+  }
+
+  .search-no-results {
+    color: #94a3b8;
+  }
+
+  .countries-grid {
+    .country-item {
+      background: rgba(30, 41, 59, 0.6);
+      border: 2px solid #475569;
+
+      &:hover {
+        border-color: #64748b;
+        background: rgba(51, 65, 85, 0.8);
+      }
+
+      .country-name {
+        color: #f1f5f9;
+      }
+
+      .calling-code {
+        color: #94a3b8;
+      }
+    }
+  }
+}

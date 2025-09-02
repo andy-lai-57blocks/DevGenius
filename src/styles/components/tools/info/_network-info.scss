@@ -95,3 +95,13 @@
   color: #1e40af;
   font-size: $font-size-sm;
 }
+
+// Dark mode support
+body.dark-theme {
+  .privacy-notice,
+  .browser-notice {
+    background: rgba(30, 41, 59, 0.6);
+    border: 2px solid #475569;
+    color: #94c3f8;
+  }
+}

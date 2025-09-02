@@ -6,6 +6,9 @@ import { Analytics } from '@vercel/analytics/react';
 // Import styles
 import './styles/main.scss';
 
+// Import theme context
+import { ThemeProvider, useTheme } from './contexts/ThemeContext';
+
 // Import components
 import AutoAdRefresh from './components/ads/AutoAdRefresh';
 import { 
@@ -144,6 +147,7 @@ const Sidebar = () => {
         <Link to="/" className="mobile-logo" onClick={closeMobileMenu}>
           <h1>One Toys</h1>
         </Link>
+        
         <button 
           className="mobile-menu-toggle"
           onClick={toggleMobileMenu}
@@ -257,8 +261,26 @@ const Sidebar = () => {
             })}
           </ul>
         </nav>
+        
+
       </aside>
     </>
+  );
+};
+
+// Floating Theme Toggle Component
+const FloatingThemeToggle = () => {
+  const { isDarkTheme, toggleTheme } = useTheme();
+  
+  return (
+    <button 
+      className="floating-theme-toggle"
+      onClick={toggleTheme}
+      title={isDarkTheme ? 'Switch to light mode' : 'Switch to dark mode'}
+      aria-label={isDarkTheme ? 'Switch to light mode' : 'Switch to dark mode'}
+    >
+      <span className="floating-theme-icon">{isDarkTheme ? '☀️' : '🌙'}</span>
+    </button>
   );
 };
 
@@ -275,22 +297,24 @@ const Layout = ({ children }) => (
         </div>
       </div>
     </main>
+    <FloatingThemeToggle />
   </div>
 );
 
 function App() {
   return (
     <HelmetProvider>
-      <Analytics 
-        debug={process.env.NODE_ENV === 'development'}
-        beforeSend={(event) => {
-          // Optional: Filter or modify events before sending
-          return event;
-        }}
-      />
-      <Router>
-        <AutoAdRefresh />
-        <Layout>
+      <ThemeProvider>
+        <Analytics 
+          debug={process.env.NODE_ENV === 'development'}
+          beforeSend={(event) => {
+            // Optional: Filter or modify events before sending
+            return event;
+          }}
+        />
+        <Router>
+          <AutoAdRefresh />
+          <Layout>
         <Routes>
           {/* Home */}
           <Route path="/" element={<Home />} />
@@ -366,6 +390,7 @@ function App() {
         </Routes>
         </Layout>
       </Router>
+      </ThemeProvider>
     </HelmetProvider>
   );
 }

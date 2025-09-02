@@ -1,5 +1,6 @@
 import React from 'react';
 import AceEditor from 'react-ace';
+import { useTheme } from '../../contexts/ThemeContext';
 
 // Import Ace Editor modes (languages)
 import 'ace-builds/src-noconflict/mode-json';
@@ -40,7 +41,7 @@ const getTheme = (isDarkTheme) => {
  * @param {function} props.onChange - Change handler
  * @param {string} props.language - Programming language mode (json, xml, html, text)
  * @param {boolean} props.readOnly - Whether editor is read-only
- * @param {boolean} props.isDarkTheme - Dark theme toggle
+
  * @param {string} props.placeholder - Placeholder text
  * @param {string} props.name - Editor name/id
  * @param {number} props.fontSize - Font size (default: 14)
@@ -54,7 +55,6 @@ const CodeEditor = ({
   onChange = () => {},
   language = 'text',
   readOnly = false,
-  isDarkTheme = false,
   placeholder = '',
   name = 'code-editor',
   fontSize = 14,
@@ -66,6 +66,8 @@ const CodeEditor = ({
   height = 'calc(100vh - 16rem)',
   ...props
 }) => {
+  // Get theme from global context
+  const { isDarkTheme } = useTheme();
   // Map language names to Ace Editor modes
   const languageMap = {
     'json': 'json',

@@ -100,7 +100,7 @@ const GzipTool = () => {
               placeholder={mode === 'compress' ? 'Enter text to compress...' : 'Paste base64 compressed data here...'}
               name="gzip-input-editor"
               height="calc(100vh - 16rem)"
-              isDarkTheme={false}
+
             />
           </div>
         </div>
@@ -171,7 +171,7 @@ const GzipTool = () => {
               readOnly={true}
               name="gzip-output-editor"
               height="calc(100vh - 16rem)"
-              isDarkTheme={false}
+
               showLineNumbers={true}
               placeholder="Result will appear here..."
             />

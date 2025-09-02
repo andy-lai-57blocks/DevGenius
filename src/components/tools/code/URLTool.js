@@ -75,7 +75,7 @@ const URLTool = () => {
               placeholder={mode === 'encode' ? 'Enter text or URL to encode...' : 'Enter URL encoded text to decode...'}
               name="url-input-editor"
               height="calc(100vh - 16rem)"
-              isDarkTheme={false}
+
             />
           </div>
         </div>
@@ -143,7 +143,7 @@ const URLTool = () => {
               readOnly={true}
               name="url-output-editor"
               height="calc(100vh - 16rem)"
-              isDarkTheme={false}
+
               showLineNumbers={true}
               placeholder="Result will appear here..."
             />

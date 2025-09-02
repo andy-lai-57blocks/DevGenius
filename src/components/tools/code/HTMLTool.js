@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { downloadAsFile, getDownloadInfo } from '../../../utils/downloadUtils';
 import SimpleAd from '../../ads/SimpleAd';
 import CodeEditor from '../../common/CodeEditor';
+import { useTheme } from '../../../contexts/ThemeContext';
 
 // Removed fallback themes - now using Ace Editor built-in themes
 
@@ -9,7 +10,7 @@ const HTMLTool = () => {
   const [input, setInput] = useState('');
   const [output, setOutput] = useState('');
   const [mode, setMode] = useState('decode'); // 'encode' or 'decode'
-  const [isDarkTheme, setIsDarkTheme] = useState(false);
+  const { isDarkTheme } = useTheme();
 
   const htmlEntities = {
     '&': '&amp;',
@@ -186,12 +187,7 @@ const HTMLTool = () => {
             <button className="btn btn-outline" onClick={loadSampleHTML}>
               📄 Sample
             </button>
-            <button 
-              className="btn btn-outline" 
-              onClick={() => setIsDarkTheme(!isDarkTheme)}
-            >
-              {isDarkTheme ? '☀️ Light' : '🌙 Dark'}
-            </button>
+
             <button className="btn btn-outline" onClick={handleClear}>
               🗑️ Clear
             </button>
@@ -229,7 +225,7 @@ const HTMLTool = () => {
               readOnly={true}
               name="html-output-editor"
               height="calc(100vh - 16rem)"
-              isDarkTheme={isDarkTheme}
+
               showLineNumbers={true}
               placeholder="Result will appear here..."
             />

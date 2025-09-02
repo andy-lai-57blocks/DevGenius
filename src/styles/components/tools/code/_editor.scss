@@ -864,45 +864,56 @@
   }
 }
 
-// Tab-style toggle buttons for mode selection
-.tab-group {
+// Clean Flat Design - Light Mode Toggle (No Borders)
+.tab-group,
+.mode-toggle {
   display: inline-flex;
   background: #f8fafc;
-  border: 2px solid #e2e8f0;
-  border-radius: $border-radius-lg;
-  padding: 0.25rem;
+  border: none;
+  border-radius: 8px;
+  padding: 3px;
   margin-bottom: $spacing-md;
+  transition: background-color 0.2s ease;
+  
+  &:hover {
+    background: rgba(241, 245, 249, 0.8);
+  }
 }
 
 .tab-btn {
-  background: none;
+  background: transparent;
   border: none;
-  padding: $spacing-sm $spacing-md;
-  border-radius: $border-radius-md;
+  margin: 0;
+  padding: 8px 16px;
+  border-radius: 6px;
   font-weight: 500;
-  font-size: $font-size-sm;
+  font-size: 14px;
   color: $text-secondary;
   cursor: pointer;
-  transition: all $transition-fast;
-  margin: 0 2px;
+  transition: all 0.15s ease;
 
-  &:hover {
+  // Hover state - simple and clean
+  &:hover:not(.active) {
+    background: rgba(59, 130, 246, 0.08);
     color: $text-primary;
-    background: rgba(59, 130, 246, 0.1);
   }
 
+  // Active state - clean blue background
   &.active {
-    background: $primary-color;
-    color: $text-white;
-    box-shadow: 0 2px 4px rgba(59, 130, 246, 0.2);
+    background: #3b82f6;
+    color: white;
+    font-weight: 600;
   }
 
-  &:first-child {
-    margin-left: 0;
+  // Press feedback
+  &:active {
+    transform: scale(0.98);
   }
 
-  &:last-child {
-    margin-right: 0;
+  // Clean focus state
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.3);
   }
 }
 
@@ -1168,11 +1179,24 @@
     justify-content: center;
     align-items: center;
     gap: $spacing-sm;
-    padding: $spacing-md 0;
-    min-width: 300px;
+    padding: $spacing-sm 0; // Top/bottom padding only, no left/right padding
+    min-width: 300px; // Content area is exactly 300px, padding is additional
+    
+    // Clean flat background for light mode - no border
+    background: rgba(248, 250, 252, 0.6);
+    border: none;
+    border-radius: 12px;
+    backdrop-filter: none;
+    box-shadow: none;
 
     .mode-toggle {
       margin-bottom: $spacing-md;
+      
+      // Ensure flat design in action-column - no borders
+      background: #f8fafc !important;
+      border: none !important;
+      backdrop-filter: none !important;
+      box-shadow: none !important;
     }
 
     .primary-actions {
@@ -1226,20 +1250,22 @@
       border-top: 1px solid $border-light;
 
       .btn {
-        font-size: $font-size-xs;
-        padding: $spacing-xs $spacing-sm;
-        border-radius: $border-radius-sm;
-        font-weight: 400;
+        font-size: 0.875rem;
+        padding: 0.5rem 1rem;
+        border-radius: $border-radius-md;
+        font-weight: 500;
+        background: rgba(248, 250, 252, 0.8);
+        color: $text-secondary;
+        border: 1px solid $border-medium;
         
-        &.btn-outline {
-          background: transparent;
-          color: $text-secondary;
-          border: 1px solid $border-medium;
-          
-          &:hover {
-            background: $bg-secondary;
-            color: $text-primary;
-          }
+        &:hover {
+          background: rgba(241, 245, 249, 0.9);
+          color: $text-primary;
+          border-color: $border-medium;
+        }
+        
+        &:active {
+          background: rgba(226, 232, 240, 0.8);
         }
       }
     }
@@ -1413,7 +1439,7 @@
     gap: $spacing-lg;
 
     .action-column {
-      min-width: 250px;
+      min-width: 300px; // Content area is exactly 300px, padding is additional
     }
   }
 }
@@ -1459,10 +1485,11 @@
 
     .action-column {
       margin: $spacing-lg 0;
-      padding: $spacing-md;
+      padding: $spacing-md 0; // Top/bottom padding only, no left/right padding
       background: $bg-secondary;
       border-radius: $border-radius-lg;
       border: 1px solid $border-light;
+      min-width: 300px; // Content area is exactly 300px, padding is additional
 
       .primary-actions,
       .secondary-actions {
@@ -1576,31 +1603,55 @@
     }
   }
 
-  // Special styling for MIME types card
-  .info-item.mime-type-card {
-    background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
-  }
-
   .mime-type-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    
     p {
-      background: rgba(255, 255, 255, 0.8);
-      border-left: 4px solid $primary-color;
-      margin-bottom: $spacing-sm;
+      background: rgba(248, 250, 252, 0.9);
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      padding: 0.875rem;
+      margin: 0;
+      color: #374151;
+      font-size: 0.9rem;
+      line-height: 1.5;
+      transition: all 0.2s ease;
       
       strong {
-        color: #2563eb;
+        color: #1d4ed8;
         font-weight: 600;
+        font-family: 'Source Code Pro', monospace;
+        background: rgba(29, 78, 216, 0.1);
+        padding: 3px 6px;
+        border-radius: 4px;
+        border: 1px solid rgba(29, 78, 216, 0.2);
+      }
+
+      &:hover {
+        background: rgba(241, 245, 249, 0.95);
+        border-color: #cbd5e1;
+        transform: translateX(2px);
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
       }
     }
 
     small {
-      display: block;
+      background: rgba(59, 130, 246, 0.08);
+      border: 1px solid rgba(59, 130, 246, 0.2);
+      border-radius: 8px;
+      padding: 0.75rem;
+      margin-top: 0.5rem;
+      color: #475569;
+      font-style: italic;
       text-align: center;
-      background: rgba($primary-color, 0.1);
-      padding: $spacing-sm;
-      border-radius: $border-radius-md;
-      color: #1e40af;
-      font-weight: 500;
+      
+      &:before {
+        content: '💡';
+        margin-right: 0.5rem;
+        filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
+      }
     }
   }
 
@@ -1623,6 +1674,178 @@
     }
   }
 }
+
+/* Dark theme styles for three-column layout */
+body.dark-theme {
+  .three-column-layout {
+    .input-label {
+      color: #cbd5e1;
+    }
+    
+    // Remove borders from input-group to match light mode
+    .input-column,
+    .output-column {
+      .input-group {
+        // No background or border - match light mode exactly
+        // Only change text colors for dark theme
+      }
+    }
+    
+    .action-column {
+      // Clean flat background for dark mode - no border
+      background: rgba(30, 41, 59, 0.4) !important;
+      backdrop-filter: none !important;
+      border: none !important;
+      border-radius: 12px !important;
+      
+      // Ensure mode-toggle inherits flat design - no borders
+      .mode-toggle {
+        background: #1e293b !important;
+        border: none !important;
+        backdrop-filter: none !important;
+        box-shadow: none !important;
+      }
+    }
+    
+    // Clean Flat Design - Dark Mode Toggle (No Borders)
+    .tab-group,
+    .mode-toggle {
+      background: #1e293b !important;
+      border: none !important;
+      border-radius: 8px !important;
+      padding: 3px !important;
+      transition: background-color 0.2s ease !important;
+      
+      &:hover {
+        background: rgba(51, 65, 85, 0.6) !important;
+      }
+    }
+    
+    .tab-btn {
+      background: transparent !important;
+      border: none !important;
+      margin: 0 !important;
+      padding: 8px 16px !important;
+      border-radius: 6px !important;
+      font-weight: 500 !important;
+      font-size: 14px !important;
+      color: #94a3b8 !important;
+      cursor: pointer !important;
+      transition: all 0.15s ease !important;
+
+      // Hover state - simple and clean
+      &:hover:not(.active) {
+        background: rgba(96, 165, 250, 0.12) !important;
+        color: #e2e8f0 !important;
+      }
+
+      // Active state - clean blue background
+      &.active {
+        background: #3b82f6 !important;
+        color: white !important;
+        font-weight: 600 !important;
+      }
+
+      // Press feedback
+      &:active {
+        transform: scale(0.98) !important;
+      }
+
+      // Clean focus state
+      &:focus {
+        outline: none !important;
+        box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.3) !important;
+      }
+    }
+      
+    // Better primary button styling for dark mode
+    .btn-primary {
+        background: linear-gradient(135deg, #475569, #334155);
+        color: #e2e8f0;
+        border: 1px solid #64748b;
+        box-shadow: 
+          0 2px 4px -1px rgba(0, 0, 0, 0.3),
+          inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        
+        &:hover {
+          background: linear-gradient(135deg, #64748b, #475569);
+          color: #f1f5f9;
+          border-color: #94a3b8;
+          box-shadow: 
+            0 4px 8px -2px rgba(0, 0, 0, 0.4),
+            inset 0 1px 0 rgba(255, 255, 255, 0.15);
+          transform: translateY(-1px);
+        }
+        
+        &:active {
+          transform: translateY(0);
+          background: linear-gradient(135deg, #334155, #1e293b);
+          box-shadow: 
+            0 1px 2px -1px rgba(0, 0, 0, 0.3),
+            inset 0 1px 2px rgba(0, 0, 0, 0.2);
+        }
+      }
+      
+      // Better outline button styling for dark mode  
+      .btn-outline {
+        background: rgba(51, 65, 85, 0.2);
+        color: #94a3b8;
+        border: 1px solid #475569;
+        backdrop-filter: blur(4px);
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+        
+        &:hover {
+          background: rgba(71, 85, 105, 0.3);
+          color: #cbd5e1;
+          border-color: #64748b;
+          box-shadow: 
+            0 2px 4px rgba(0, 0, 0, 0.3),
+            inset 0 1px 0 rgba(255, 255, 255, 0.05);
+          transform: translateY(-1px);
+        }
+        
+        &:active {
+          transform: translateY(0);
+          background: rgba(71, 85, 105, 0.4);
+          color: #e2e8f0;
+        }
+      }
+      
+      // Clean secondary-actions styling for dark mode
+      .secondary-actions {
+        border-top-color: #475569;
+        
+        .btn {
+          background: rgba(51, 65, 85, 0.3);
+          color: #cbd5e1;
+          border: 1px solid #475569;
+          font-size: 0.875rem;
+          padding: 0.5rem 1rem;
+          font-weight: 500;
+          
+          &:hover {
+            background: rgba(71, 85, 105, 0.4);
+            color: #f1f5f9;
+            border-color: #64748b;
+          }
+          
+          &:active {
+            background: rgba(71, 85, 105, 0.5);
+          }
+        }
+      }
+    }
+    
+    .status-indicator {
+      &.valid {
+        color: #34d399;
+      }
+      
+      &.invalid {
+        color: #f87171;
+      }
+    }
+  }
 
 // Ace Editor Container Styles
 .code-editor-container {
@@ -1721,5 +1944,389 @@
 
   .ace_scrollbar-v {
     width: 12px !important;
+  }
+}
+
+// Comprehensive dark mode styles for HLS components
+body.dark-theme {
+  // Sample stream items
+  .sample-stream-item {
+    background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+    border: 2px solid #475569;
+    color: #e2e8f0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+
+    &:hover {
+      border-color: #60a5fa;
+      background: linear-gradient(135deg, #334155 0%, #475569 100%);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+    }
+
+    .sample-stream-info {
+      strong {
+        color: #f1f5f9;
+      }
+      
+      p {
+        color: #cbd5e1;
+      }
+    }
+
+    .stream-url {
+      color: #94a3b8;
+    }
+  }
+
+  // Video player container
+  .hls-player-container {
+    border: 2px solid #334155;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+
+    &:hover {
+      border-color: #475569;
+    }
+  }
+
+  // Player overlay and stream indicators
+  .player-overlay {
+    .stream-indicator {
+      .stream-status {
+        background: rgba(15, 23, 42, 0.9);
+        color: #f1f5f9;
+        border: 1px solid #475569;
+        backdrop-filter: blur(8px);
+
+        &.live {
+          border-color: #dc2626;
+          color: #fecaca;
+        }
+
+        &.vod {
+          border-color: #059669;
+          color: #a7f3d0;
+        }
+      }
+    }
+  }
+
+  // Stream info section
+  .stream-info-section {
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+    border: 2px solid #334155;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+
+    h3 {
+      color: #f1f5f9;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+    }
+
+    code {
+      background: rgba(51, 65, 85, 0.9);
+      color: #fbbf24;
+      border: 1px solid #475569;
+      font-family: 'Source Code Pro', monospace;
+      font-weight: 500;
+      padding: 3px 6px;
+      border-radius: 4px;
+    }
+  }
+
+  // Info cards
+  .info-card {
+    background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+    border: 2px solid #475569;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+
+    &:hover {
+      border-color: #64748b;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+    }
+
+    h4 {
+      color: #f1f5f9;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+    }
+
+    ul li {
+      color: #e2e8f0;
+      line-height: 1.6;
+      
+      strong {
+        color: #f8fafc;
+        font-weight: 600;
+      }
+    }
+
+    p {
+      color: #e2e8f0;
+      line-height: 1.7;
+    }
+  }
+
+  // About HLS info section
+  .info-section {
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+    border: 2px solid #334155;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+
+    h3 {
+      color: #f1f5f9;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+    }
+  }
+
+  .info-item {
+    background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+    border: 2px solid #475569;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+
+    &:hover {
+      border-color: #64748b;
+      transform: translateY(-1px);
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
+    }
+
+    h4 {
+      color: #f1f5f9;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+    }
+
+    p {
+      color: #e2e8f0;
+      line-height: 1.7;
+    }
+
+    ul {
+      li {
+        color: #e2e8f0;
+        line-height: 1.6;
+        
+        &:hover {
+          color: #f8fafc;
+        }
+      }
+    }
+
+    &.mime-type-card {
+      background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+      border-color: #475569;
+
+      &:hover {
+        border-color: #64748b;
+      }
+    }
+  }
+
+  .mime-type-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    
+    p {
+      background: rgba(51, 65, 85, 0.4);
+      border: 1px solid #475569;
+      border-radius: 8px;
+      padding: 0.875rem;
+      margin: 0;
+      color: #e2e8f0;
+      font-size: 0.9rem;
+      line-height: 1.5;
+      transition: all 0.2s ease;
+      
+      strong {
+        color: #fbbf24;
+        font-weight: 600;
+        font-family: 'Source Code Pro', monospace;
+        background: rgba(251, 191, 36, 0.15);
+        padding: 3px 6px;
+        border-radius: 4px;
+        border: 1px solid rgba(251, 191, 36, 0.25);
+      }
+
+      &:hover {
+        background: rgba(51, 65, 85, 0.6);
+        border-color: #64748b;
+        transform: translateX(2px);
+      }
+    }
+
+    small {
+      background: rgba(30, 41, 59, 0.6);
+      border: 1px solid #475569;
+      border-radius: 8px;
+      padding: 0.75rem;
+      margin-top: 0.5rem;
+      color: #cbd5e1;
+      font-style: italic;
+      text-align: center;
+      
+      &:before {
+        content: '💡';
+        margin-right: 0.5rem;
+        filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.3));
+      }
+    }
+  }
+
+  // Quality levels section
+  .quality-levels-section {
+    h3 {
+      color: #f1f5f9;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+    }
+  }
+
+  .quality-level-card {
+    background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+    border: 2px solid #475569;
+    color: #e2e8f0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+
+    &:hover {
+      border-color: #60a5fa;
+      background: linear-gradient(135deg, #334155 0%, #475569 100%);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+    }
+
+    &.active {
+      border-color: #10b981;
+      background: linear-gradient(135deg, #065f46 0%, #047857 100%);
+      color: #ecfdf5;
+      box-shadow: 0 4px 8px rgba(16, 185, 129, 0.3);
+    }
+
+    .quality-resolution {
+      color: #f8fafc;
+      font-weight: 700;
+      font-size: 1.1rem;
+    }
+
+    .quality-bitrate {
+      color: #60a5fa;
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+
+    .quality-fps {
+      color: #e2e8f0;
+      font-weight: 500;
+    }
+
+    .quality-codecs {
+      color: #cbd5e1;
+      font-size: 0.85rem;
+      font-weight: 400;
+    }
+
+    .quality-active-indicator {
+      color: #10b981;
+    }
+  }
+
+  // Button group
+  .button-group {
+    .btn {
+      background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+      border: 2px solid #475569;
+      color: #e2e8f0;
+      font-weight: 500;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+
+      &:hover {
+        border-color: #60a5fa;
+        background: linear-gradient(135deg, #334155 0%, #475569 100%);
+        color: #f8fafc;
+        transform: translateY(-1px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+      }
+
+      &:active {
+        transform: translateY(0);
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+      }
+    }
+  }
+
+  // Error messages
+  .error-message {
+    background: linear-gradient(135deg, #7f1d1d 0%, #991b1b 100%);
+    border: 2px solid #dc2626;
+    color: #fef2f2;
+    font-weight: 500;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+
+    .error-icon {
+      filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.5));
+      margin-right: 0.5rem;
+    }
+  }
+
+  // Input labels in HLS tool
+  .input-label {
+    color: #e2e8f0;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  }
+
+  // Enhanced text readability for all HLS components
+  .tool-container {
+    // Main headings
+    h3, h4 {
+      color: #f8fafc;
+      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+    }
+
+    // Paragraph text
+    p {
+      color: #e2e8f0;
+      line-height: 1.6;
+    }
+
+    // List items
+    ul li {
+      color: #e2e8f0;
+      
+      strong {
+        color: #f8fafc;
+        font-weight: 600;
+      }
+    }
+
+    // Strong text in paragraphs
+    p strong {
+      color: #f8fafc;
+      font-weight: 600;
+    }
+
+    // Code elements
+    code {
+      background: rgba(51, 65, 85, 0.8);
+      color: #fbbf24;
+      border: 1px solid #475569;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-family: 'Source Code Pro', monospace;
+    }
+
+    // Input labels
+    .input-label {
+      color: #f1f5f9;
+      font-weight: 500;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+    }
+
+    // Sample stream info text
+    .sample-stream-info {
+      strong {
+        color: #f8fafc;
+        font-weight: 600;
+      }
+      
+      p {
+        color: #d1d5db;
+      }
+    }
   }
 }
