@@ -1,4 +1,7 @@
 import React, { useState } from 'react';
+import SimpleAd from '../../ads/SimpleAd';
+import CodeEditor from '../../common/CodeEditor';
+import { downloadAsFile } from '../../../utils/downloadUtils';
 
 const LoremGenerator = () => {
   const [output, setOutput] = useState('');
@@ -93,77 +96,169 @@ const LoremGenerator = () => {
     }
   };
 
+  const handleDownload = () => {
+    const success = downloadAsFile(output);
+    if (!success) {
+      console.error('Failed to download file');
+    }
+  };
+
   const handleClear = () => {
     setOutput('');
   };
 
+  const getTypeDisplayName = () => {
+    switch(type) {
+      case 'words': return 'Words';
+      case 'sentences': return 'Sentences';
+      case 'paragraphs': return 'Paragraphs';
+      default: return 'Paragraphs';
+    }
+  };
+
+  const maxCount = type === 'words' ? 100 : type === 'sentences' ? 20 : 10;
+
   return (
-    <div className="tool-container">
-      <div className="input-group">
-        <label className="input-label">Generate Type</label>
-        <div className="button-group">
-          <button
-            className={`btn ${type === 'words' ? 'btn-primary' : 'btn-outline'}`}
-            onClick={() => setType('words')}
-          >
-            Words
-          </button>
-          <button
-            className={`btn ${type === 'sentences' ? 'btn-primary' : 'btn-outline'}`}
-            onClick={() => setType('sentences')}
-          >
-            Sentences
-          </button>
-          <button
-            className={`btn ${type === 'paragraphs' ? 'btn-primary' : 'btn-outline'}`}
-            onClick={() => setType('paragraphs')}
-          >
-            Paragraphs
-          </button>
-        </div>
-      </div>
-
-      <div className="input-group">
-        <label className="input-label">
-          Number of {type}: {count}
-        </label>
-        <input
-          type="range"
-          min="1"
-          max={type === 'words' ? 100 : type === 'sentences' ? 20 : 10}
-          value={count}
-          onChange={(e) => setCount(parseInt(e.target.value))}
-          className="password-slider"
-        />
-      </div>
-
-      <div className="button-group">
-        <button className="btn btn-primary" onClick={generateLorem}>
-          Generate Lorem Ipsum
-        </button>
-        <button className="btn btn-outline" onClick={handleClear}>
-          Clear
-        </button>
-      </div>
-
-      {output && (
-        <>
+    <div className="tool-container lorem-generator-tool">
+      <div className="three-column-layout">
+        {/* Input Column */}
+        <div className="input-column">
           <div className="input-group">
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.5rem' }}>
-              <label className="input-label">Generated Text</label>
-              <button className="btn btn-outline btn-small" onClick={handleCopy}>
-                Copy
-              </button>
+            <div className="input-header">
+              <label className="input-label">Lorem Ipsum Settings</label>
+              <span className="language-indicator">
+                🎲 Generate placeholder text
+              </span>
             </div>
-            <textarea
-              className="text-area"
-              value={output}
-              readOnly
-              style={{ minHeight: '200px', whiteSpace: 'pre-wrap' }}
+            <div className="settings-panel">
+              <div className="setting-group">
+                <label className="setting-label">📝 Generate Type</label>
+                <div className="type-buttons">
+                  <button
+                    className={`type-btn ${type === 'words' ? 'active' : ''}`}
+                    onClick={() => setType('words')}
+                  >
+                    Words
+                  </button>
+                  <button
+                    className={`type-btn ${type === 'sentences' ? 'active' : ''}`}
+                    onClick={() => setType('sentences')}
+                  >
+                    Sentences
+                  </button>
+                  <button
+                    className={`type-btn ${type === 'paragraphs' ? 'active' : ''}`}
+                    onClick={() => setType('paragraphs')}
+                  >
+                    Paragraphs
+                  </button>
+                </div>
+              </div>
+
+              <div className="setting-group">
+                <label className="setting-label">
+                  🔢 Number of {getTypeDisplayName()}: {count}
+                </label>
+                <input
+                  type="range"
+                  min="1"
+                  max={maxCount}
+                  value={count}
+                  onChange={(e) => setCount(parseInt(e.target.value))}
+                  className="count-slider"
+                />
+                <div className="slider-labels">
+                  <span>1</span>
+                  <span>{maxCount}</span>
+                </div>
+              </div>
+
+              <div className="preview-info">
+                <div className="info-item">
+                  <span className="info-label">Type:</span>
+                  <span className="info-value">{getTypeDisplayName()}</span>
+                </div>
+                <div className="info-item">
+                  <span className="info-label">Count:</span>
+                  <span className="info-value">{count}</span>
+                </div>
+                <div className="info-item">
+                  <span className="info-label">Max:</span>
+                  <span className="info-value">{maxCount}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Action Column */}
+        <div className="action-column">
+          <div className="current-settings">
+            <label className="input-label">⚙️ Current Settings</label>
+            <div className="settings-display">
+              <div className="setting-display-item">
+                <span className="setting-icon">📝</span>
+                <div className="setting-info">
+                  <div className="setting-name">{getTypeDisplayName()}</div>
+                  <div className="setting-desc">Generate {count} {type}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="primary-actions">
+            <button className="btn btn-primary" onClick={generateLorem}>
+              🎲 Generate Lorem Ipsum
+            </button>
+          </div>
+
+          <div className="secondary-actions">
+            <button className="btn btn-outline" onClick={handleClear}>
+              🗑️ Clear
+            </button>
+            {output && (
+              <>
+                <button className="btn btn-outline" onClick={handleCopy}>
+                  📋 Copy Text
+                </button>
+                <button 
+                  className="btn btn-outline" 
+                  onClick={handleDownload}
+                  title="Download generated text as file"
+                >
+                  📥 Download as TXT
+                </button>
+              </>
+            )}
+          </div>
+          
+          <SimpleAd />
+        </div>
+
+        {/* Output Column */}
+        <div className="output-column">
+          <div className="input-group">
+            <div className="input-header">
+              <label className="input-label">Generated Text</label>
+              {output && (
+                <span className="language-indicator">
+                  📊 {output.length} characters
+                </span>
+              )}
+            </div>
+            <CodeEditor
+              value={output || ''}
+              onChange={() => {}} // Read-only
+              language="text"
+              readOnly={true}
+              name="lorem-generator-output-editor"
+              height="calc(100vh - 16rem)"
+              showLineNumbers={false}
+              placeholder="Generated Lorem Ipsum text will appear here..."
             />
           </div>
-        </>
-      )}
+        </div>
+      </div>
     </div>
   );
 };

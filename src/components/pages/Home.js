@@ -15,7 +15,7 @@ const Home = () => {
       title: 'Text',
       description: 'Advanced text processing and manipulation functions',
       icon: '🔤',
-      toolCount: 3
+      toolCount: 4
     },
     {
       path: '/info',

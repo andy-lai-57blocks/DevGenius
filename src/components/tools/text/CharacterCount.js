@@ -1,92 +1,49 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useMemo } from 'react';
+import SimpleAd from '../../ads/SimpleAd';
+import CodeEditor from '../../common/CodeEditor';
+import { downloadAsFile } from '../../../utils/downloadUtils';
 
 const CharacterCount = () => {
   const [input, setInput] = useState('');
-  const [stats, setStats] = useState({
-    characters: 0,
-    charactersNoSpaces: 0,
-    words: 0,
-    sentences: 0,
-    paragraphs: 0,
-    lines: 0,
-    readingTime: 0,
-    speakingTime: 0
-  });
-  const [charFrequency, setCharFrequency] = useState({});
 
-  // Calculate all statistics when input changes
-  useEffect(() => {
-    if (!input.trim()) {
-      setStats({
+  // Calculate statistics in real-time using useMemo
+  const stats = useMemo(() => {
+    if (!input) {
+      return {
         characters: 0,
         charactersNoSpaces: 0,
         words: 0,
-        sentences: 0,
         paragraphs: 0,
-        lines: 0,
-        readingTime: 0,
-        speakingTime: 0
-      });
-      setCharFrequency({});
-      return;
+        readingTime: 0
+      };
     }
 
-    // Basic counts
     const characters = input.length;
     const charactersNoSpaces = input.replace(/\s/g, '').length;
     const words = input.trim() ? input.trim().split(/\s+/).length : 0;
-    const sentences = input.trim() ? (input.match(/[.!?]+/g) || []).length : 0;
     const paragraphs = input.trim() ? input.split(/\n\s*\n/).filter(p => p.trim()).length : 0;
-    const lines = input ? input.split('\n').length : 0;
+    const readingTime = Math.max(1, Math.ceil(words / 200)); // At least 1 minute
 
-    // Reading time (average 200 words per minute)
-    const readingTime = Math.ceil(words / 200);
-    
-    // Speaking time (average 150 words per minute)
-    const speakingTime = Math.ceil(words / 150);
-
-    setStats({
+    return {
       characters,
       charactersNoSpaces,
       words,
-      sentences,
       paragraphs,
-      lines,
-      readingTime,
-      speakingTime
-    });
-
-    // Character frequency analysis
-    const frequency = {};
-    const text = input.toLowerCase();
-    for (let char of text) {
-      if (char.match(/[a-z0-9]/)) {
-        frequency[char] = (frequency[char] || 0) + 1;
-      }
-    }
-    
-    // Sort by frequency and take top 10
-    const sortedFreq = Object.entries(frequency)
-      .sort(([,a], [,b]) => b - a)
-      .slice(0, 10)
-      .reduce((obj, [char, count]) => {
-        obj[char] = count;
-        return obj;
-      }, {});
-
-    setCharFrequency(sortedFreq);
+      readingTime
+    };
   }, [input]);
 
   const handleClear = () => {
     setInput('');
   };
 
-  const handleCopy = async (text) => {
+  const handleCopy = async () => {
+    const statsText = getFormattedStats();
     try {
-      await navigator.clipboard.writeText(text);
+      await navigator.clipboard.writeText(statsText);
     } catch (error) {
       const textArea = document.createElement('textarea');
-      textArea.value = text;
+      textArea.value = statsText;
       document.body.appendChild(textArea);
       textArea.select();
       document.execCommand('copy');
@@ -94,154 +51,189 @@ const CharacterCount = () => {
     }
   };
 
+  const handleDownload = () => {
+    const statsText = getFormattedStats();
+    const success = downloadAsFile(statsText);
+    if (!success) {
+      console.error('Failed to download file');
+    }
+  };
+
+  const getFormattedStats = () => {
+    if (!input) return 'No text to analyze...';
+    
+    return `TEXT ANALYSIS REPORT
+${'='.repeat(50)}
+
+📊 CHARACTER STATISTICS
+${'-'.repeat(25)}
+Total Characters: ${stats.characters.toLocaleString()}
+Characters (no spaces): ${stats.charactersNoSpaces.toLocaleString()}
+Spaces: ${(stats.characters - stats.charactersNoSpaces).toLocaleString()}
+
+📝 WORD & PARAGRAPH STATISTICS  
+${'-'.repeat(35)}
+Total Words: ${stats.words.toLocaleString()}
+Paragraphs: ${stats.paragraphs.toLocaleString()}
+Average Words per Paragraph: ${stats.paragraphs > 0 ? Math.round(stats.words / stats.paragraphs) : 0}
+
+⏱️  READING TIME
+${'-'.repeat(15)}
+Estimated Reading Time: ${stats.readingTime} minute${stats.readingTime !== 1 ? 's' : ''}
+(Based on 200 words per minute)
+
+📈 TEXT DENSITY
+${'-'.repeat(15)}
+Average Characters per Word: ${stats.words > 0 ? Math.round(stats.charactersNoSpaces / stats.words) : 0}
+Average Words per Line: ${input.split('\n').length > 0 ? Math.round(stats.words / input.split('\n').length) : 0}
+
+Generated on: ${new Date().toLocaleString()}`;
+  };
+
   const loadSampleText = () => {
-    setInput(`Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+    const samples = [
+      `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
 
 Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
 
-Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.`);
-  };
+Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.`,
+      
+      `The quick brown fox jumps over the lazy dog. This sentence contains every letter in the English alphabet.
 
-  const copyAllStats = () => {
-    const statsText = [
-      `Text Statistics:`,
-      `Characters: ${stats.characters}`,
-      `Characters (no spaces): ${stats.charactersNoSpaces}`,
-      `Words: ${stats.words}`,
-      `Sentences: ${stats.sentences}`,
-      `Paragraphs: ${stats.paragraphs}`,
-      `Lines: ${stats.lines}`,
-      `Reading time: ${stats.readingTime} minute${stats.readingTime !== 1 ? 's' : ''}`,
-      `Speaking time: ${stats.speakingTime} minute${stats.speakingTime !== 1 ? 's' : ''}`
-    ].join('\n');
+Writing is an art form that has existed for thousands of years. From ancient cave paintings to modern digital text, humans have always found ways to communicate through written symbols.
+
+In today's world, text analysis has become increasingly important for content creators, writers, and digital marketers who need to understand the characteristics of their written content.`,
+
+      `function calculateStatistics(text) {
+  const characters = text.length;
+  const words = text.trim().split(/\\s+/).length;
+  const paragraphs = text.split(/\\n\\s*\\n/).length;
+  
+  return {
+    characters,
+    words, 
+    paragraphs,
+    readingTime: Math.ceil(words / 200)
+  };
+}
+
+// This is a sample code snippet for text analysis
+const myText = "Hello, world!";
+const stats = calculateStatistics(myText);
+console.log(stats);`
+    ];
     
-    handleCopy(statsText);
+    const sampleIndex = Math.floor(Date.now() / 10000) % samples.length;
+    setInput(samples[sampleIndex]);
   };
 
-  const statItems = [
-    { key: 'characters', label: 'Characters', value: stats.characters, icon: '🔤' },
-    { key: 'charactersNoSpaces', label: 'Characters (no spaces)', value: stats.charactersNoSpaces, icon: '📝' },
-    { key: 'words', label: 'Words', value: stats.words, icon: '📖' },
-    { key: 'sentences', label: 'Sentences', value: stats.sentences, icon: '📄' },
-    { key: 'paragraphs', label: 'Paragraphs', value: stats.paragraphs, icon: '📋' },
-    { key: 'lines', label: 'Lines', value: stats.lines, icon: '📏' }
-  ];
+  const formattedStats = getFormattedStats();
 
   return (
-    <div className="tool-container">
-      <div className="input-group">
-        <label className="input-label">Text to Analyze</label>
-        <textarea
-          className="text-area"
-          value={input}
-          onChange={(e) => setInput(e.target.value)}
-          placeholder="Enter or paste your text here to see detailed statistics..."
-          style={{ minHeight: '200px' }}
-        />
-      </div>
-
-      <div className="button-group">
-        <button className="btn btn-outline" onClick={loadSampleText}>
-          Load Sample
-        </button>
-        <button className="btn btn-outline" onClick={handleClear}>
-          Clear
-        </button>
-        <button className="btn btn-outline" onClick={copyAllStats} disabled={!input.trim()}>
-          Copy Stats
-        </button>
-      </div>
-
-      {/* Basic Statistics */}
-      <div className="char-count-section">
-        <h3>📊 Basic Statistics</h3>
-        <div className="stats-grid">
-          {statItems.map((stat) => (
-            <div key={stat.key} className="stat-item">
-              <div className="stat-icon">{stat.icon}</div>
-              <div className="stat-content">
-                <div className="stat-value">{stat.value.toLocaleString()}</div>
-                <div className="stat-label">{stat.label}</div>
-              </div>
+    <div className="tool-container character-count-tool">
+      <div className="three-column-layout">
+        {/* Input Column */}
+        <div className="input-column">
+          <div className="input-group">
+            <div className="input-header">
+              <label className="input-label">Input Text</label>
+              {input && (
+                <span className="language-indicator">
+                  📊 Length: {input.length} characters
+                </span>
+              )}
             </div>
-          ))}
-        </div>
-      </div>
-
-      {/* Reading & Speaking Time */}
-      {stats.words > 0 && (
-        <div className="char-count-section">
-          <h3>⏱️ Time Estimates</h3>
-          <div className="time-stats">
-            <div className="time-item">
-              <div className="time-icon">📚</div>
-              <div className="time-content">
-                <div className="time-value">{stats.readingTime} min</div>
-                <div className="time-label">Reading time</div>
-                <div className="time-note">~200 words/min</div>
-              </div>
-            </div>
-            <div className="time-item">
-              <div className="time-icon">🎤</div>
-              <div className="time-content">
-                <div className="time-value">{stats.speakingTime} min</div>
-                <div className="time-label">Speaking time</div>
-                <div className="time-note">~150 words/min</div>
-              </div>
-            </div>
+            <CodeEditor
+              value={input}
+              onChange={setInput}
+              language="text"
+              placeholder="Type or paste your text here for analysis..."
+              name="character-count-input-editor"
+              height="calc(100vh - 16rem)"
+            />
           </div>
         </div>
-      )}
 
-      {/* Character Frequency */}
-      {Object.keys(charFrequency).length > 0 && (
-        <div className="char-count-section">
-          <h3>🔍 Most Frequent Characters</h3>
-          <div className="frequency-grid">
-            {Object.entries(charFrequency).map(([char, count]) => (
-              <div key={char} className="frequency-item">
-                <div className="frequency-char">{char}</div>
-                <div className="frequency-count">{count}</div>
-                <div className="frequency-bar">
-                  <div 
-                    className="frequency-fill"
-                    style={{ 
-                      width: `${(count / Math.max(...Object.values(charFrequency))) * 100}%` 
-                    }}
-                  ></div>
+        {/* Action Column */}
+        <div className="action-column">
+          <div className="stats-display">
+            <label className="input-label">📊 Text Statistics</label>
+            <div className="main-stat">
+              <div className="stat-number">{stats.characters.toLocaleString()}</div>
+              <div className="stat-name">Characters</div>
+            </div>
+            <div className="secondary-stats">
+              <div className="stat-item-simple">
+                <span className="stat-value">{stats.words.toLocaleString()}</span>
+                <span className="stat-label">Words</span>
+              </div>
+              <div className="stat-item-simple">
+                <span className="stat-value">{stats.charactersNoSpaces.toLocaleString()}</span>
+                <span className="stat-label">No spaces</span>
+              </div>
+              <div className="stat-item-simple">
+                <span className="stat-value">{stats.paragraphs.toLocaleString()}</span>
+                <span className="stat-label">Paragraphs</span>
+              </div>
+              {stats.words > 0 && (
+                <div className="stat-item-simple reading-time">
+                  <span className="stat-value">{stats.readingTime} min</span>
+                  <span className="stat-label">Reading time</span>
                 </div>
-              </div>
-            ))}
+              )}
+            </div>
           </div>
-        </div>
-      )}
 
-      {/* Quick Copy Options */}
-      {input.trim() && (
-        <div className="char-count-section">
-          <h3>📋 Quick Actions</h3>
-          <div className="action-buttons">
-            <button 
-              className="btn btn-outline btn-small"
-              onClick={() => handleCopy(stats.characters.toString())}
-            >
-              Copy Character Count
+          <div className="secondary-actions">
+            <button className="btn btn-outline" onClick={loadSampleText}>
+              📄 Load Sample
             </button>
-            <button 
-              className="btn btn-outline btn-small"
-              onClick={() => handleCopy(stats.words.toString())}
-            >
-              Copy Word Count
+            <button className="btn btn-outline" onClick={handleClear} disabled={!input}>
+              🗑️ Clear
             </button>
-            <button 
-              className="btn btn-outline btn-small"
-              onClick={() => handleCopy(input.trim())}
-            >
-              Copy Text
-            </button>
+            {input && (
+              <>
+                <button className="btn btn-outline" onClick={handleCopy}>
+                  📋 Copy Report
+                </button>
+                <button 
+                  className="btn btn-outline" 
+                  onClick={handleDownload}
+                  title="Download analysis report as text file"
+                >
+                  📥 Download Report
+                </button>
+              </>
+            )}
+          </div>
+          
+          <SimpleAd />
+        </div>
+
+        {/* Output Column */}
+        <div className="output-column">
+          <div className="input-group">
+            <div className="input-header">
+              <label className="input-label">Analysis Report</label>
+              {input && (
+                <span className="language-indicator">
+                  📈 {stats.words} words analyzed
+                </span>
+              )}
+            </div>
+            <CodeEditor
+              value={formattedStats}
+              onChange={() => {}} // Read-only
+              language="text"
+              readOnly={true}
+              name="character-count-output-editor"
+              height="calc(100vh - 16rem)"
+              showLineNumbers={false}
+              placeholder="Text analysis report will appear here..."
+            />
           </div>
         </div>
-      )}
+      </div>
     </div>
   );
 };

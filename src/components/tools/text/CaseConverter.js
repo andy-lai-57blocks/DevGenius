@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from 'react';
+import SimpleAd from '../../ads/SimpleAd';
+import CodeEditor from '../../common/CodeEditor';
+import { downloadAsFile } from '../../../utils/downloadUtils';
 
 const CaseConverter = () => {
   const [input, setInput] = useState('');
+  const [selectedCase, setSelectedCase] = useState('lowercase');
   const [results, setResults] = useState({
     lowercase: '',
     uppercase: '',
@@ -87,12 +91,13 @@ const CaseConverter = () => {
     setInput('');
   };
 
-  const handleCopy = async (text) => {
+  const handleCopy = async () => {
+    const outputText = results[selectedCase];
     try {
-      await navigator.clipboard.writeText(text);
+      await navigator.clipboard.writeText(outputText);
     } catch (error) {
       const textArea = document.createElement('textarea');
-      textArea.value = text;
+      textArea.value = outputText;
       document.body.appendChild(textArea);
       textArea.select();
       document.execCommand('copy');
@@ -100,8 +105,25 @@ const CaseConverter = () => {
     }
   };
 
+  const handleDownload = () => {
+    const outputText = results[selectedCase];
+    const success = downloadAsFile(outputText);
+    if (!success) {
+      console.error('Failed to download file');
+    }
+  };
+
   const loadSampleText = () => {
-    setInput('Hello World Example Text');
+    const samples = [
+      'Hello World Example Text',
+      'The Quick Brown Fox Jumps Over The Lazy Dog',
+      'JavaScriptIsAwesome',
+      'convert_this_snake_case',
+      'Convert-This-Kebab-Case',
+      'CONVERT_THIS_CONSTANT_CASE'
+    ];
+    const sampleIndex = Math.floor(Date.now() / 10000) % samples.length;
+    setInput(samples[sampleIndex]);
   };
 
   const caseTypes = [
@@ -115,49 +137,107 @@ const CaseConverter = () => {
     { key: 'constantCase', label: 'CONSTANT_CASE', description: 'uppercase with underscores' }
   ];
 
+  const currentOutput = results[selectedCase] || '';
+  const currentCaseInfo = caseTypes.find(type => type.key === selectedCase);
+
   return (
-    <div className="tool-container">
-      <div className="input-group">
-        <label className="input-label">Input Text</label>
-        <textarea
-          className="text-area"
-          value={input}
-          onChange={(e) => setInput(e.target.value)}
-          placeholder="Enter text to convert..."
-          style={{ minHeight: '120px' }}
-        />
-      </div>
-
-      <div className="button-group">
-        <button className="btn btn-outline" onClick={loadSampleText}>
-          Load Sample
-        </button>
-        <button className="btn btn-outline" onClick={handleClear}>
-          Clear
-        </button>
-      </div>
-
-      <div className="case-results">
-        {caseTypes.map((caseType) => (
-          <div key={caseType.key} className="case-result-item">
-            <div className="case-header">
-              <div>
-                <span className="case-label">{caseType.label}</span>
-                <span className="case-description">{caseType.description}</span>
-              </div>
-              <button 
-                className="btn btn-outline btn-small"
-                onClick={() => handleCopy(results[caseType.key])}
-                disabled={!results[caseType.key]}
-              >
-                Copy
-              </button>
+    <div className="tool-container case-converter-tool">
+      <div className="three-column-layout">
+        {/* Input Column */}
+        <div className="input-column">
+          <div className="input-group">
+            <div className="input-header">
+              <label className="input-label">Input Text</label>
+              {input && (
+                <span className="language-indicator">
+                  📊 Length: {input.length} characters
+                </span>
+              )}
             </div>
-            <div className="case-result">
-              {results[caseType.key] || 'Enter text above to see conversion...'}
+            <CodeEditor
+              value={input}
+              onChange={setInput}
+              language="text"
+              placeholder="Enter text to convert between different cases..."
+              name="case-converter-input-editor"
+              height="calc(100vh - 16rem)"
+            />
+          </div>
+        </div>
+
+        {/* Action Column */}
+        <div className="action-column">
+          <div className="mode-selector">
+            <label className="input-label">🔤 Case Conversion Type</label>
+            <select 
+              className="mode-select"
+              value={selectedCase}
+              onChange={(e) => setSelectedCase(e.target.value)}
+            >
+              {caseTypes.map(type => (
+                <option key={type.key} value={type.key}>
+                  {type.label}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          <div className="primary-actions">
+            <div className="current-mode-info">
+              <div className="mode-name">{currentCaseInfo?.label}</div>
+              <div className="mode-category">Example: {currentCaseInfo?.description}</div>
             </div>
           </div>
-        ))}
+
+          <div className="secondary-actions">
+            <button className="btn btn-outline" onClick={loadSampleText}>
+              📄 Load Sample
+            </button>
+            <button className="btn btn-outline" onClick={handleClear}>
+              🗑️ Clear
+            </button>
+            {currentOutput && (
+              <>
+                <button className="btn btn-outline" onClick={handleCopy}>
+                  📋 Copy Result
+                </button>
+                <button 
+                  className="btn btn-outline" 
+                  onClick={handleDownload}
+                  title="Download converted text as file"
+                >
+                  📥 Download as TXT
+                </button>
+              </>
+            )}
+          </div>
+          
+          <SimpleAd />
+        </div>
+
+        {/* Output Column */}
+        <div className="output-column">
+          <div className="input-group">
+            <div className="input-header">
+              <label className="input-label">Converted Result</label>
+              {currentOutput && (
+                <span className="language-indicator">
+                  📊 Length: {currentOutput.length} characters
+                </span>
+              )}
+            </div>
+            <CodeEditor
+              value={currentOutput}
+              onChange={() => {}} // Read-only
+              language="text"
+              readOnly={true}
+              name="case-converter-output-editor"
+              height="calc(100vh - 16rem)"
+              showLineNumbers={true}
+              placeholder="Converted text will appear here..."
+            />
+          </div>
+        </div>
       </div>
     </div>
   );

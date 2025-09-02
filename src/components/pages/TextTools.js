@@ -4,6 +4,13 @@ import { Link } from 'react-router-dom';
 const TextTools = () => {
   const tools = [
     {
+      path: '/text/space-remover',
+      title: 'Space Remover',
+      description: 'Remove, replace, or normalize spaces and whitespace in text',
+      icon: '🚫',
+      category: 'Processing'
+    },
+    {
       path: '/text/case-converter',
       title: 'Case Converter',
       description: 'Convert text between different case formats',

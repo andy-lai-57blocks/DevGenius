@@ -88,11 +88,20 @@
   animation: fadeInUp 0.6s ease-out 0.6s both;
 }
 
-.stat-item {
+/* Home page specific stat-item styling */
+.home-container .hero-stats .stat-item {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
   text-align: center;
+  padding: 1rem 1.25rem;
+  border-radius: 0.75rem;
+  transition: all 0.3s ease;
 }
 
-.stat-number {
+/* Home page specific stat text styling */
+.home-container .hero-stats .stat-number {
   display: block;
   font-size: 2rem;
   font-weight: 700;
@@ -100,12 +109,12 @@
   line-height: 1;
 }
 
-.stat-label {
+.home-container .hero-stats .stat-label {
   display: block;
   font-size: 0.875rem;
   color: #64748b;
   font-weight: 500;
-  margin-top: 0.25rem;
+  margin-left: 0.5rem;
 }
 
 .stat-divider {
@@ -401,11 +410,18 @@ body.dark-theme {
     color: #cbd5e1;
   }
   
-  .stat-number {
+  /* Home page specific stat-item dark mode styling */
+  .home-container .hero-stats .stat-item {
+    background: #1e293bb3;
+    border: 1px solid #475569;
+  }
+  
+  /* Home page specific stat text colors in dark mode */
+  .home-container .hero-stats .stat-number {
     color: #f1f5f9;
   }
   
-  .stat-label {
+  .home-container .hero-stats .stat-label {
     color: #94a3b8;
   }
   

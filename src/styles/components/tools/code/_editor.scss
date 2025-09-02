@@ -1181,6 +1181,7 @@
     gap: $spacing-sm;
     padding: $spacing-sm 0; // Top/bottom padding only, no left/right padding
     min-width: 300px; // Content area is exactly 300px, padding is additional
+    max-width: 300px; // Ensure it doesn't exceed 300px
     
     // Clean flat background for light mode - no border
     background: rgba(248, 250, 252, 0.6);
@@ -1197,6 +1198,52 @@
       border: none !important;
       backdrop-filter: none !important;
       box-shadow: none !important;
+    }
+
+    // Language selector styling
+    .language-selector {
+      width: 100%;
+      margin-bottom: $spacing-md;
+      
+      .input-label {
+        font-size: $font-size-sm;
+        font-weight: 600;
+        color: $text-secondary;
+        margin-bottom: $spacing-xs;
+        display: block;
+      }
+      
+      .language-select {
+        width: 100%;
+        padding: $spacing-sm $spacing-md;
+        border: 2px solid $border-light;
+        border-radius: $border-radius-md;
+        background: $bg-card;
+        color: $text-primary;
+        font-size: $font-size-sm;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all $transition-fast;
+        
+        &:focus {
+          outline: none;
+          border-color: $primary-color;
+          box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+        
+        &:hover {
+          border-color: #cbd5e1;
+          background: #f8fafc;
+        }
+      }
+      
+      .language-hint {
+        font-size: $font-size-xs;
+        color: $text-muted;
+        font-style: italic;
+        text-align: center;
+        margin-top: $spacing-xs;
+      }
     }
 
     .primary-actions {
@@ -1440,6 +1487,7 @@
 
     .action-column {
       min-width: 300px; // Content area is exactly 300px, padding is additional
+      max-width: 300px; // Ensure it doesn't exceed 300px
     }
   }
 }
@@ -1490,6 +1538,7 @@
       border-radius: $border-radius-lg;
       border: 1px solid $border-light;
       min-width: 300px; // Content area is exactly 300px, padding is additional
+      max-width: 300px; // Ensure it doesn't exceed 300px
 
       .primary-actions,
       .secondary-actions {
@@ -1675,6 +1724,35 @@
   }
 }
 
+// Input header and language indicator - applies to both light and dark modes
+.input-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: $spacing-sm;
+  
+  .input-label {
+    margin-bottom: 0;
+  }
+  
+  .language-indicator {
+    font-size: $font-size-xs;
+    font-weight: 500;
+    color: $primary-color;
+    background: rgba($primary-color, 0.15);
+    padding: $spacing-xs $spacing-sm;
+    border-radius: $border-radius-sm;
+    border: 1px solid rgba($primary-color, 0.3);
+    transition: all $transition-fast;
+    
+    &:hover {
+      background: rgba($primary-color, 0.2);
+      transform: translateY(-1px);
+      box-shadow: 0 2px 4px rgba($primary-color, 0.3);
+    }
+  }
+}
+
 /* Dark theme styles for three-column layout */
 body.dark-theme {
   .three-column-layout {
@@ -1811,6 +1889,19 @@ body.dark-theme {
         }
       }
       
+      // Dark mode language indicator styling  
+      .language-indicator {
+        color: #60a5fa;
+        background: rgba(96, 165, 250, 0.15);
+        border-color: rgba(96, 165, 250, 0.3);
+        
+        &:hover {
+          background: rgba(96, 165, 250, 0.2);
+          transform: translateY(-1px);
+          box-shadow: 0 2px 4px rgba(96, 165, 250, 0.3);
+        }
+      }
+
       // Clean secondary-actions styling for dark mode
       .secondary-actions {
         border-top-color: #475569;
@@ -1834,18 +1925,20 @@ body.dark-theme {
           }
         }
       }
+      }
+  
+  .status-indicator {
+    &.valid {
+      color: #34d399;
     }
     
-    .status-indicator {
-      &.valid {
-        color: #34d399;
-      }
-      
-      &.invalid {
-        color: #f87171;
-      }
+    &.invalid {
+      color: #f87171;
     }
   }
+
+
+}
 
 // Ace Editor Container Styles
 .code-editor-container {

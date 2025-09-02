@@ -12,7 +12,7 @@ export const seoData = {
   '/code': {
     title: 'Code Tools - Encoders, Decoders & Formatters | One Toys',
     description: 'Professional code tools for developers. Base64, URL, HTML encoding/decoding, JSON/XML formatting, Gzip compression, UUID generation, and password creation. Free online developer tools.',
-    keywords: 'code tools, developer tools, base64 encoder, json formatter, xml formatter, url encoder, html encoder, gzip compression, uuid generator, password generator',
+    keywords: 'base64 encoder, base64 decoder, url encoder, url decoder, html encoder, html decoder, json formatter, json validator, xml formatter, xml validator, gzip compression, gzip decompression, vast formatter, hls play',
     type: 'website'
   },
 
@@ -41,7 +41,7 @@ export const seoData = {
   '/code/base64': {
     title: 'Base64 Encoder/Decoder Online - Free Tool | One Toys',
     description: 'Free online Base64 encoder and decoder. Convert text to Base64 and decode Base64 strings instantly. Supports file download, syntax highlighting. No registration required.',
-    keywords: 'base64 encoder, base64 decoder, base64 online, encode base64, decode base64, base64 converter, base64 tool, free base64',
+    keywords: 'base64 encoder, base64 decoder, encode base64, decode base64, base64 online, base64 converter, base64 tool, free base64',
     type: 'tool'
   },
 
@@ -76,14 +76,21 @@ export const seoData = {
   '/code/gzip': {
     title: 'Gzip Compression Tool - Compress & Decompress | One Toys',
     description: 'Free Gzip compression and decompression tool. Compress text data to reduce size, decompress gzipped content. Base64 encoding support.',
-    keywords: 'gzip compression, gzip decompress, compress text, decompress gzip, text compression, file compression, gzip tool',
+    keywords: 'gzip compression, gzip decompression, compress text, decompress gzip, text compression, file compression, gzip tool',
     type: 'tool'
   },
 
   '/code/hls': {
     title: 'HLS Stream Player & Analyzer - HTTP Live Streaming | One Toys',
     description: 'Professional HLS stream player and analyzer. Play HTTP Live Streaming content, analyze stream quality, view adaptive bitrate levels. Supports live and on-demand streams.',
-    keywords: 'hls player, http live streaming, hls stream analyzer, m3u8 player, adaptive streaming, live streaming, video streaming, hls tool, streaming media',
+    keywords: 'hls play, hls player, http live streaming, hls stream analyzer, m3u8 player, adaptive streaming, live streaming, video streaming, hls tool',
+    type: 'tool'
+  },
+
+  '/code/vast': {
+    title: 'VAST Formatter - Format Video Ad XML | One Toys',
+    description: 'Professional VAST (Video Ad Serving Template) formatter and validator. Pretty print, minify, and validate VAST XML for video advertising. Supports VAST 2.0, 3.0, and 4.0.',
+    keywords: 'vast formatter, vast validator, video ad xml, vast xml formatter, video advertising, ad serving template, vast pretty print, format vast',
     type: 'tool'
   },
 

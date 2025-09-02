@@ -22,6 +22,7 @@ import {
   HLSTool,
   CaseConverter, 
   CharacterCount,
+  SpaceRemover,
   UUIDGenerator, 
   PasswordGenerator, 
   LoremGenerator,
@@ -87,6 +88,7 @@ const Sidebar = () => {
       label: 'Text', 
       icon: '🔤',
       submenu: [
+        { path: '/text/space-remover', title: 'Space Remover', icon: '🚫' },
         { path: '/text/case-converter', title: 'Case Converter', icon: '🔤' },
         { path: '/text/character-count', title: 'Character Count Tool', icon: '📊' },
         { path: '/text/lorem', title: 'Lorem Ipsum Generator', icon: '📝' }
@@ -344,6 +346,7 @@ function App() {
           {/* Text Tools */}
           <Route path="/text/case-converter" element={<CaseConverter />} />
           <Route path="/text/character-count" element={<CharacterCount />} />
+          <Route path="/text/space-remover" element={<SpaceRemover />} />
           <Route path="/text/lorem" element={<LoremGenerator />} />
                 
                 {/* Info Tools */}

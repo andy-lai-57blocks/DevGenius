@@ -18,7 +18,8 @@ export {
 export {
   CaseConverter,
   LoremGenerator,
-  CharacterCount
+  CharacterCount,
+  SpaceRemover
 } from './text';
 
 // Info Tools

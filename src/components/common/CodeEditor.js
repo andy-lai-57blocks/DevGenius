@@ -2,13 +2,23 @@ import React from 'react';
 import AceEditor from 'react-ace';
 import { useTheme } from '../../contexts/ThemeContext';
 
-// Import Ace Editor modes (languages)
+// Import Ace Editor modes (languages) - Common and well-supported modes only
 import 'ace-builds/src-noconflict/mode-json';
 import 'ace-builds/src-noconflict/mode-xml';
 import 'ace-builds/src-noconflict/mode-html';
 import 'ace-builds/src-noconflict/mode-javascript';
 import 'ace-builds/src-noconflict/mode-css';
 import 'ace-builds/src-noconflict/mode-text';
+import 'ace-builds/src-noconflict/mode-python';
+import 'ace-builds/src-noconflict/mode-java';
+import 'ace-builds/src-noconflict/mode-c_cpp';
+import 'ace-builds/src-noconflict/mode-php';
+import 'ace-builds/src-noconflict/mode-sql';
+import 'ace-builds/src-noconflict/mode-yaml';
+import 'ace-builds/src-noconflict/mode-markdown';
+import 'ace-builds/src-noconflict/mode-typescript';
+import 'ace-builds/src-noconflict/mode-ruby';
+import 'ace-builds/src-noconflict/mode-sh';
 
 // Import Ace Editor themes
 import 'ace-builds/src-noconflict/theme-github';
@@ -68,16 +78,35 @@ const CodeEditor = ({
 }) => {
   // Get theme from global context
   const { isDarkTheme } = useTheme();
-  // Map language names to Ace Editor modes
+  // Map language names to Ace Editor modes - only supported modes
   const languageMap = {
+    'text': 'text',
+    'plain': 'text',
     'json': 'json',
     'xml': 'xml',
     'html': 'html',
+    'css': 'css',
     'javascript': 'javascript',
     'js': 'javascript',
-    'css': 'css',
-    'text': 'text',
-    'plain': 'text'
+    'typescript': 'typescript',
+    'ts': 'typescript',
+    'python': 'python',
+    'py': 'python',
+    'java': 'java',
+    'c': 'c_cpp',
+    'cpp': 'c_cpp',
+    'c++': 'c_cpp',
+    'php': 'php',
+    'sql': 'sql',
+    'yaml': 'yaml',
+    'yml': 'yaml',
+    'markdown': 'markdown',
+    'md': 'markdown',
+    'ruby': 'ruby',
+    'rb': 'ruby',
+    'shell': 'sh',
+    'bash': 'sh',
+    'sh': 'sh'
   };
 
   // Get the appropriate mode
